@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>About</title>
-  <meta name="description" content="We share some technical articles, and we also Welcome you share your own acticles.">
+  <title>Tmux 指令介紹</title>
+  <meta name="description" content="本篇文章將介紹 Tmux 套件的相關指令。">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://0.0.0.0:4000/about/">
+  <link rel="canonical" href="http://0.0.0.0:4000/linux/2019/01/25/tmux.html">
   <link rel="alternate" type="application/rss+xml" title="QC5 Blog" href="/feed.xml">
   
   
@@ -60,26 +60,34 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title">About</h1>
+    <h1 class="post-title" itemprop="name headline">Tmux 指令介紹</h1>
+    <p class="post-meta"><time datetime="2019-01-25T12:00:00+00:00" itemprop="datePublished">Jan 25, 2019</time></p>
   </header>
 
-  <div class="post-content">
-    <p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="https://jekyllrb.com/">jekyllrb.com</a></p>
+  <div class="post-content" itemprop="articleBody">
+    <p>本篇文章將介紹 Tmux 套件的相關指令。</p>
 
-<p>You can find the source code for Minima at GitHub:
-<a href="https://github.com/jekyll">jekyll</a> /
-<a href="https://github.com/jekyll/minima">minima</a></p>
+<p><img src="/pics/2019-01-27/luna.PNG" alt="" width="514" height="837" border="0" /></p>
 
-<p>You can find the source code for Jekyll at GitHub:
-<a href="https://github.com/jekyll">jekyll</a> /
-<a href="https://github.com/jekyll/jekyll">jekyll</a></p>
-
+<ul>
+  <li>Ctrl+b, c: new window</li>
+  <li>Ctrl+b, ‘,’: rename window</li>
+  <li>Ctrl+b, n: switch to next window</li>
+  <li>Ctrl+b, [number]: switch window</li>
+  <li>Ctrl+b, %: 垂直分割</li>
+  <li>Ctrl+b, “: 水平分割</li>
+  <li>Ctrl+b, space: 切換分割模式</li>
+  <li>Ctrl+b, 壓著 ctrl 及方向鍵: 調整大小</li>
+  <li>Ctrl+b, d: exit window</li>
+  <li>tmux attach -t [id]: attach session</li>
+</ul>
 
   </div>
 
+  
 </article>
 
       </div>
