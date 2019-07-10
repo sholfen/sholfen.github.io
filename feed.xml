@@ -5,9 +5,80 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Jul 2019 15:28:29 +0800</pubDate>
-    <lastBuildDate>Thu, 04 Jul 2019 15:28:29 +0800</lastBuildDate>
+    <pubDate>Wed, 10 Jul 2019 13:26:40 +0800</pubDate>
+    <lastBuildDate>Wed, 10 Jul 2019 13:26:40 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>利用 Consul 服務存取設定檔</title>
+        <description>&lt;p&gt;Consul 是一個很實用的網站服務，可以對網站程式做負載平衡，其中一個最特別的功能就是存放設定檔。以往網站在不同的 staging，都會放上不同的設定檔(例如資料庫的 IP)，在我以前工作的公司，是利用 build server 產出對應不同 staging 的 zip 檔案，每個 zip 裡的設定檔都不同，雖然這做法解決了不同 staging 的問題，但同時也出現了一個版本要維護多個 zip 檔的問題，更不用說佈署時上錯檔案的可能。&lt;/p&gt;
+
+&lt;p&gt;本篇文章會簡單介紹如何架設 Consul 服務以及如果利用它來存放設定檔。&lt;/p&gt;
+
+&lt;p&gt;多虧了 Docker 的熱潮，利用 Docker 就可以輕易的架設，首先下載 image 檔：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker pull consul:1.5.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;本篇文章用的是 1.5.2 版，在下載 image 檔時最好指定版號，這樣測試時跟上 Production 環境時可以確保不會踩到 image 的 bug，因為不指定版號，有可能在不同的 staging 使用到不同版本的 image 檔。&lt;/p&gt;
+
+&lt;p&gt;接下來輸入下列指令來產生 container。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;consul_dev &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 8900:8500 consul:1.5.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;需特別注意的是，這個指令產生出來的 Consul 服務是開發用的，任何的設定都是存在記憶體裡，所以重啟後資料會消失，故不能使用在 Production 環境上。&lt;/p&gt;
+
+&lt;p&gt;接下來開啟 Consul 的網站，輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8900/ui&lt;/code&gt;，就可以看到以下畫面：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-10/1.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著點進 Key/Value，然後按 Create：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-10/2.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在接下來的畫面，先設定一個資料夾 Config，在輸入 Config 後在結尾加一個 ‘/’，Consul 就會直接視為資料夾：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-10/3.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;新增後畫面如下，之後再點擊 Config 資料夾：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-10/4.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後再新增我們要的設定，這邊名稱為 ‘aaa3’，值為一個 JSON 文件：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-10/5.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;設定完成後，在瀏覽器的網址輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8900/v1/kv/Config/aaa3&lt;/code&gt;後，可以看到下列畫面：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-10/6.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到回傳值是一個 JSON 文件，而 Value 就是 aaa3 底下的值，但這是一個 base64 字串，故需要再寫程式給轉回來。&lt;/p&gt;
+
+&lt;p&gt;另外，在 Production 環境中，需啟用的 container 數量會稍多，請參考以下指令：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;consul_server1 &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 8500:8500 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CONSUL_BIND_INTERFACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 consul:1.5.2 agent &lt;span class=&quot;nt&quot;&gt;--server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--bootstrap-expect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2 &lt;span class=&quot;nt&quot;&gt;--client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0 &lt;span class=&quot;nt&quot;&gt;-ui&lt;/span&gt;
+docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;consul_server2 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CONSUL_BIND_INTERFACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 consul:1.5.2 agent &lt;span class=&quot;nt&quot;&gt;--server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0 &lt;span class=&quot;nt&quot;&gt;--join&lt;/span&gt; 172.17.0.2
+docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;consul_client &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CONSUL_BIND_INTERFACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 consul:1.5.2 agent &lt;span class=&quot;nt&quot;&gt;--server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0 &lt;span class=&quot;nt&quot;&gt;--join&lt;/span&gt; 172.17.0.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;簡單說明，第一個 container 為可以進入的 ui，第二個 container 為 cluster 裡的其中一個 node，它會加入 consul_server1，最後一個為接收外部 request 的 container，它會將收到的 request 轉給 server (也就是第一或第二個 container)。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.consul.io/api/kv.html&quot; target=&quot;_blank&quot;&gt;KV Store Endpoints&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.didispace.com/consul-service-discovery-exp/&quot; target=&quot;_blank&quot;&gt;使用Consul做服務發現的若干姿勢&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 10 Jul 2019 13:00:00 +0800</pubDate>
+        <link>/consul/2019/07/10/consul-kv.html</link>
+        <guid isPermaLink="true">/consul/2019/07/10/consul-kv.html</guid>
+        
+        
+        <category>consul</category>
+        
+      </item>
     
       <item>
         <title>利用 HttpClient 取得 Cookie</title>
@@ -199,6 +270,47 @@
         
         
         <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>第一篇測試文</title>
+        <description>&lt;p&gt;測試文章&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Jan 2019 16:20:00 +0800</pubDate>
+        <link>/test/2019/01/10/test-my-jekyll.html</link>
+        <guid isPermaLink="true">/test/2019/01/10/test-my-jekyll.html</guid>
+        
+        
+        <category>test</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 10 Jan 2019 15:12:44 +0800</pubDate>
+        <link>/jekyll/update/2019/01/10/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">/jekyll/update/2019/01/10/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
         
       </item>
     
