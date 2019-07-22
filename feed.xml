@@ -5,8 +5,8 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Jul 2019 22:08:38 +0800</pubDate>
-    <lastBuildDate>Mon, 22 Jul 2019 22:08:38 +0800</lastBuildDate>
+    <pubDate>Mon, 22 Jul 2019 22:12:11 +0800</pubDate>
+    <lastBuildDate>Mon, 22 Jul 2019 22:12:11 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -15,7 +15,7 @@
 
 &lt;p&gt;由於向 Consul 註冊 API 的參數相當複雜，這裡傾向使用第三方的 library，可以在 nuget 中搜尋 Consul，如以下畫面：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;pics/2019-07-22/1.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-22/1.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;安裝後，在專案新增 ConsulInitExtension.cs 這支檔案，它是用來在網站啟動時對 Consul 做註冊。&lt;/p&gt;
 
@@ -106,7 +106,7 @@
 
 &lt;p&gt;之後將網站佈署到 IIS，測試時記得暫時關閉防火牆，以免 Consul 沒辦法做 health check。網站啟動後，到 Consul 頁面，可以看到以下成功的畫面：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;pics/2019-07-22/2.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pics/2019-07-22/2.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;要取得 API 位址時，可透過下列網址取得 json value：&lt;/p&gt;
 
