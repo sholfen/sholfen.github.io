@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>卑微研究生的部落格</title>
-  <meta name="description" content="It's my blog">
+  <title>適用於多執行緒環境的 ConcurrentDictionary</title>
+  <meta name="description" content="在 ASP.NET 中，通常共用的值可能都會選擇存放在 Dictionary 物件中。但是 ASP.NET 可以算是一個多執行緒的環境，所以會有同時多個執行緒存取同一個物件的情形在，雖然可以利用 lock 關鍵字來避免錯誤發生，但程式碼會顯得不夠簡潔，這時就可以利用 ConcurrentDictionary 來解...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="/dotnet/2019/07/26/ConcurrentDictionary.html">
   <link rel="alternate" type="application/rss+xml" title="卑微研究生的部落格" href="/feed.xml">
 </head>
 
@@ -54,97 +54,32 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">適用於多執行緒環境的 ConcurrentDictionary</h1>
+    <p class="post-meta"><time datetime="2019-07-26T17:00:00+08:00" itemprop="datePublished">Jul 26, 2019</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jul 26, 2019</span>
+  <div class="post-content" itemprop="articleBody">
+    <p>在 ASP.NET 中，通常共用的值可能都會選擇存放在 Dictionary 物件中。但是 ASP.NET 可以算是一個多執行緒的環境，所以會有同時多個執行緒存取同一個物件的情形在，雖然可以利用 lock 關鍵字來避免錯誤發生，但程式碼會顯得不夠簡潔，這時就可以利用 ConcurrentDictionary 來解決問題。</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/26/ConcurrentDictionary.html">適用於多執行緒環境的 ConcurrentDictionary</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 22, 2019</span>
+<p>使用上跟一般的 Dictionary 沒什麼不同，只是 Add 改為 TryAdd 而已( Remove 也是一樣)。</p>
 
-        <h2>
-          <a class="post-link" href="/consul/2019/07/22/consul-register-service.html">利用 Consul 服務註冊 API</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 10, 2019</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ConcurrentDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">dict</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConcurrentDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
 
-        <h2>
-          <a class="post-link" href="/consul/2019/07/10/consul-kv.html">利用 Consul 服務存取設定檔</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 4, 2019</span>
+<span class="n">dict</span><span class="p">.</span><span class="nf">TryAdd</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span> <span class="s">"value"</span><span class="p">);</span>
+</code></pre></div></div>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/04/httpclient-cookie.html">利用 HttpClient 取得 Cookie</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 3, 2019</span>
+<p><strong>參考資料</strong></p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/03/httpclient.html">在 .Net Core 截取網頁 - 使用 HttpClient</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 30, 2019</span>
+<ul>
+  <li><a href="https://blog.darkthread.net/blog/concurrentdictionary/" target="_blank">集合物件的多執行緒存取注意事項</a></li>
+</ul>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/06/30/dapper.html">在 Dapper 中使用 SqlBuilder 達成動態條件</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 24, 2019</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/06/24/di.html">在 ASP.NET MVC Core 使用 DI</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 25, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/linux/2019/01/25/tmux.html">Tmux 指令介紹</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/test/2019/01/10/test-my-jekyll.html">第一篇測試文</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2019/01/10/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>

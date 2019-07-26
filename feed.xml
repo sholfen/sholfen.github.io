@@ -5,9 +5,35 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Jul 2019 22:27:50 +0800</pubDate>
-    <lastBuildDate>Mon, 22 Jul 2019 22:27:50 +0800</lastBuildDate>
+    <pubDate>Fri, 26 Jul 2019 17:41:42 +0800</pubDate>
+    <lastBuildDate>Fri, 26 Jul 2019 17:41:42 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>適用於多執行緒環境的 ConcurrentDictionary</title>
+        <description>&lt;p&gt;在 ASP.NET 中，通常共用的值可能都會選擇存放在 Dictionary 物件中。但是 ASP.NET 可以算是一個多執行緒的環境，所以會有同時多個執行緒存取同一個物件的情形在，雖然可以利用 lock 關鍵字來避免錯誤發生，但程式碼會顯得不夠簡潔，這時就可以利用 ConcurrentDictionary 來解決問題。&lt;/p&gt;
+
+&lt;p&gt;使用上跟一般的 Dictionary 沒什麼不同，只是 Add 改為 TryAdd 而已( Remove 也是一樣)。&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ConcurrentDictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dict&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConcurrentDictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;TryAdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;value&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.darkthread.net/blog/concurrentdictionary/&quot; target=&quot;_blank&quot;&gt;集合物件的多執行緒存取注意事項&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 26 Jul 2019 17:00:00 +0800</pubDate>
+        <link>/dotnet/2019/07/26/ConcurrentDictionary.html</link>
+        <guid isPermaLink="true">/dotnet/2019/07/26/ConcurrentDictionary.html</guid>
+        
+        
+        <category>dotNet</category>
+        
+      </item>
     
       <item>
         <title>利用 Consul 服務註冊 API</title>
