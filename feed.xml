@@ -5,9 +5,114 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 26 Jul 2019 17:41:42 +0800</pubDate>
-    <lastBuildDate>Fri, 26 Jul 2019 17:41:42 +0800</lastBuildDate>
+    <pubDate>Tue, 06 Aug 2019 10:45:15 +0800</pubDate>
+    <lastBuildDate>Tue, 06 Aug 2019 10:45:15 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>在 ASP.NET Core 中使用 NLog</title>
+        <description>&lt;p&gt;ASP.NET Core 中雖然也有內建的 log 功能，但個人覺得 NLog 較好用，而且目前也算主流，所以文章會講解使用方式及如何定義設定檔。&lt;/p&gt;
+
+&lt;p&gt;首先，在 ASP.NET Core 的專案，加進下列兩個 NuGet 套件：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2019-08-07/1.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下來新增 nlog.config&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;nlog&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;autoReload=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;internalLogLevel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Debug&quot;&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;internalLogFile=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c:\logs\internal-nlog.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- enable asp.net core layout renderers --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;extensions&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;assembly=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NLog.Web.AspNetCore&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/extensions&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;variable&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;appname&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TestNLog&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- the targets to write to --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;targets&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- another file log, only own logs. Uses some ASP.NET core renderers --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;File&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ownFile-web&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;fileName=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c:\logs\nlog-own-${shortdate}.log&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;layout=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|url: ${aspnet-request-url}|action: ${aspnet-mvc-action}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;target&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xsi:type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;File&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyLogTarget&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;fileName=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c:\logs\${shortdate}-${appname}.log&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;layout=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${longdate}:${level}|${logger}|${aspnet-mvc-action}|${message} &quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/targets&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- rules to map from logger name to target --&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;rules&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;logger&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyLog&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxlevel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Info&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;writeTo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ownFile-web&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!--Skip non-critical Microsoft logs and so log only own logs--&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;logger&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;maxlevel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Info&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;writeTo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ownFile-web&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;logger&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NLogTestWebApp.*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;minlevel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Trace&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;writeTo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyLogTarget&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;final=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/rules&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/nlog&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在此針對設定檔的幾個參數做說明：&lt;/p&gt;
+
+&lt;h3 id=&quot;target&quot;&gt;target&lt;/h3&gt;
+&lt;p&gt;target 設定的是檔案的寫法位置，以及 log 的格式(分別是 fileName 及 layout)，其中 ${level} 這個就是代表置入 level 這個變數，這個變數是內建。&lt;/p&gt;
+
+&lt;h3 id=&quot;variable&quot;&gt;variable&lt;/h3&gt;
+&lt;p&gt;宣告變數用的，在前面的 target 部份，有提到可以置入變數，除了內建的，也可以自行宣告，像是 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;variable name=&quot;appname&quot; value=&quot;TestNLog&quot; /&amp;gt;&lt;/code&gt; 這行，就是用來設定專案名稱，好讓 log 裡可以清楚顯示是來自於哪個專案。&lt;/p&gt;
+
+&lt;h3 id=&quot;rule&quot;&gt;rule&lt;/h3&gt;
+&lt;p&gt;rule 就是用來設定所謂的 logger，像是 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;logger name=&quot;MyLog&quot; maxlevel=&quot;Info&quot; writeTo=&quot;ownFile-web&quot; /&amp;gt;&lt;/code&gt; 這一行，就是設定要使用前面宣告的哪個 target。而 name 這個部份稍微複雜一點。先看這一行程式碼：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NLogBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ConfigureNLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;nlog.config&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MyLog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這一行就是直接透過 name 去取得 NLog 物件。&lt;/p&gt;
+
+&lt;p&gt;但在 ASP.NET Core 中，都是透過 DI 的方式取得 ILog 物件，再寫入 log。像是會透過這樣的方式取得：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ILogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ITestService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_testService&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在這個 controller 中，我設定的 namespace 是 &lt;code class=&quot;highlighter-rouge&quot;&gt;NLogTestWebApp.Controllers&lt;/code&gt;。也就是說，在整個專案下，基本上 namespace 都會是 &lt;code class=&quot;highlighter-rouge&quot;&gt;NLogTestWebApp&lt;/code&gt;，所以我的 rule name 就可以設定為 &lt;code class=&quot;highlighter-rouge&quot;&gt;NLogTestWebApp.*&lt;/code&gt;，這樣子基本上專案底下的元件都可以吃到這個 rule。&lt;/p&gt;
+
+&lt;p&gt;最後，再回頭講解 Program.cs 中需要做什麼設定：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IWebHostBuilder&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CreateWebHostBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;WebHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;CreateDefaultBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UseStartup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Startup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ConfigureLogging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ClearProviders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;SetMinimumLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Microsoft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Logging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LogLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Trace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseNLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;基本上只是在結尾加上 &lt;code class=&quot;highlighter-rouge&quot;&gt;UseNLog()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-2&quot; target=&quot;_blank&quot;&gt;Getting started with ASP.NET Core 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/NLog/NLog/wiki/Configuration-file&quot; target=&quot;_blank&quot;&gt;Configuration file&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/zh-tw/aspnet/core/fundamentals/logging/?view=aspnetcore-2.2&quot; target=&quot;_blank&quot;&gt;ASP.NET Core 中的記錄&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 06 Aug 2019 10:00:00 +0800</pubDate>
+        <link>/dotnet/2019/08/06/asp-net-core-nlog.html</link>
+        <guid isPermaLink="true">/dotnet/2019/08/06/asp-net-core-nlog.html</guid>
+        
+        
+        <category>dotNet</category>
+        
+      </item>
     
       <item>
         <title>適用於多執行緒環境的 ConcurrentDictionary</title>
@@ -467,34 +572,6 @@ docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot
         
         
         <category>test</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 10 Jan 2019 15:12:44 +0800</pubDate>
-        <link>/jekyll/update/2019/01/10/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">/jekyll/update/2019/01/10/welcome-to-jekyll.html</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
