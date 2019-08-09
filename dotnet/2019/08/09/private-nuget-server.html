@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>卑微研究生的部落格</title>
-  <meta name="description" content="It's my blog">
+  <title>如何架設私有的 NuGet 伺服器</title>
+  <meta name="description" content="NuGet 是一個好用的套件管理伺服器，需要什麼功能的套件，在 NuGet 找就對了。但畢竟它是公開的服務，如果自家公司的專案拆分很細，也會有需要把寫好的專案放上 NuGet 的需求，但放在公開的地方實在太危險，幸好微軟有提供自架 NuGet server 的套件。準備架設要架 private NuGet ser...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="/dotnet/2019/08/09/private-nuget-server.html">
   <link rel="alternate" type="application/rss+xml" title="卑微研究生的部落格" href="/feed.xml">
 </head>
 
@@ -54,113 +54,61 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">如何架設私有的 NuGet 伺服器</h1>
+    <p class="post-meta"><time datetime="2019-08-09T16:00:00+08:00" itemprop="datePublished">Aug 9, 2019</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Aug 9, 2019</span>
+  <div class="post-content" itemprop="articleBody">
+    <p>NuGet 是一個好用的套件管理伺服器，需要什麼功能的套件，在 NuGet 找就對了。但畢竟它是公開的服務，如果自家公司的專案拆分很細，也會有需要把寫好的專案放上 NuGet 的需求，但放在公開的地方實在太危險，幸好微軟有提供自架 NuGet server 的套件。</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/08/09/private-nuget-server.html">如何架設私有的 NuGet 伺服器</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Aug 6, 2019</span>
+<h3 id="準備架設">準備架設</h3>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/08/06/asp-net-core-nlog.html">在 ASP.NET Core 中使用 NLog</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 26, 2019</span>
+<p>要架 private NuGet server，首先新增一個空白的 ASP.NET 網站專案，然後在 NuGet 上搜尋 <code class="highlighter-rouge">NuGet.Server</code>。</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/26/ConcurrentDictionary.html">適用於多執行緒環境的 ConcurrentDictionary</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 22, 2019</span>
+<p><img src="/pics/2019-08-09/1.PNG" border="0" /></p>
 
-        <h2>
-          <a class="post-link" href="/consul/2019/07/22/consul-register-service.html">利用 Consul 服務註冊 API</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 10, 2019</span>
+<p>套件安裝完之後，需在 web.config 上修改幾個值：</p>
 
-        <h2>
-          <a class="post-link" href="/consul/2019/07/10/consul-kv.html">利用 Consul 服務存取設定檔</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 4, 2019</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;appSettings&gt;</span>
+  .....略
+  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">"apiKey"</span> <span class="na">value=</span><span class="s">"57622ac6-879c-3065-a123-bb27ee67224f"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">"packagesPath"</span> <span class="na">value=</span><span class="s">"C:\MyPackages"</span> <span class="nt">/&gt;</span>
+  .....略
+<span class="nt">&lt;/appSettings&gt;</span>
+</code></pre></div></div>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/04/httpclient-cookie.html">利用 HttpClient 取得 Cookie</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 3, 2019</span>
+<p>API key 是為了上傳套件用到的(請不要直接拿範例的 key 來用)，而 <code class="highlighter-rouge">packagePath</code> 是設定套件存放的網站，建議不要放在網站目錄底下，以免造成管理上的不便。</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/03/httpclient.html">在 .Net Core 截取網頁 - 使用 HttpClient</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 30, 2019</span>
+<p>之後在 Visual Studio 上新增架好的 NuGet Server：</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/06/30/dapper.html">在 Dapper 中使用 SqlBuilder 達成動態條件</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 24, 2019</span>
+<p><img src="/pics/2019-08-09/2.PNG" border="0" /></p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/06/24/di.html">在 ASP.NET MVC Core 使用 DI</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 25, 2019</span>
+<h3 id="如何上傳套件">如何上傳套件</h3>
+<p>在上傳套件到 private NuGet server 前，要先下載 NuGet CLI，到 https://www.nuget.org/downloads 下載新的 nuget.exe，之前先設定 API key 及網址：</p>
 
-        <h2>
-          <a class="post-link" href="/linux/2019/01/25/tmux.html">Tmux 指令介紹</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2019</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nuget setApiKey 57622ac6-879c-3065-a123-bb27ee67224f <span class="nt">-Source</span> http://localhost:5566/nuget
+</code></pre></div></div>
 
-        <h2>
-          <a class="post-link" href="/test/2019/01/10/test-my-jekyll.html">第一篇測試文</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2019</span>
+<p>下面是上傳 nupkg 檔的語法</p>
 
-        <h2>
-          <a class="post-link" href="/jekyll/update/2019/01/10/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-  </ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nuget push NuGetTestClassLibrary.1.0.0.nupkg 57622dc6-879b-4505-a123-bb27ee67224f <span class="nt">-Source</span> http://localhost:5566/nuget
+</code></pre></div></div>
 
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+<p>如果沒有特殊需求，這樣的方法其實算最簡易的方式，之後的文章會再介紹其它的方法。</p>
 
-</div>
+<p><strong>參考資料</strong></p>
+
+<ul>
+  <li><a href="https://poychang.github.io/hosting-your-own-nuget-server/" target="_blank">架設私有的 NuGet 伺服器</a></li>
+  <li><a href="https://docs.microsoft.com/zh-tw/nuget/hosting-packages/nuget-server" target="_blank">使用 NuGet.Server 裝載 NuGet 摘要</a></li>
+</ul>
+
+  </div>
+
+</article>
 
       </div>
     </div>
