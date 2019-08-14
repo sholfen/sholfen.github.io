@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>卑微研究生的部落格</title>
-  <meta name="description" content="It's my blog">
+  <title>使用 Baget 架設私有的 NuGet 伺服器</title>
+  <meta name="description" content="前篇文章講解了如何架設自己的 NuGet Server，但缺點是只能架在 Windows 上，後來我找到了 BaGet 這個 open source 專案，且能利用 Docker 架設。以下講解如何使用 BaGet：準備架設首先準備一個 baget.env 檔案，這個是建立 container 時會用到的，內容如...">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="/nuget/2019/08/14/baget-nuget-server.html">
   <link rel="alternate" type="application/rss+xml" title="卑微研究生的部落格" href="/feed.xml">
 </head>
 
@@ -54,121 +54,48 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">使用 Baget 架設私有的 NuGet 伺服器</h1>
+    <p class="post-meta"><time datetime="2019-08-14T10:00:00+08:00" itemprop="datePublished">Aug 14, 2019</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Aug 14, 2019</span>
+  <div class="post-content" itemprop="articleBody">
+    <p>前篇文章講解了如何架設自己的 NuGet Server，但缺點是只能架在 Windows 上，後來我找到了 BaGet 這個 open source 專案，且能利用 Docker 架設。以下講解如何使用 BaGet：</p>
 
-        <h2>
-          <a class="post-link" href="/nuget/2019/08/14/baget-nuget-server.html">使用 Baget 架設私有的 NuGet 伺服器</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Aug 9, 2019</span>
+<h3 id="準備架設">準備架設</h3>
+<p>首先準備一個 baget.env 檔案，這個是建立 container 時會用到的，內容如下：</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/08/09/private-nuget-server.html">如何架設私有的 NuGet 伺服器</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Aug 6, 2019</span>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ApiKey=[Your Key]
+Storage__Type=FileSystem
+Storage__Path=/var/baget/packages
+Database__Type=Sqlite
+Database__ConnectionString=Data Source=/var/baget/baget.db
+Search__Type=Database
+</code></pre></div></div>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/08/06/asp-net-core-nlog.html">在 ASP.NET Core 中使用 NLog</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 26, 2019</span>
+<p>接下來直接執行以下指令：</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/26/ConcurrentDictionary.html">適用於多執行緒環境的 ConcurrentDictionary</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 22, 2019</span>
+<p><code class="highlighter-rouge">docker run -d -ti --name private-nuget-server -p 5555:80 --env-file baget.env -v "/docker/BaGet:/var/baget" loicsharma/baget</code></p>
 
-        <h2>
-          <a class="post-link" href="/consul/2019/07/22/consul-register-service.html">利用 Consul 服務註冊 API</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 10, 2019</span>
+<p>建立後就可以透過 port 5555 看到 BaGet 的 UI，這樣就表示建立成功了。最後在 Visual Studio 設定 NuGet 來源，網址為 <code class="highlighter-rouge">http://[FQDN]:5555/v3/index.json</code></p>
 
-        <h2>
-          <a class="post-link" href="/consul/2019/07/10/consul-kv.html">利用 Consul 服務存取設定檔</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 4, 2019</span>
+<h3 id="如何上傳套件">如何上傳套件</h3>
+<p>如果有安裝 .Net Core，就可以使用下列指令：</p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/04/httpclient-cookie.html">利用 HttpClient 取得 Cookie</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jul 3, 2019</span>
+<p><code class="highlighter-rouge">dotnet nuget push -s http://[FQDN]:5555/v3/index.json -k [Your Key] NuGetTestClassLibrary.1.0.3.nupkg</code></p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/07/03/httpclient.html">在 .Net Core 截取網頁 - 使用 HttpClient</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 30, 2019</span>
+<p><strong>參考資料</strong></p>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/06/30/dapper.html">在 Dapper 中使用 SqlBuilder 達成動態條件</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jun 24, 2019</span>
+<ul>
+  <li><a href="https://loic-sharma.github.io/BaGet/" target="_blank">BaGet Document</a></li>
+</ul>
 
-        <h2>
-          <a class="post-link" href="/dotnet/2019/06/24/di.html">在 ASP.NET MVC Core 使用 DI</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 25, 2019</span>
 
-        <h2>
-          <a class="post-link" href="/linux/2019/01/25/tmux.html">Tmux 指令介紹</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2019</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/test/2019/01/10/test-my-jekyll.html">第一篇測試文</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2019/01/10/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>
