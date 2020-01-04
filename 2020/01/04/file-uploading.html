@@ -1,0 +1,104 @@
+<p>﻿—
+layout: post
+title:  “自製 ASP.NET Core 的檔案上傳工具”
+date:   2020-01-04 11:00:00 +0800
+categories: dotnet
+—
+花了一些時間，檔案上傳的工具算是初步完成了，雖然要這功能其實很容易實作，但我要的是可以隨時切換不同的檔案上傳目的地，目前已經有一個初版。</p>
+
+<ul>
+  <li><a href="https://github.com/sholfen/FileUploadWebAP" target="_blank">GitHub 位置</a></li>
+</ul>
+
+<p>檔案 clone 下來後，首先打開 appsettings.json 檔案：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Microsoft"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Microsoft.Hosting.Lifetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"AllowedHosts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"FileUploaderConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"LocalFilePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Datas</span><span class="se">\\</span><span class="s2">files</span><span class="se">\\</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"AzureConnectonString"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your key&gt;"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>目前工具支援將檔案上傳到本機或是 Azure 上，appsettings.json 是用來設定這兩個上傳方式的設定，<code class="highlighter-rouge">FileUploaderConfig</code> 是本機的資料夾。而 <code class="highlighter-rouge">AzureConnectonString</code> 就是 Azure 上的連線字串。</p>
+
+<p>接下來看 Startup.cs 檔案：</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">services</span><span class="p">.</span><span class="nf">AddControllersWithViews</span><span class="p">();</span>
+    <span class="n">Helpers</span><span class="p">.</span><span class="n">Utilities</span><span class="p">.</span><span class="n">Configuration</span> <span class="p">=</span> <span class="n">Configuration</span><span class="p">;</span>
+    <span class="n">Type</span> <span class="n">uploaderType</span> <span class="p">=</span> <span class="n">libs</span><span class="p">.</span><span class="n">FilesSaver</span><span class="p">.</span><span class="n">UploaderFactory</span><span class="p">.</span><span class="nf">CreateFileUploader</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">FilesSaver</span><span class="p">.</span><span class="n">FileUploaderType</span><span class="p">.</span><span class="n">AzureStorage</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">);</span>
+    <span class="n">services</span><span class="p">.</span><span class="nf">AddTransient</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">FilesSaver</span><span class="p">.</span><span class="n">IFileUploader</span><span class="p">),</span> <span class="n">uploaderType</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">Type uploaderType = libs.FilesSaver.UploaderFactory.CreateFileUploader(libs.FilesSaver.FileUploaderType.AzureStorage, Configuration);</code> 是設定檔案上傳要使用本機或 Azure，最後一行就是 DI 的設定。</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span><span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span> <span class="n">IWebHostEnvironment</span> <span class="n">env</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="p">......</span>
+    <span class="n">Helpers</span><span class="p">.</span><span class="n">Utilities</span><span class="p">.</span><span class="n">ServerPath</span> <span class="p">=</span> <span class="n">env</span><span class="p">.</span><span class="n">WebRootPath</span> <span class="p">+</span> <span class="s">"\\"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>上面的設定是為了要讓上傳工具可以知道網站的真正根目錄位置，如果是用 Azure 的話就不用設定。接下來看 Web API 的程式碼：</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[Route("api/[controller]</span><span class="s">")]
+</span><span class="na">[ApiController]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">FileUploadingController</span> <span class="p">:</span> <span class="n">ControllerBase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">IFileUploader</span> <span class="n">fileUploader</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">FileUploadingController</span><span class="p">(</span><span class="n">IFileUploader</span> <span class="n">fileUploader</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">fileUploader</span> <span class="p">=</span> <span class="n">fileUploader</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// GET api/&lt;controller&gt;/5</span>
+    <span class="p">[</span><span class="nf">HttpGet</span><span class="p">(</span><span class="s">"{id}"</span><span class="p">)]</span>
+    <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Get</span><span class="p">(</span><span class="kt">string</span> <span class="n">id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">FileInfo</span> <span class="n">fileInfo</span> <span class="p">=</span> <span class="n">fileUploader</span><span class="p">.</span><span class="nf">GetFile</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nf">File</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">.</span><span class="n">FileStream</span><span class="p">,</span> <span class="s">"application/octet-stream"</span><span class="p">,</span> <span class="n">fileInfo</span><span class="p">.</span><span class="n">FileName</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// POST api/&lt;controller&gt;</span>
+    <span class="p">[</span><span class="n">HttpPost</span><span class="p">]</span>
+    <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Post</span><span class="p">([</span><span class="n">FromForm</span><span class="p">]</span><span class="n">IFormFile</span> <span class="n">file</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">FileInfo</span> <span class="n">fileInfo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileInfo</span>
+        <span class="p">{</span>
+            <span class="n">FileName</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="n">FileName</span><span class="p">,</span>
+            <span class="n">FileStream</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="nf">OpenReadStream</span><span class="p">(),</span>
+            <span class="n">Token</span> <span class="p">=</span> <span class="n">FileInfo</span><span class="p">.</span><span class="nf">CreateToken</span><span class="p">(</span><span class="s">"peter"</span><span class="p">,</span> <span class="n">file</span><span class="p">.</span><span class="n">FileName</span><span class="p">),</span>
+            <span class="n">Version</span> <span class="p">=</span> <span class="s">"0.1"</span>
+        <span class="p">};</span>
+        <span class="n">fileUploader</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">JsonResult</span><span class="p">(</span><span class="k">new</span> <span class="p">{</span> <span class="n">Token</span> <span class="p">=</span> <span class="n">fileInfo</span><span class="p">.</span><span class="n">Token</span> <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>除了上傳檔案要設定 FileInfo 物件，下載檔案就比較單純，只要用 token 就可以直接取得了。</p>
+
+<p><strong>參考資料</strong></p>
+
+<ul>
+  <li><a href="https://dotblogs.com.tw/help/2017/08/16/aspnetcore_api_upload_file" target="_blank">Asp.Net Core Web API上傳檔案</a></li>
+  <li><a href="https://docs.microsoft.com/zh-tw/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.0" target="_blank">上傳 ASP.NET Core 中的檔案</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-develop-table-dotnet" target="_blank">Get started with Azure Cosmos DB Table API and Azure Table storage using the .NET SDK</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet" target="_blank">Quickstart: Azure Blob storage client library v12 for .NET</a></li>
+  <li><a href="https://stackoverflow.com/questions/45727856/how-to-download-a-file-in-asp-net-core" target="_blank">How to download a file in ASP.NET Core</a></li>
+  <li><a href="https://stackoverflow.com/questions/311165/how-do-you-convert-a-byte-array-to-a-hexadecimal-string-and-vice-versa" target="_blank">How do you convert a byte array to a hexadecimal string, and vice versa?
+</a></li>
+</ul>
