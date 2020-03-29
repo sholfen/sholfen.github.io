@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>在 PowerShell 中使用 .NET class</title>
-  <meta name="description" content="在 PowerShell 最大的好處就是可以使用 .NET 內建的 class，這樣可以讓 script 的使用上更為強大。範例如下：">
+  <title>在 PowerShell 中使用自己寫的 .NET class</title>
+  <meta name="description" content="在一篇提到 PowerShell 可以使用 .NET 內建的 class，當然自己用 C# 寫的 dll 元件也可使用。C# 範例如下：">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="/powershell/2020/03/29/powershell-using-namespace.html">
+  <link rel="canonical" href="/powershell/2020/03/29/powershell-using-dll.html">
   <link rel="alternate" type="application/rss+xml" title="卑微研究生的部落格" href="/feed.xml">
 </head>
 
@@ -57,29 +57,74 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">在 PowerShell 中使用 .NET class</h1>
-    <p class="post-meta"><time datetime="2020-03-29T18:00:00+08:00" itemprop="datePublished">Mar 29, 2020</time></p>
+    <h1 class="post-title" itemprop="name headline">在 PowerShell 中使用自己寫的 .NET class</h1>
+    <p class="post-meta"><time datetime="2020-03-29T20:00:00+08:00" itemprop="datePublished">Mar 29, 2020</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>在 PowerShell 最大的好處就是可以使用 .NET 內建的 class，這樣可以讓 script 的使用上更為強大。範例如下：</p>
+    <p>在一篇提到 PowerShell 可以使用 .NET 內建的 class，當然自己用 C# 寫的 dll 元件也可使用。C# 範例如下：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using </span>namespace System.Collections.Generic;
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
 
-<span class="nv">$list</span> <span class="o">=</span> <span class="nb">New-Object </span>List[string];
-<span class="nv">$list</span>.Add<span class="o">(</span><span class="s2">"aaa3"</span><span class="o">)</span>;
-<span class="nv">$list</span>.Add<span class="o">(</span><span class="s2">"aaa4"</span><span class="o">)</span>;
-<span class="nv">$list</span>;
-<span class="nv">$guid</span> <span class="o">=</span> <span class="o">[</span>System.Guid]::NewGuid<span class="o">()</span>;
-<span class="nv">$guid</span>.ToString<span class="o">()</span>;
+<span class="k">namespace</span> <span class="nn">ForPowerShellLibrary</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">ForPowerShellClass</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="nf">ForPowerShellClass</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">Field1</span> <span class="p">=</span> <span class="s">"aaa3"</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Field1</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="kt">string</span> <span class="nf">TestMethod</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"aaa4"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<p>唯一要注意的是，產生 instance 要用<code class="highlighter-rouge">New-Object</code>語法，雖然不好記，但寫一次後，就直接複製就好XD。如果是呼叫 static method 就要用<code class="highlighter-rouge">[Namespace]::Foo()</code>這樣的語法。</p>
+<p>之後把編譯好的 dll 檔丟到 <code class="highlighter-rouge">C:\Users\[user name]</code> 底下，PowerShell 範例如下：</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Add-Type</span> -Path .\ForPowerShellLibrary.dll;
+
+<span class="nv">$instance</span> <span class="o">=</span> <span class="nb">New-Object </span>ForPowerShellLibrary.ForPowerShellClass;
+<span class="nv">$instance</span>.Field1;
+<span class="nv">$instance</span>.TestMethod<span class="o">()</span>;
+</code></pre></div></div>
+
+<p>另外還有一種寫法，是直接把 C# code 寫在 ps 檔裡，範例如下：</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Add-Type</span> -TypeDefinition @<span class="s2">"
+using System;
+
+public class ForPowerShellClass
+{
+    public ForPowerShellClass()
+    {
+        Field1 = "</span>aaa3<span class="s2">";
+    }
+
+    public string Field1 { get; set; }
+
+    public string TestMethod()
+    {
+        return "</span>aaa4<span class="s2">";
+    }
+}
+"</span>@
+
+<span class="nv">$instance</span> <span class="o">=</span> <span class="nb">New-Object </span>ForPowerShellClass;
+<span class="nv">$instance</span>.Field1;
+<span class="nv">$instance</span>.TestMethod<span class="o">()</span>;
+</code></pre></div></div>
 
 <p><strong>參考資料</strong></p>
 
 <ul>
-  <li><a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_using?view=powershell-7" target="_blank">About Using</a></li>
+  <li><a href="https://blog.darkthread.net/blog/call-net-lib-with-powershell/" target="_blank">PowerShell 練習 - 呼叫 .NET DLL 程式庫</a></li>
+  <li><a href="https://activedirectoryfaq.com/2016/01/use-net-code-c-and-dlls-in-powershell/" target="_blank">Use .Net Code (C#) and DLLs in Powershell</a></li>
 </ul>
 
 
