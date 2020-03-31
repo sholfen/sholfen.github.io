@@ -5,9 +5,38 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 29 Mar 2020 20:19:37 +0800</pubDate>
-    <lastBuildDate>Sun, 29 Mar 2020 20:19:37 +0800</lastBuildDate>
+    <pubDate>Tue, 31 Mar 2020 13:09:56 +0800</pubDate>
+    <lastBuildDate>Tue, 31 Mar 2020 13:09:56 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>在 PowerShell 中管理 IIS</title>
+        <description>&lt;p&gt;其實 PowerShell 除了像 Linux 的 ShellScript 一樣可以做些雜事外，還整合了 .NET 元件，可以直接進行呼叫，或是呼叫自己寫的 C# 程式碼。另外我覺得還有一個不錯的功能就是可以管理 IIS 網站，這邊只講怎麼啟動、停止網站，雖說也可以用來新增網站跟 Application Pool，但這樣的情境似乎比較少遇到，所以只列上面提到的指令。另外在本機執行寫好的 ps 檔案，要先執行 &lt;code class=&quot;highlighter-rouge&quot;&gt;Set-ExecutionPolicy RemoteSigned&lt;/code&gt;。範例如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Stop-WebSite&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;Default Web Site&quot;&lt;/span&gt;;
+&lt;span class=&quot;nb&quot;&gt;Start-WebSite&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;Default Web Site&quot;&lt;/span&gt;;
+&lt;span class=&quot;nb&quot;&gt;Stop-WebAppPool&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestPool&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Start-WebAppPool&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestPool&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;指令簡單易懂。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/zh-tw/powershell/module/webadministration/?view=win10-ps&quot; target=&quot;_blank&quot;&gt;WebAdministration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.darkthread.net/blog/powershell-learning-notes/&quot; target=&quot;_blank&quot;&gt;Powershell 學習筆記&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Tue, 31 Mar 2020 13:00:00 +0800</pubDate>
+        <link>/powershell/2020/03/31/powershell-iis.html</link>
+        <guid isPermaLink="true">/powershell/2020/03/31/powershell-iis.html</guid>
+        
+        
+        <category>powershell</category>
+        
+      </item>
     
       <item>
         <title>在 PowerShell 中使用自己寫的 .NET class</title>
@@ -746,66 +775,6 @@ mkdir &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;;
         <pubDate>Sat, 16 Nov 2019 17:00:00 +0800</pubDate>
         <link>/dotnet/2019/11/16/asp-net-core-config.html</link>
         <guid isPermaLink="true">/dotnet/2019/11/16/asp-net-core-config.html</guid>
-        
-        
-        <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>ASP.NET Core 中的 Area 使用方式</title>
-        <description>&lt;p&gt;當一個網站功能愈來愈多，漸漸變成大型網站，Controllers 資料夾肯定會有愈來愈多的 controllers 檔案。這時就會利用資料夾將 controllers 依功能的不同去做分類，而這時對應的網址以及 View 的資料夾對應勢必也得做改變，本篇文章將會講解 Area 的用法。&lt;/p&gt;
-
-&lt;p&gt;首先簡單示範 Area 的預設行為，先新增下列 controller 程式碼：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;[Area(&quot;Products&quot;)]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Controller&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Test Index&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Index2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這裡 Area 設定為 &lt;code class=&quot;highlighter-rouge&quot;&gt;Products&lt;/code&gt;，所以打開網址  &lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost/Products/Test&lt;/code&gt; 後就可以拿到 response。&lt;/p&gt;
-
-&lt;p&gt;如果是範例中的 action index2，就要取得 view 檔案，而它的預設路徑老實說相當奇怪，會在根目錄 &lt;code class=&quot;highlighter-rouge&quot;&gt;Areas/Products/Views/Test/Index2.cshtml&lt;/code&gt;。但這個行為是可以設定的，方法如下，在 Startup.cs 加入下列程式碼：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ConfigureServices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddControllersWithViews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Microsoft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AspNetCore&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Mvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Razor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RazorViewEngineOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//註解為官方所提供的範例&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//options.AreaViewLocationFormats.Clear();&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//options.AreaViewLocationFormats.Add(&quot;/MyAreas/{2}/Views/{1}/{0}.cshtml&quot;);&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//options.AreaViewLocationFormats.Add(&quot;/MyAreas/{2}/Views/Shared/{0}.cshtml&quot;);&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//options.AreaViewLocationFormats.Add(&quot;/Views/Shared/{0}.cshtml&quot;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AreaViewLocationFormats&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Views/Areas/{2}/{1}/{0}.cshtml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddMvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這樣就能將所有的 View 檔案集中在 Views 資料夾裡做管理。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/zh-tw/aspnet/core/mvc/controllers/areas?view=aspnetcore-3.0&quot; target=&quot;_blank&quot;&gt;ASP.NET Core 中的區域&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 10 Nov 2019 14:00:00 +0800</pubDate>
-        <link>/dotnet/2019/11/10/asp-net-mvc-area.html</link>
-        <guid isPermaLink="true">/dotnet/2019/11/10/asp-net-mvc-area.html</guid>
         
         
         <category>dotnet</category>
