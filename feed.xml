@@ -5,8 +5,8 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 May 2020 22:10:35 +0800</pubDate>
-    <lastBuildDate>Mon, 18 May 2020 22:10:35 +0800</lastBuildDate>
+    <pubDate>Mon, 18 May 2020 22:25:12 +0800</pubDate>
+    <lastBuildDate>Mon, 18 May 2020 22:25:12 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -112,9 +112,9 @@
 &lt;/ul&gt;
 
 </description>
-        <pubDate>Mon, 18 May 2020 00:00:00 +0800</pubDate>
-        <link>/dotnet/2020/05/18/graphql-in-asp-net-core-part4.html</link>
-        <guid isPermaLink="true">/dotnet/2020/05/18/graphql-in-asp-net-core-part4.html</guid>
+        <pubDate>Sun, 17 May 2020 00:00:00 +0800</pubDate>
+        <link>/dotnet/2020/05/17/graphql-in-asp-net-core-part4.html</link>
+        <guid isPermaLink="true">/dotnet/2020/05/17/graphql-in-asp-net-core-part4.html</guid>
         
         
         <category>dotnet</category>
