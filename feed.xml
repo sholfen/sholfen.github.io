@@ -5,9 +5,47 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 May 2020 15:01:31 +0800</pubDate>
-    <lastBuildDate>Sat, 23 May 2020 15:01:31 +0800</lastBuildDate>
+    <pubDate>Sun, 24 May 2020 15:03:15 +0800</pubDate>
+    <lastBuildDate>Sun, 24 May 2020 15:03:15 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>ASP.NET Core 的動態 DI - 不同 Controller 取得不同 instance</title>
+        <description>&lt;p&gt;當我們對同一個 Interface 實作不同的類別，而且這個需求是針對不同的 controller 而設(也可以當做是針對不同的使用者)，要怎麼做呢？其實方式很簡單。&lt;/p&gt;
+
+&lt;h2 id=&quot;startupcs-設定&quot;&gt;Startup.cs 設定&lt;/h2&gt;
+
+&lt;p&gt;在 Startup.cs 中，加入下列程式碼：&lt;/p&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ConfigureServices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IServiceCollection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddTransient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddTransient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddTransient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetRequiredService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ILogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()));&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddMvc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddControllersAsServices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddControllersWithViews&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;重點在於&lt;code class=&quot;highlighter-rouge&quot;&gt;services.AddTransient(x =&amp;gt; new HomeController(x.GetRequiredService&amp;lt;ILogger&amp;lt;HomeController&amp;gt;&amp;gt;(), (IService)x.GetService&amp;lt;ServiceA&amp;gt;()));&lt;/code&gt;這一行，將 controller 跟要對應的類別做 mapping，最後別忘了&lt;code class=&quot;highlighter-rouge&quot;&gt;services.AddMvc().AddControllersAsServices();&lt;/code&gt;這一行，不然不會有任何作用。&lt;/p&gt;
+
+&lt;p&gt;這樣在 HomeController 中就會取得 ServiceA，其它的 Controller 一律取得 ServiceB。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ardalis.com/configure-different-implementations-for-different-controllers-in-configureservices&quot; target=&quot;_blank&quot;&gt;Configure Different Implementations for Different Controllers in ConfigureServices&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://andrewlock.net/the-difference-between-getservice-and-getrquiredservice-in-asp-net-core/&quot; target=&quot;_blank&quot;&gt;The difference between GetService() and GetRequiredService() in ASP.NET Core&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 24 May 2020 00:00:00 +0800</pubDate>
+        <link>/dotnet/2020/05/24/asp-net-core-multiple-implementations-di.html</link>
+        <guid isPermaLink="true">/dotnet/2020/05/24/asp-net-core-multiple-implementations-di.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>ASP.NET Core 的 DI 小技巧</title>
@@ -801,38 +839,6 @@ public class ForPowerShellClass
         <pubDate>Sun, 29 Mar 2020 20:00:00 +0800</pubDate>
         <link>/powershell/2020/03/29/powershell-using-dll.html</link>
         <guid isPermaLink="true">/powershell/2020/03/29/powershell-using-dll.html</guid>
-        
-        
-        <category>powershell</category>
-        
-      </item>
-    
-      <item>
-        <title>在 PowerShell 中使用 .NET class</title>
-        <description>&lt;p&gt;在 PowerShell 最大的好處就是可以使用 .NET 內建的 class，這樣可以讓 script 的使用上更為強大。範例如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using &lt;/span&gt;namespace System.Collections.Generic;
-
-&lt;span class=&quot;nv&quot;&gt;$list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;New-Object &lt;/span&gt;List[string];
-&lt;span class=&quot;nv&quot;&gt;$list&lt;/span&gt;.Add&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aaa3&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$list&lt;/span&gt;.Add&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aaa4&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$list&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$guid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;System.Guid]::NewGuid&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;;
-&lt;span class=&quot;nv&quot;&gt;$guid&lt;/span&gt;.ToString&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;唯一要注意的是，產生 instance 要用&lt;code class=&quot;highlighter-rouge&quot;&gt;New-Object&lt;/code&gt;語法，雖然不好記，但寫一次後，就直接複製就好XD。如果是呼叫 static method 就要用&lt;code class=&quot;highlighter-rouge&quot;&gt;[Namespace]::Foo()&lt;/code&gt;這樣的語法。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_using?view=powershell-7&quot; target=&quot;_blank&quot;&gt;About Using&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sun, 29 Mar 2020 18:00:00 +0800</pubDate>
-        <link>/powershell/2020/03/29/powershell-using-namespace.html</link>
-        <guid isPermaLink="true">/powershell/2020/03/29/powershell-using-namespace.html</guid>
         
         
         <category>powershell</category>
