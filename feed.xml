@@ -5,9 +5,47 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 28 May 2020 08:27:56 +0800</pubDate>
-    <lastBuildDate>Thu, 28 May 2020 08:27:56 +0800</lastBuildDate>
+    <pubDate>Fri, 29 May 2020 16:55:56 +0800</pubDate>
+    <lastBuildDate>Fri, 29 May 2020 16:55:56 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>在 EntityFramework Core 使用動態欄位查詢</title>
+        <description>&lt;p&gt;在之前 Dapper 的範例中，有提到如何動態將要查詢的欄位塞進 SQL 字串，也由於 Dapper 是用純 SQL 語法，所以只要組合一下查詢字串就可以了，但在 Entity Framework Core 中，顯然是沒辦法做到。幸好有 &lt;a href=&quot;https://dynamic-linq.net/&quot; target=&quot;_blank&quot;&gt;Dynamic LINQ&lt;/a&gt; 這個函式庫。&lt;/p&gt;
+
+&lt;p&gt;以下連結為本篇文章的範例位置：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sholfen/EntityFrameworkWebAPTemplate&quot; target=&quot;_blank&quot;&gt;範例下載&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;其實用法非常的簡單，安裝完 Dynamic LINQ 後，就只要把字串丟進 Select 函式就好，程式碼如下：&lt;/p&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IQueryable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_currentDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AsNoTracking&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_currentDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AsNoTracking&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&quot;new \{\{ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; \}\}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//&quot;new { City, CompanyName }&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其它的 LINQ function 也可以套用類似的做法。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dynamic-linq.net/basic-simple-query&quot; target=&quot;_blank&quot;&gt;Dynamic LINQ Simple Query&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Fri, 29 May 2020 00:00:00 +0800</pubDate>
+        <link>/dotnet/2020/05/29/entityframework-dynamic-linq.html</link>
+        <guid isPermaLink="true">/dotnet/2020/05/29/entityframework-dynamic-linq.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>在 ASP.NET Core 中使用 EntityFramework Core 的範例</title>
@@ -800,35 +838,6 @@
         <pubDate>Thu, 02 Apr 2020 08:00:00 +0800</pubDate>
         <link>/powershell/2020/04/02/powershell-deploy-web.html</link>
         <guid isPermaLink="true">/powershell/2020/04/02/powershell-deploy-web.html</guid>
-        
-        
-        <category>powershell</category>
-        
-      </item>
-    
-      <item>
-        <title>在 PowerShell 中管理 IIS</title>
-        <description>&lt;p&gt;其實 PowerShell 除了像 Linux 的 ShellScript 一樣可以做些雜事外，還整合了 .NET 元件，可以直接進行呼叫，或是呼叫自己寫的 C# 程式碼。另外我覺得還有一個不錯的功能就是可以管理 IIS 網站，這邊只講怎麼啟動、停止網站，雖說也可以用來新增網站跟 Application Pool，但這樣的情境似乎比較少遇到，所以只列上面提到的指令。另外在本機執行寫好的 ps 檔案，要先執行 &lt;code class=&quot;highlighter-rouge&quot;&gt;Set-ExecutionPolicy RemoteSigned&lt;/code&gt;。範例如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Stop-WebSite&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;Default Web Site&quot;&lt;/span&gt;;
-&lt;span class=&quot;nb&quot;&gt;Start-WebSite&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;Default Web Site&quot;&lt;/span&gt;;
-&lt;span class=&quot;nb&quot;&gt;Stop-WebAppPool&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestPool&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Start-WebAppPool&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestPool&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;指令簡單易懂。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/zh-tw/powershell/module/webadministration/?view=win10-ps&quot; target=&quot;_blank&quot;&gt;WebAdministration&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.darkthread.net/blog/powershell-learning-notes/&quot; target=&quot;_blank&quot;&gt;Powershell 學習筆記&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 31 Mar 2020 13:00:00 +0800</pubDate>
-        <link>/powershell/2020/03/31/powershell-iis.html</link>
-        <guid isPermaLink="true">/powershell/2020/03/31/powershell-iis.html</guid>
         
         
         <category>powershell</category>
