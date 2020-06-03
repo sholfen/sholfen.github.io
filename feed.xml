@@ -5,9 +5,53 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 May 2020 16:55:56 +0800</pubDate>
-    <lastBuildDate>Fri, 29 May 2020 16:55:56 +0800</lastBuildDate>
+    <pubDate>Wed, 03 Jun 2020 09:44:07 +0800</pubDate>
+    <lastBuildDate>Wed, 03 Jun 2020 09:44:07 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>在 EntityFramework Core 呼叫預存程序</title>
+        <description>&lt;p&gt;使用資料庫，為了效能的考量下，有時候使用預存程序。而在 EntityFramework Core 中，呼叫預存程序稍微有點麻煩，但其實也只是把呼叫預存程序的 SQL 語法填入而已。&lt;/p&gt;
+
+&lt;p&gt;以下連結為本篇文章的範例位置：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sholfen/EntityFrameworkWebAPTemplate&quot; target=&quot;_blank&quot;&gt;範例下載&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;以下是呼叫的方式，其實就是呼叫 FromSqlRaw：&lt;/p&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IQueryable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ExecStoreProcedure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;storeProcedureRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;IQueryable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_currentDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FromSqlRaw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;storeProcedureRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_currentDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FromSqlRaw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;storeProcedureRawSql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用方式：&lt;/p&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Customers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetCustomersBySP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//exec [dbo].[CustOrderHist] @CustomerID = N&#39;BOTTM&#39;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Customers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;customers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_customersRepository&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ExecStoreProcedure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;exec [dbo].[MyTest] @Num = {0};&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Wed, 03 Jun 2020 00:00:00 +0800</pubDate>
+        <link>/dotnet/2020/06/03/entityframework-sp.html</link>
+        <guid isPermaLink="true">/dotnet/2020/06/03/entityframework-sp.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>在 EntityFramework Core 使用動態欄位查詢</title>
@@ -817,30 +861,6 @@
         
         
         <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>在 PowerShell 中佈署網站到 IIS 資料夾</title>
-        <description>&lt;p&gt;這篇算是個小筆記。在之前的公司上班，每次上新版網站都很煩，因為 IIS 底下掛了好幾個網站，然後都要一個一個把網站跟 application pool 停掉，再把新網站更新上去，最後再把每個網站跟 application pool 都開啟。事情很簡單，但很花時間，於是我就試著利用之前學到的指令寫了一支簡單的 script，有興趣的人可以參考看看(範例中網站名稱跟 application pool 同名)：&lt;/p&gt;
-
-&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Stop-WebSite&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestWebSite&quot;&lt;/span&gt;;
-&lt;span class=&quot;nb&quot;&gt;Stop-WebAppPool&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestWebSite&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;rm &lt;/span&gt;C:\inetpub\wwwroot\TestWebSite\&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Expand-Archive&lt;/span&gt; -LiteralPath &lt;span class=&quot;s1&quot;&gt;&#39;C:\WebFileFolder\Publish.zip&#39;&lt;/span&gt; -DestinationPath C:\inetpub\wwwroot\TestWebSite
-&lt;span class=&quot;nb&quot;&gt;Start-WebAppPool&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestWebSite&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;Start-WebSite&lt;/span&gt; -Name &lt;span class=&quot;s2&quot;&gt;&quot;TestWebSite&quot;&lt;/span&gt;;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;中間有一個解壓縮的指令，是因為網站的檔案較多，壓成一個檔案，丟到遠端的主機會比較有效率。&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 02 Apr 2020 08:00:00 +0800</pubDate>
-        <link>/powershell/2020/04/02/powershell-deploy-web.html</link>
-        <guid isPermaLink="true">/powershell/2020/04/02/powershell-deploy-web.html</guid>
-        
-        
-        <category>powershell</category>
         
       </item>
     
