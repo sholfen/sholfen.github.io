@@ -5,15 +5,13 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 06 Jan 2022 03:37:52 +0800</pubDate>
-    <lastBuildDate>Thu, 06 Jan 2022 03:37:52 +0800</lastBuildDate>
+    <pubDate>Thu, 06 Jan 2022 03:42:07 +0800</pubDate>
+    <lastBuildDate>Thu, 06 Jan 2022 03:42:07 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
         <title>在 ASP.NET Core 上使用 JWT</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2021-09-06/1.PNG&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;關於 JWT，相信很多讀者應該都有聽說過，主要可以拿來做 SSO，它的簡介就不再多談，這邊主要聚焦在 ASP.NET Core 該如何使用。&lt;/p&gt;
+        <description>&lt;p&gt;關於 JWT，相信很多讀者應該都有聽說過，主要可以拿來做 SSO，它的簡介就不再多談，這邊主要聚焦在 ASP.NET Core 該如何使用。&lt;/p&gt;
 
 &lt;p&gt;在新增 ASP.NET Core 專案後，新增套件&lt;code class=&quot;highlighter-rouge&quot;&gt;Microsoft.AspNetCore.Authentication.JwtBearer&lt;/code&gt;，這樣就能使用 JWT 的功能。&lt;/p&gt;
 
