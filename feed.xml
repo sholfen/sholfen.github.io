@@ -5,8 +5,8 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Apr 2022 21:50:52 +0800</pubDate>
-    <lastBuildDate>Mon, 25 Apr 2022 21:50:52 +0800</lastBuildDate>
+    <pubDate>Tue, 26 Apr 2022 18:31:39 +0800</pubDate>
+    <lastBuildDate>Tue, 26 Apr 2022 18:31:39 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -33,6 +33,10 @@
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果遇到修改 package.json 檔後，在寫 TypeScript 時  intellisense 還是失效，可以在專案底下執行下列指令：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm i --save-dev @types/vue&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;之後是加入 Vue 的 js 檔案，選擇”新增用戶端程式庫”選項，如下圖安裝所需的檔案：&lt;/p&gt;
 
