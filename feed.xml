@@ -5,9 +5,57 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Apr 2022 18:31:39 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Apr 2022 18:31:39 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Apr 2022 14:39:38 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Apr 2022 14:39:38 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>在 ASP.NET Core 網站執行影片串流功能</title>
+        <description>&lt;p&gt;本篇與其說文章，不如說是小筆記，因為要做到影片串流功能其實不困擾，解說如下：&lt;/p&gt;
+
+&lt;p&gt;首先開一個 ASP.NET Core 專案，然後讓網站能抓到欲播放影片的檔案位置，之後再將檔案回傳到前端：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;IHostingEnvironment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Microsoft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AspNetCore&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Hosting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IHostingEnvironment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ILogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IHostingEnvironment&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_hostingEnvironment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ILogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IHostingEnvironment&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hostingEnvironment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_logger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_hostingEnvironment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hostingEnvironment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetVideo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serverPath&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_hostingEnvironment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WebRootPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serverPath&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;\\palm.mp4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PhysicalFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;application/octet-stream&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enableRangeProcessing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;重點就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;PhysicalFile(path, contentType: &quot;application/octet-stream&quot;, enableRangeProcessing: true)&lt;/code&gt; 這行，所以說非常簡單，最後是前端的寫法：&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text-center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;display-4&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;影片&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;video&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Home/GetVideo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autoplay=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;autoplay&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;controls=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;controls&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;800&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/video&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;執行網站後，瀏覽器會有預設的播放控制器，可以觀看影片下載進度，在播放時會持續下載，但暫停時進度條就會停止。&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 30 Apr 2022 00:00:00 +0800</pubDate>
+        <link>/dotnet/2022/04/30/streaming-video.html</link>
+        <guid isPermaLink="true">/dotnet/2022/04/30/streaming-video.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>在 ASP.NET Core 網站整合 TypeScript 與 Vue</title>
@@ -895,54 +943,6 @@ Add-Type &lt;span class=&quot;nt&quot;&gt;-LiteralPath&lt;/span&gt; &lt;span cla
         <pubDate>Mon, 06 Sep 2021 00:00:00 +0800</pubDate>
         <link>/dotnet/2021/09/06/nanoid.html</link>
         <guid isPermaLink="true">/dotnet/2021/09/06/nanoid.html</guid>
-        
-        
-        <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>在 ASP.NET Core 中執行 PowerShell 指令</title>
-        <description>&lt;p&gt;在 Windows Server 上，PowerShell 是個好用的指令工具，可以省去不少人工作業。而筆者最近遇到需要因應網站的狀況去執行特定的 PowerShell 指令，這部份就需要寫 C# 程式做為輔助，本篇文章將會介紹如何在 C# 寫的 Console 程式中執行指令。&lt;/p&gt;
-
-&lt;p&gt;首先在 Nuget 管理工具新增下列有關 PowerShell 的套件：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2021-06-05/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後新增一個呼叫指令的程式碼(範例為管理 IIS 的指令)：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PowerShell&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PowerShell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddScript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Set-ExecutionPolicy RemoteSigned;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddScript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Import-Module WebAdministration;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddScript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Start-WebSite -Name &#39;TestWebSite&#39;;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddScript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Start-WebAppPool -Name &#39;TestWebSite&#39;;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddScript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Start-WebAppPool -Name &#39;TestWebSite&#39;;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddScript&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Start-WebSite -Name &#39;TestWebSite&#39;;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PSObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;powershell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Invoke&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&quot;already restrt web site.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;然後記得更改下列設定，將程式設為64位元：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2021-06-05/2.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.miniasp.com/post/2014/05/09/Call-Windows-PowerShell-Cmdlets-from-CSharp-program&quot; target=&quot;_blank&quot;&gt;如何透過 C# 應用程式執行或呼叫 PowerShell 命令&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 05 Jun 2021 00:00:00 +0800</pubDate>
-        <link>/dotnet/2021/06/05/powershell-in-asp-net-core.html</link>
-        <guid isPermaLink="true">/dotnet/2021/06/05/powershell-in-asp-net-core.html</guid>
         
         
         <category>dotnet</category>
