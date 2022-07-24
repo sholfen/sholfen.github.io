@@ -5,9 +5,64 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 16 Jul 2022 12:10:11 +0800</pubDate>
-    <lastBuildDate>Sat, 16 Jul 2022 12:10:11 +0800</lastBuildDate>
+    <pubDate>Sun, 24 Jul 2022 11:23:21 +0800</pubDate>
+    <lastBuildDate>Sun, 24 Jul 2022 11:23:21 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>ASP.NET Core 上的 Tag Helpers</title>
+        <description>&lt;p&gt;在 ASP.NET Core 有一項叫 Tag Helpers 的功能，它可以用來簡化在 View 上的 html code，例如官方提供的範例中，簡化過的 email tag：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EmailTagHelper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TagHelper&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EmailDomain&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;contoso.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MailTo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TagHelperContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TagHelperOutput&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TagName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// Replaces &amp;lt;email&amp;gt; with &amp;lt;a&amp;gt; tag&lt;/span&gt;
+
+        &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MailTo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;@&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EmailDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;SetAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;href&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;mailto:&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;SetContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這樣在 View 上可簡化成：&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;email mail-to=&quot;aaa3&quot;&amp;gt;aaa3&amp;lt;/email&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;而以下範例則是單純生出一個連到 Google 的 html a tag：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;[HtmlTargetElement(&quot;test&quot;)]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestTagHelper&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TagHelper&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TagHelperContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TagHelperOutput&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TagName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;SetAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;href&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com.tw&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;SetContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Test Content&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在 View 上就只要寫 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;test&amp;gt;&amp;lt;/test&amp;gt;&lt;/code&gt;，而寫出這些類別後，如要使用則必需在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_ViewImports.cshtml&lt;/code&gt; 加入 &lt;code class=&quot;highlighter-rouge&quot;&gt;@addTagHelper *, &amp;lt;Assembly Name&amp;gt;&lt;/code&gt; 這一行，才能在 View 上使用自己寫的 Tag Helpers&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/authoring?view=aspnetcore-6.0&amp;amp;WT.mc_id=DOP-MVP-37580&quot; target=&quot;_blank&quot;&gt;Author Tag Helpers in ASP.NET Core&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sun, 24 Jul 2022 00:00:00 +0800</pubDate>
+        <link>/dotnet/2022/07/24/html-tag-helper.html</link>
+        <guid isPermaLink="true">/dotnet/2022/07/24/html-tag-helper.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>TypeScript 筆記 - Part4</title>
@@ -814,169 +869,6 @@ Add-Type &lt;span class=&quot;nt&quot;&gt;-LiteralPath&lt;/span&gt; &lt;span cla
         
         
         <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>各家電視布袋戲簡介</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2022-01-20/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;布袋戲，老一輩的可能會想到雲州大儒俠的史豔文，年輕一點會或許會先想到霹靂系列的素還真。事實上，所謂的電視布袋戲其實不是只有前面提到的這兩個系列，只是這兩個系列非常的紅，所以很多人只知道這兩個。以下列出幾個比較有名的系列。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;金光系列&lt;/li&gt;
-  &lt;li&gt;霹靂系列&lt;/li&gt;
-  &lt;li&gt;天宇系列&lt;/li&gt;
-  &lt;li&gt;巨登系列&lt;/li&gt;
-  &lt;li&gt;神魔英雄傳&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;現況&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;目前還存活在出租市場的，只剩霹靂跟金光這兩個系列。&lt;/p&gt;
-
-&lt;h5 id=&quot;巨登系列&quot;&gt;巨登系列&lt;/h5&gt;
-
-&lt;p&gt;巨登系列於1994年的時候停止發行，原因為何不清楚，總共發行的劇集如下&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;戰朝天劫２０集&lt;/li&gt;
-  &lt;li&gt;嚮天霹靂２０集&lt;/li&gt;
-  &lt;li&gt;驚世霹靂２０集&lt;/li&gt;
-  &lt;li&gt;驚世至尊１６集&lt;/li&gt;
-  &lt;li&gt;驚世太子１４集&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;第一部的戰朝天劫，在前十集幾乎都是外景，在當時這是很大的創舉，即使是現在的霹靂布袋戲，也還是在攝影棚拍，幾乎沒有外景。以下是巨登系列的影片：&lt;/p&gt;
-
-&lt;p&gt;戰朝天劫片頭&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/KwTz3cf6hSE&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;嚮天霹靂片頭&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/X1ID-wPukyM&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;傲風狂斬風十雨初登場&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Rd3o8iS8ERE&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;玄奇父子初登場&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/KM-vVL_M8Iw&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;h5 id=&quot;神魔系列&quot;&gt;神魔系列&lt;/h5&gt;
-
-&lt;p&gt;神魔系列在魔紀天下後就停止發行，之後負責製作的嘉佑影視與代理商佳穎科技打官司，最後決嘉佑敗訴。神魔系列就我看過後的感想，我覺得在第二部之後進步非常多，或許就拍攝技術而言，比不過霹靂，但是在劇情的用心程度上，是好過霹靂很多的，武戲方面，也給人很不一樣的感覺。&lt;/p&gt;
-
-&lt;p&gt;神魔系列總共發行下列三部：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;血魔劫&lt;/li&gt;
-  &lt;li&gt;情海魔濤&lt;/li&gt;
-  &lt;li&gt;魔紀天下&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;王者風雲片頭(此為蕭建平在神魔系列前所發行的系列)&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/btP5oQJZ7ZE&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;神魔 - 刀學生登場&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/c-vvbmPxgFk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;h5 id=&quot;天宇系列&quot;&gt;天宇系列&lt;/h5&gt;
-
-&lt;p&gt;早期的天宇是由三立公司出資的，所以在當時也擁有比較多的資源，整體的品質也比較好。在飛月覆月結束後，跟三立就結束合作的關係，品質也每況愈下，後面發行的劇則被網友戲稱是天宇的黑洞期。&lt;/p&gt;
-
-&lt;p&gt;個人是在小學二年級的時候，從第四台看到當時正在發行的天宇殺機，那時候也是我第一次接觸電視布袋戲，也是在那時才知道布袋戲已經跟印象中的野台戲不一樣。&lt;/p&gt;
-
-&lt;p&gt;第一個認識的角色：東方孤行，從此迷上電視布袋戲。&lt;/p&gt;
-
-&lt;p&gt;東方孤行武戲&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/CPIP75Neh_I&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;天宇發行的劇集相當的多，所以這邊就不列出來了。&lt;/p&gt;
-
-&lt;h5 id=&quot;金光系列&quot;&gt;金光系列&lt;/h5&gt;
-
-&lt;p&gt;金光系列是黃俊雄大師製作的布袋戲，故事基本上也是以史豔文為主，導演是黃俊雄的四兒子：黃立綱，黃立綱在布袋戲的拍攝上，做了很多突破，而從黑白龍狼傳(其實要從鷹燕龍虎榜開始算)開始，正式由黃立綱接手。而黃俊雄的金光系列共發行了四部，其中金光九天盤是後來被腰斬的：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;金光菩薩藏 10集&lt;/li&gt;
-  &lt;li&gt;萬教大革殺 10集&lt;/li&gt;
-  &lt;li&gt;金光十八龍 30 集&lt;/li&gt;
-  &lt;li&gt;金光九天盤 18集(腰斬)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;如果我沒記錯的話，金光菩薩藏是接續當時在華視播的雲州大儒俠。&lt;/p&gt;
-
-&lt;p&gt;金光武戲(黃立綱)&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/cH2ghEijX54&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;h5 id=&quot;霹靂系列&quot;&gt;霹靂系列&lt;/h5&gt;
-
-&lt;p&gt;霹靂系列目前在台灣的布袋戲市場可以說是獨佔的，知道它的人也是最多的，這邊就不多做介紹，不過倒是可以提提另外的作品：黑河戰記。&lt;/p&gt;
-
-&lt;p&gt;黑河戰記是跟霹靂系列完全沒關係的作品，算是全新的嚐試，不過也因為如此，出租率非常的慘，最後也是被腰斬。不過這部在中國可是有得過獎的，這部有很多的外景拍攝，武戲則不加電腦動畫，算是真材實料的武打。&lt;/p&gt;
-
-&lt;p&gt;黑河戰記片頭&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/znrKS2KujTI&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;黑河戰記片段&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/BG60Lu43QmU&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;後來更推出了時裝布袋戲：火爆球王，後續雖然有推出光離世紀的計劃，但在前製期就腰斬，製作好的偶有些被拿到霹靂正劇使用(跟當初的天子傳奇一樣)。&lt;/p&gt;
-
-&lt;p&gt;火爆球王預告(該預告之內容後來全部放棄)&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qMCtAbnKo0Q&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;火爆球王片頭&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/4dvcoeuA0XA&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;火爆球王片段&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ozenySQZrbg&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;近年霹靂的一大突破，就是跟日本合作，推出日語布袋戲：東離劍遊紀，劇本由虛淵玄負責，配音則是找日本的一線聲優。&lt;/p&gt;
-
-&lt;p&gt;東離劍遊紀武戲&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UlCGDYmil34&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;而在東離拍完的空檔，這些人手就會去幫忙拍所謂的高規格武戲：&lt;/p&gt;
-
-&lt;p&gt;霹靂高規格武戲&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/X7gGnA5B76U&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;除此之外，黃強華還試圖重啟老劇霹靂異數，打造所謂的全新霹靂宇宙，口白不是由黃文擇負責，而是採用多人配音。&lt;/p&gt;
-
-&lt;p&gt;刀說異數 - 花信風初登場&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-pzOXtW8OSY&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;最後就不得不提，霹靂的年度大製作：素還真電影。&lt;/p&gt;
-
-&lt;p&gt;這部製作成本八千萬，該電影非常重要，它的票房會讓霹靂決定要不要讓正劇繼續走下去，也或許該電影如果成功，也再拍新電影或再重啟一次霹靂宇宙。&lt;/p&gt;
-
-&lt;p&gt;素還真電影預告&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/2JlEMpy5ljY&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-</description>
-        <pubDate>Thu, 20 Jan 2022 00:00:00 +0800</pubDate>
-        <link>/other/2022/01/20/palmdrama.html</link>
-        <guid isPermaLink="true">/other/2022/01/20/palmdrama.html</guid>
-        
-        
-        <category>other</category>
         
       </item>
     
