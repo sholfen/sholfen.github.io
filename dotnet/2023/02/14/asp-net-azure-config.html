@@ -118,6 +118,8 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
+<p>然後記得設定 DI：<code class="highlighter-rouge">builder.Services.AddTransient&lt;IConfigManager, ConfigManager&gt;(x =&gt; new ConfigManager(builder.Configuration));</code></p>
+
 <p>最後在 controller 上測試：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">GetValue</span><span class="p">()</span> 
