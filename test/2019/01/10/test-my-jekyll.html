@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>在 .Net Core 截取網頁 - 使用 HttpClient</title>
-  <meta name="description" content="在寫網站時，都會將某些邏輯獨立在別的 Web API，而在呼叫時就肯定會用到 HttpClient，使用上其實也不難，如以下範例所示：">
+  <title>第一篇測試文</title>
+  <meta name="description" content="測試文章">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="/dotnet/2019/07/03/httpclient.html">
+  <link rel="canonical" href="/test/2019/01/10/test-my-jekyll.html">
   <link rel="alternate" type="application/rss+xml" title="卑微研究生的部落格" href="/feed.xml">
 </head>
 
@@ -61,32 +61,12 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">在 .Net Core 截取網頁 - 使用 HttpClient</h1>
-    <p class="post-meta"><time datetime="2019-07-03T18:00:00+08:00" itemprop="datePublished">Jul 3, 2019</time></p>
+    <h1 class="post-title" itemprop="name headline">第一篇測試文</h1>
+    <p class="post-meta"><time datetime="2019-01-10T16:20:00+08:00" itemprop="datePublished">Jan 10, 2019</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>在寫網站時，都會將某些邏輯獨立在別的 Web API，而在呼叫時就肯定會用到 HttpClient，使用上其實也不難，如以下範例所示：</p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
-<span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">@"https://example.com"</span><span class="p">);</span>
-<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">@"/"</span><span class="p">);</span>
-<span class="kt">string</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p>如果要截取網頁的原始碼，基本做法是一樣的，但會牽涉到 decode 的問題，需額外做處理：</p>
-
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HttpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
-<span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">@"https://www.google.com"</span><span class="p">);</span>
-
-<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">@"/"</span><span class="p">);</span>
-<span class="kt">string</span> <span class="n">htmlStr</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
-<span class="kt">string</span> <span class="n">htmlDecodeStr</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">HttpUtility</span><span class="p">.</span><span class="nf">HtmlDecode</span><span class="p">(</span><span class="n">htmlStr</span><span class="p">);</span>
-<span class="kt">string</span> <span class="n">urlDecodeStr</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">RegularExpressions</span><span class="p">.</span><span class="n">Regex</span><span class="p">.</span><span class="nf">Unescape</span><span class="p">(</span><span class="n">htmlDecodeStr</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>做完字串的處理後，就可以對其做邏輯上的處理。</p>
-
+    <p>測試文章</p>
 
   </div>
 
