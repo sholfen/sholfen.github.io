@@ -5,9 +5,48 @@
     <description>It&#39;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Aug 2023 14:50:26 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Aug 2023 14:50:26 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Aug 2023 21:43:32 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Aug 2023 21:43:32 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>在 Blazor 上使用 Localstorage</title>
+        <description>&lt;p&gt;在 Blazor 專案上，想使用 Localstorage 的功能，寫 JS 是最快解但很煩，幸好有套件可使用，就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;Blazored.LocalStorage&lt;/code&gt;，而且使用上非常簡單。&lt;/p&gt;
+
+&lt;p&gt;第一步是在 Program.cs 加上這一行：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddBlazoredLocalStorage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;下列程式碼是 Blazor 的前端部份：&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@using Blazored.LocalStorage
+@inject ILocalStorageService localstorage;
+
+....
+
+@code {
+    List&lt;span class=&quot;nt&quot;&gt;&amp;lt;WebUrlData&amp;gt;&lt;/span&gt; list = new List&lt;span class=&quot;nt&quot;&gt;&amp;lt;WebUrlData&amp;gt;&lt;/span&gt;();
+    await localstorage.SetItemAsync&lt;span class=&quot;nt&quot;&gt;&amp;lt;List&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;WebUrlData&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&amp;gt;(nameof(WebUrlData), list);
+    List&lt;span class=&quot;nt&quot;&gt;&amp;lt;WebUrlData&amp;gt;&lt;/span&gt; list = await localstorage.GetItemAsync&lt;span class=&quot;nt&quot;&gt;&amp;lt;List&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;WebUrlData&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&amp;gt;(nameof(WebUrlData));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.c-sharpcorner.com/article/using-localstorage-to-cache-data-in-blazor-applications/&quot; target=&quot;_blank&quot;&gt;Using Localstorage To Cache Data In Blazor Applications&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sun, 27 Aug 2023 00:00:00 +0800</pubDate>
+        <link>/dotnet/2023/08/27/blazor-local-storage.html</link>
+        <guid isPermaLink="true">/dotnet/2023/08/27/blazor-local-storage.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>上傳檔案到 Azure Container</title>
@@ -681,145 +720,6 @@
         
         
         <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>目前AI的相關資料以及工具整理</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2023-03-17/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最近 ChatGPT 的橫空出世，讓很多人見識到了 AI 的威力，雖然 OpenAI 表示 ChatGPT 的技術其實不是最新的，但成熟的生成式 AI，讓 ChatGPT 所以產生的對話或內容都相當自然。例如你請它產生一篇廣告文案，只要指定好對應的資訊，就能產生句子順暢且內容還不算差的文案，這對於一些行業是會產生一些衝擊的。甚至你問他怎麼寫程式，它也真的能給你能夠執行的程式碼，讓很多工程師笑稱自己快失業了(雖然這誇大了，不過低階的工程師的確很危險)。&lt;/p&gt;
-
-&lt;p&gt;本篇文章，會分成下列幾個章節：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;何謂 AI&lt;/li&gt;
-  &lt;li&gt;AI 的原理&lt;/li&gt;
-  &lt;li&gt;好用的生成式 AI 工具：ChatGPT&lt;/li&gt;
-  &lt;li&gt;線上 AI 繪圖：Midjourney&lt;/li&gt;
-  &lt;li&gt;本機 AI 繪圖：Stable Diffusion&lt;/li&gt;
-  &lt;li&gt;最後的最後，關於 AI 的倫理問題&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果只是單純想知道工具怎麼用，可以跳過前面兩章及最後一章。&lt;/p&gt;
-
-&lt;p&gt;而在文章開始前，下列兩本書可以參考看看，有助於對 AI 的了解。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://readmoo.com/book/210228065000101&quot;&gt;超圖解AI未來社會&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://readmoo.com/book/210256187000101&quot;&gt;AI世代與我們的未來&lt;/a&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;何謂-ai&quot;&gt;何謂 AI&lt;/h5&gt;
-
-&lt;p&gt;大眾對於 AI (人工智慧) 的想像，往往來自於電影。常見的就是對話型 AI，這樣的想像在1968年的電影就有出現過，甚至還探討到 AI 所可能發生的問題，請見下面的預告。&lt;/p&gt;
-
-&lt;p&gt;2001：太空漫遊&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/AhPvYCqCv-I&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;看完預告，大致就可以理解這種 AI 會毀滅人類的想像一直都在，這也是人之常情，畢竟對大眾來說，不可控的 AI 太可怕。但話說回來，其實 AI 的定義是很廣的，而且早已應用在我們的生活中。Google 搜尋引擎、Facebook 決定貼文順序或是你搜尋 YouTube 影片等等這類的演算法，也算是一種 AI。還有一個就是打敗人類棋手(西洋棋、圍棋)的 AI，尤其是圍棋，不但打敗了人類，還用了人類不曾用過的棋步，這都說明了 AI 的強大(或是威脅？)。&lt;/p&gt;
-
-&lt;h5 id=&quot;ai-的原理&quot;&gt;AI 的原理&lt;/h5&gt;
-
-&lt;p&gt;AI 不是工程師寫幾行程式碼就可以直接執行的東西，它需要經過訓練、學習，再經過人類的驗證，才能派上用場，而這方式稱為機器學習。&lt;/p&gt;
-
-&lt;p&gt;學習的方式有兩種，分別為&lt;code class=&quot;highlighter-rouge&quot;&gt;監督式學習&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;非監督式學習&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;監督式學習是由人類提供大量已標註正確答案的資料，讓 AI 學習這些資料的”特徵”，之後 AI 就可以藉由”特徵”來辨識資料。&lt;/p&gt;
-
-&lt;p&gt;而非監督式學習則是不提供正確答案，讓 AI 自己去歸納出這些資料中的”特徵”，這樣的方式，AI 有時會給出人類無法理解的答案。&lt;/p&gt;
-
-&lt;p&gt;以上兩個名詞絕非三言兩語能解釋完，因為這些學習還得依據不同目的而選擇不同的演算法。更別說還有所謂的&lt;code class=&quot;highlighter-rouge&quot;&gt;類神經網路&lt;/code&gt;以及最近很紅的&lt;code class=&quot;highlighter-rouge&quot;&gt;深度學習&lt;/code&gt;，有興趣可再自行找參考資料。&lt;/p&gt;
-
-&lt;h5 id=&quot;好用的生成式-ai-工具chatgpt&quot;&gt;好用的生成式 AI 工具：ChatGPT&lt;/h5&gt;
-
-&lt;p&gt;https://chat.openai.com/chat&lt;/p&gt;
-
-&lt;p&gt;ChatGPT 的橫空出世，造成世界上極大的震憾，用過的人都發現所謂的生成式 AI 竟如此可怕，對於學術界及業界都造成衝擊。首先是學校方面，許多學校都害怕學生利用 ChatGPT 抄襲作業，畢竟 ChatGPT 所回答的句子極其自然、有條理，雖然有時它只是一本正經地胡說八道。但不得不說，用它寫制式文件或是廣告文案都相當方便，所以出來的東西還是要經過人工修飾，但已經大幅節省了時間。&lt;/p&gt;
-
-&lt;p&gt;像是我今天想寫一篇有關女僕咖啡店的文章，但想不出合適的標題，這時就可以利用 ChatGPT 來產生：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2023-03-17/2.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後呢我利用它給我的標題再產生一篇有關女僕咖啡店的介紹文章：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2023-03-17/3.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;看起來有模有樣，不過真的去過女僕咖啡廳的人肯定會吐槽，我只能說，ChatGPT 所產出的東西只能參考。&lt;/p&gt;
-
-&lt;p&gt;重點來了，要如何善用 ChatGPT 其實是門學問，因為你餵給它的提示詞(prompt)如果不夠精確，得到的回答有時是差強人意的，所以有人就整理了一系列的指令：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.explainthis.io/zh-hant/chatgpt&quot;&gt;ChatGPT 指令大全&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;裡面包含了各式制式文件的產生指令，但必須注意，從 ChatGPT 得到的回答一定要經過檢視，避免裡面有錯誤資訊或是句子不對的問題。&lt;/p&gt;
-
-&lt;p&gt;如果你英文夠好的話，可以利用下面這個網頁提供的指令，讓 ChatGPT 來”角色扮演”，讓它回答問題的語法更偏向某一領域的專家：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/f/awesome-chatgpt-prompts&quot;&gt;Awesome ChatGPT Prompts&lt;/a&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;線上-ai-繪圖midjourney&quot;&gt;線上 AI 繪圖：Midjourney&lt;/h5&gt;
-
-&lt;p&gt;有 AI 寫作，自然也有 AI 繪圖。只是這方面的爭議較大，因為有人用它產生圖片後去參加比賽，也有人利用它產生圖片來賣錢，而最大的爭議在於，它訓練的圖片是來自於網路上各個繪師的作品，這其實是侵犯到他們的著作權，這也是為何美國會有一群繪師抵制的原因。&lt;/p&gt;
-
-&lt;p&gt;但無論如何，如果能善用它，AI 繪圖其實能節省繪師的時間。例如繪師將自己的作品餵給 AI 做訓練，然後依客戶的需求給幾個提示詞，就可以產出數張不同的參考圖片，繪師就可以經過一定程度的修改再給客戶參考，讓客戶決定哪種才是他們想要的，以此減少溝通成本。&lt;/p&gt;
-
-&lt;p&gt;那接下來介紹一個進入門檻最低的工具：Midjourney&lt;/p&gt;
-
-&lt;p&gt;Midjourney 相當特別，它是透過 DC 通訊軟體，對它下提示詞，然後再產生數張圖片，可以參考以下文章：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.kocpc.com.tw/archives/453331&quot;&gt;Midjourney 輸入關鍵字，讓 AI 自動產生出超美圖片&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;YouTube 上也有教學：&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JTFNF22TG9s&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;進階使用：&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/wIYoSAOa0z0&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;以下是筆者試出來的成果：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2023-03-17/4.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2023-03-17/5.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;本機-ai-繪圖stable-diffusion&quot;&gt;本機 AI 繪圖：Stable Diffusion&lt;/h5&gt;
-
-&lt;p&gt;Stable Diffusion 絕對是目前最紅的 AI 繪圖工具，它可以藉由你電腦中強大的顯示卡畫出相當擬真的人像，使用方式可參考下列影片&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/HaXb3R2VHP8&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;也有文章：&lt;a href=&quot;https://www.coolaler.com/index/%E4%BD%BF%E7%94%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%AF%E5%8D%A1%E9%80%B2%E8%A1%8C-ai-%E7%B9%AA%E5%9C%96-stable-diffusion-webui-%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8/&quot;&gt;使用自己的顯卡進行 AI 繪圖, Stable Diffusion webUI 安裝教學&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;但假如自己的電腦太差或是沒獨顯，不就沒得用？好在還是有方法利用網路上的資源來使用 Stable Diffusion，可參考下列文章：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://unwire.hk/2023/03/09/stable-diffusion-google-colab/life-tech/&quot;&gt;【教學】iOS, Android 免費 AI 真人繪圖 毋須電腦+製作真人 Cosplay 美女相片&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://applealmond.com/posts/178039&quot;&gt;免安裝 Stable Diffusion 繪圖教學：教你用 Google Colab 做出擬真 AI 美女圖&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;相關的模型檔，可從以下網址下載：&lt;/p&gt;
-
-&lt;p&gt;https://civitai.com/&lt;/p&gt;
-
-&lt;p&gt;筆者也實驗過，效果真的很好：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2023-03-17/6.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;最後的最後關於-ai-的倫理問題&quot;&gt;最後的最後，關於 AI 的倫理問題&lt;/h5&gt;
-
-&lt;p&gt;最後不得不提 AI 上的倫理問題，像是中國政府在各地安裝的監視器中具有人臉辨識的功能，是雖然為了預防犯罪或是抓出違規行人等目的，但這當中牽涉的隱私問題從來就不是中國政府所在意的。而在美國，人臉辨識還曾發生過把黑猩猩辨認為黑人的事件，這根本的原因在於訓練資料的偏差，也就是說資料裡黑人的照片太少，所以造成偏差。這類訓練資料偏差的問題是很常發生的，畢竟收集資料的是人，當收集資料的團體有意或故意的忽略某些資料，那 AI 產生出來的結果就會有偏差甚至造成歧視。這也是為何某些科技大廠而另外設立倫理委員會的原因。&lt;/p&gt;
-
-&lt;p&gt;另一個則是令人擔憂的武器 AI 化。例如烏俄戰爭中，驗證了無人機的實用性，讓各國加大力度投資無人機。另外解放軍也成功讓 AI 駕駛戰鬥機，這將讓戰機機可以做出人類駕駛所無法做到的飛行動作，而無人艦艇目前也在發展中。這樣的發展方向，或許可以減少人員的訓練也可以降低人員的傷亡，但繼續發展的後果是什麼，沒有人知道。微軟及 Google 大廠曾因接了美國國防部的訂單而遭到左派工程師的抗議(大都也都支持民主黨)，但即使軟體大廠不接這些訂單，也無法阻止美軍繼續發展 AI。&lt;/p&gt;
-
-&lt;p&gt;但筆者個人並不反對發展武器的 AI，筆者在意的是發展這些的後果是什麼，如果這些技術外流到恐佈份子手中，會發生什麼事？這也是值得深思的問題。&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 17 Mar 2023 00:00:00 +0800</pubDate>
-        <link>/other/2023/03/17/ai-tools.html</link>
-        <guid isPermaLink="true">/other/2023/03/17/ai-tools.html</guid>
-        
-        
-        <category>other</category>
         
       </item>
     
