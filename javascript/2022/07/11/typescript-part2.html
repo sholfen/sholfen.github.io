@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -74,14 +76,14 @@
 <span class="p">};</span>
 
 <span class="kr">enum</span> <span class="nx">TestEnum2</span> <span class="p">{</span>
-    <span class="nx">One</span> <span class="o">=</span> <span class="s2">"one"</span><span class="p">,</span>
-    <span class="nx">Two</span> <span class="o">=</span> <span class="s2">"two"</span><span class="p">,</span>
-    <span class="nx">Three</span> <span class="o">=</span> <span class="s2">"three"</span>
+    <span class="nx">One</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">one</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">Two</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">two</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nx">Three</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">three</span><span class="dl">"</span>
 <span class="p">};</span>
 
 <span class="kd">let</span> <span class="nx">enumVal</span><span class="p">:</span> <span class="nx">TestEnum</span> <span class="o">=</span> <span class="nx">TestEnum</span><span class="p">.</span><span class="nx">Three</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">enumVal</span> <span class="o">==</span> <span class="nx">TestEnum</span><span class="p">.</span><span class="nx">Three</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">enumVal</span><span class="p">);</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">enumVal</span> <span class="o">==</span> <span class="nx">TestEnum</span><span class="p">.</span><span class="nx">Three</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">enumVal</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kd">let</span> <span class="nx">enumValue1</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">TestEnum</span><span class="p">.</span><span class="nx">One</span><span class="p">;</span>
@@ -96,7 +98,7 @@
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">type</span> <span class="nx">jsonType</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">name</span><span class="p">:</span> <span class="nx">string</span>
     <span class="na">age</span><span class="p">:</span> <span class="nx">number</span>
-    <span class="nx">readonly</span> <span class="na">sex</span><span class="p">:</span> <span class="kr">boolean</span>
+    <span class="nx">readonly</span> <span class="na">sex</span><span class="p">:</span> <span class="nx">boolean</span>
 <span class="p">};</span>
 
 <span class="nx">type</span> <span class="nx">jsonType2</span> <span class="o">=</span> <span class="p">{</span>
@@ -105,13 +107,13 @@
 <span class="p">};</span>
 
 <span class="kd">let</span> <span class="nx">info</span><span class="p">:</span> <span class="nx">jsonType</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s2">"Peter"</span><span class="p">,</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Peter</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">age</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
     <span class="na">sex</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">};</span>
 
-<span class="nx">jsonStr</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">info2</span><span class="p">:</span> <span class="nx">jsonType</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
+<span class="nx">jsonStr</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">info2</span><span class="p">:</span> <span class="nx">jsonType</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>在 C# 中通常都是定義一個 class 來處理 JSON 資料，但在 TypeScript 中有 type 這樣的形式可以更簡單地處理 JSON 資料，畢竟只有處理資料，也不需要 class 中的 method。</p>

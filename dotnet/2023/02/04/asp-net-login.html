@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -163,13 +165,13 @@
 
 <p>然後是 Home Controller 上的實作</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[HttpGet]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">HttpGet</span><span class="p">]</span>
 <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Login</span><span class="p">()</span>
 <span class="p">{</span>
 	<span class="k">return</span> <span class="nf">View</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="na">[HttpPost]</span>
+<span class="p">[</span><span class="n">HttpPost</span><span class="p">]</span>
 <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Login</span><span class="p">(</span><span class="n">LoginModel</span> <span class="n">model</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="k">if</span> <span class="p">(!</span><span class="n">_authManager</span><span class="p">.</span><span class="nf">AuthByNameAndPassword</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">UserName</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">Password</span><span class="p">,</span> <span class="k">out</span> <span class="n">PersonModel</span> <span class="n">person</span><span class="p">))</span>
@@ -194,7 +196,7 @@
 	<span class="k">return</span> <span class="nf">RedirectToAction</span><span class="p">(</span><span class="s">"Info"</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="na">[Authorize]</span>
+<span class="p">[</span><span class="n">Authorize</span><span class="p">]</span>
 <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Info</span><span class="p">()</span>
 <span class="p">{</span>
 	<span class="kt">var</span> <span class="n">data</span> <span class="p">=</span> <span class="n">HttpContext</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">Claims</span><span class="p">.</span><span class="nf">First</span><span class="p">();</span>
@@ -206,7 +208,7 @@
 
 <p>在需要登入的 Action 上加入 Authorize 即可</p>
 
-<p>而登入的方法也很簡單，呼叫 <code class="highlighter-rouge">await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme)</code> 就可以了</p>
+<p>而登入的方法也很簡單，呼叫 <code class="language-plaintext highlighter-rouge">await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme)</code> 就可以了</p>
 
 <p><strong>參考資料</strong></p>
 

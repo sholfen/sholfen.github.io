@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -89,40 +91,40 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>之後把編譯好的 dll 檔丟到 <code class="highlighter-rouge">C:\Users\[user name]</code> 底下，PowerShell 範例如下：</p>
+<p>之後把編譯好的 dll 檔丟到 <code class="language-plaintext highlighter-rouge">C:\Users\[user name]</code> 底下，PowerShell 範例如下：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Add-Type</span> -Path .\ForPowerShellLibrary.dll;
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-Type</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="o">.</span><span class="nx">\ForPowerShellLibrary.dll</span><span class="p">;</span><span class="w">
 
-<span class="nv">$instance</span> <span class="o">=</span> <span class="nb">New-Object </span>ForPowerShellLibrary.ForPowerShellClass;
-<span class="nv">$instance</span>.Field1;
-<span class="nv">$instance</span>.TestMethod<span class="o">()</span>;
-</code></pre></div></div>
+</span><span class="nv">$instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">ForPowerShellLibrary.ForPowerShellClass</span><span class="p">;</span><span class="w">
+</span><span class="nv">$instance</span><span class="o">.</span><span class="nf">Field1</span><span class="p">;</span><span class="w">
+</span><span class="nv">$instance</span><span class="o">.</span><span class="nf">TestMethod</span><span class="p">();</span><span class="w">
+</span></code></pre></div></div>
 
 <p>另外還有一種寫法，是直接把 C# code 寫在 ps 檔裡，範例如下：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Add-Type</span> -TypeDefinition @<span class="s2">"
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-Type</span><span class="w"> </span><span class="nt">-TypeDefinition</span><span class="w"> </span><span class="sh">@"
 using System;
 
 public class ForPowerShellClass
 {
     public ForPowerShellClass()
     {
-        Field1 = "</span>aaa3<span class="s2">";
+        Field1 = "aaa3";
     }
 
     public string Field1 { get; set; }
 
     public string TestMethod()
     {
-        return "</span>aaa4<span class="s2">";
+        return "aaa4";
     }
 }
-"</span>@
+"@</span><span class="w">
 
-<span class="nv">$instance</span> <span class="o">=</span> <span class="nb">New-Object </span>ForPowerShellClass;
-<span class="nv">$instance</span>.Field1;
-<span class="nv">$instance</span>.TestMethod<span class="o">()</span>;
-</code></pre></div></div>
+</span><span class="nv">$instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">ForPowerShellClass</span><span class="p">;</span><span class="w">
+</span><span class="nv">$instance</span><span class="o">.</span><span class="nf">Field1</span><span class="p">;</span><span class="w">
+</span><span class="nv">$instance</span><span class="o">.</span><span class="nf">TestMethod</span><span class="p">();</span><span class="w">
+</span></code></pre></div></div>
 
 <p><strong>參考資料</strong></p>
 

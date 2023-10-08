@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,7 +70,7 @@
   <div class="post-content" itemprop="articleBody">
     <p>在 ASP.NET Core 上有個好用的功能叫 Middleware，它可以在處理 request 時做一些介入，例如搜集 log 或是做錯誤處理，以下示範如何做錯誤處理並把錯誤記錄在 log 中。</p>
 
-<p>首先，新增一個類別叫 <code class="highlighter-rouge">ExceptionMiddleware</code>，它大致上有以下基本格式：</p>
+<p>首先，新增一個類別叫 <code class="language-plaintext highlighter-rouge">ExceptionMiddleware</code>，它大致上有以下基本格式：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">ExceptionMiddleware</span>
 <span class="p">{</span>
@@ -86,7 +88,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>大致上，處理的邏輯會在<code class="highlighter-rouge">Invoke</code>這個 method 裡。然後在 Startup.cs 中加入以下程式碼：</p>
+<p>大致上，處理的邏輯會在<code class="language-plaintext highlighter-rouge">Invoke</code>這個 method 裡。然後在 Startup.cs 中加入以下程式碼：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span><span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span> <span class="n">IWebHostEnvironment</span> <span class="n">env</span><span class="p">)</span>
 <span class="p">{</span>
@@ -101,7 +103,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>然後在 Program.cs 多呼叫一個 method <code class="highlighter-rouge">UseNLog</code>。</p>
+<p>然後在 Program.cs 多呼叫一個 method <code class="language-plaintext highlighter-rouge">UseNLog</code>。</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">IHostBuilder</span> <span class="nf">CreateHostBuilder</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">=&gt;</span>
     <span class="n">Host</span><span class="p">.</span><span class="nf">CreateDefaultBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,7 +70,7 @@
   <div class="post-content" itemprop="articleBody">
     <h2 id="說明">說明</h2>
 
-<p>在 .NET 程式中，可以用 HttpClient 或 WebClient 這兩種類別來抓取網頁。而在 ASP.NET Core 中，提供了 IHttpClientFactory 來取得 HttpClient 的 instance。一開始覺得好像沒什麼差別，但在官方文件中提到：<code class="highlighter-rouge">自動管理可避免在手動管理 HttpClient 存留期時所發生的常見 DNS （網域名稱系統）問題</code>。想想既然這樣用沒壞處，也不用爭論要用 HttpClient 或 WebClient，那就照官方的建議吧。</p>
+<p>在 .NET 程式中，可以用 HttpClient 或 WebClient 這兩種類別來抓取網頁。而在 ASP.NET Core 中，提供了 IHttpClientFactory 來取得 HttpClient 的 instance。一開始覺得好像沒什麼差別，但在官方文件中提到：<code class="language-plaintext highlighter-rouge">自動管理可避免在手動管理 HttpClient 存留期時所發生的常見 DNS （網域名稱系統）問題</code>。想想既然這樣用沒壞處，也不用爭論要用 HttpClient 或 WebClient，那就照官方的建議吧。</p>
 
 <h2 id="使用方式">使用方式</h2>
 

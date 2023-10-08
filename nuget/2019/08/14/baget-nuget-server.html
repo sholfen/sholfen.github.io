@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -81,14 +83,14 @@ Search__Type=Database
 
 <p>接下來直接執行以下指令：</p>
 
-<p><code class="highlighter-rouge">docker run -d -ti --name private-nuget-server -p 5555:80 --env-file baget.env -v "/docker/BaGet:/var/baget" loicsharma/baget</code></p>
+<p><code class="language-plaintext highlighter-rouge">docker run -d -ti --name private-nuget-server -p 5555:80 --env-file baget.env -v "/docker/BaGet:/var/baget" loicsharma/baget</code></p>
 
-<p>建立後就可以透過 port 5555 看到 BaGet 的 UI，這樣就表示建立成功了。最後在 Visual Studio 設定 NuGet 來源，網址為 <code class="highlighter-rouge">http://[FQDN]:5555/v3/index.json</code></p>
+<p>建立後就可以透過 port 5555 看到 BaGet 的 UI，這樣就表示建立成功了。最後在 Visual Studio 設定 NuGet 來源，網址為 <code class="language-plaintext highlighter-rouge">http://[FQDN]:5555/v3/index.json</code></p>
 
 <h3 id="如何上傳套件">如何上傳套件</h3>
 <p>如果有安裝 .Net Core，就可以使用下列指令：</p>
 
-<p><code class="highlighter-rouge">dotnet nuget push -s http://[FQDN]:5555/v3/index.json -k [Your Key] NuGetTestClassLibrary.1.0.3.nupkg</code></p>
+<p><code class="language-plaintext highlighter-rouge">dotnet nuget push -s http://[FQDN]:5555/v3/index.json -k [Your Key] NuGetTestClassLibrary.1.0.3.nupkg</code></p>
 
 <p><strong>參考資料</strong></p>
 

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -85,11 +87,11 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>這樣在 View 上可簡化成：<code class="highlighter-rouge">&lt;email mail-to="aaa3"&gt;aaa3&lt;/email&gt;</code></p>
+<p>這樣在 View 上可簡化成：<code class="language-plaintext highlighter-rouge">&lt;email mail-to="aaa3"&gt;aaa3&lt;/email&gt;</code></p>
 
 <p>而以下範例則是單純生出一個連到 Google 的 html a tag：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[HtmlTargetElement("test")]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">HtmlTargetElement</span><span class="p">(</span><span class="s">"test"</span><span class="p">)]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">TestTagHelper</span> <span class="p">:</span> <span class="n">TagHelper</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Process</span><span class="p">(</span><span class="n">TagHelperContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">TagHelperOutput</span> <span class="n">output</span><span class="p">)</span>
@@ -101,7 +103,7 @@
 <span class="p">}</span> 
 </code></pre></div></div>
 
-<p>在 View 上就只要寫 <code class="highlighter-rouge">&lt;test&gt;&lt;/test&gt;</code>，而寫出這些類別後，如要使用則必需在 <code class="highlighter-rouge">_ViewImports.cshtml</code> 加入 <code class="highlighter-rouge">@addTagHelper *, &lt;Assembly Name&gt;</code> 這一行，才能在 View 上使用自己寫的 Tag Helpers</p>
+<p>在 View 上就只要寫 <code class="language-plaintext highlighter-rouge">&lt;test&gt;&lt;/test&gt;</code>，而寫出這些類別後，如要使用則必需在 <code class="language-plaintext highlighter-rouge">_ViewImports.cshtml</code> 加入 <code class="language-plaintext highlighter-rouge">@addTagHelper *, &lt;Assembly Name&gt;</code> 這一行，才能在 View 上使用自己寫的 Tag Helpers</p>
 
 <p><strong>參考資料</strong></p>
 

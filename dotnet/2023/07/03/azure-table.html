@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,9 +70,9 @@
   <div class="post-content" itemprop="articleBody">
     <p>以前在用的 Azure 儲存體，再過不久就要停止服務了，取而代之的是 Azure Cosmos DB，不過在開服務時依然是稱之為儲存體，只是選項上會讓你選擇是 SQL、NoSQL 還是 Table。因為觀念上還是習慣 Table，所以最近研究的是這塊，在做 side project 時也比較好上手。</p>
 
-<p>使用 Table 前，要先定義 Table 上所放的資料，另外別忘了安裝 <code class="highlighter-rouge">Azure.Data.Tables</code> 套件：</p>
+<p>使用 Table 前，要先定義 Table 上所放的資料，另外別忘了安裝 <code class="language-plaintext highlighter-rouge">Azure.Data.Tables</code> 套件：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">record</span> <span class="n">AzureTestData</span> <span class="p">:</span> <span class="n">ITableEntity</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">record</span> <span class="nc">AzureTestData</span> <span class="p">:</span> <span class="n">ITableEntity</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="kt">string</span> <span class="n">RowKey</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="nf">NewGuid</span><span class="p">().</span><span class="nf">ToString</span><span class="p">();</span>
 
@@ -80,11 +82,11 @@
 
     <span class="k">public</span> <span class="n">DateTimeOffset</span><span class="p">?</span> <span class="n">Timestamp</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">default</span><span class="p">!;</span>
 
-    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">default</span><span class="p">!;</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">default</span><span class="p">!;</span>
 
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span>
 
-    <span class="k">public</span> <span class="kt">string</span> <span class="n">Desc</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Desc</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -98,7 +100,7 @@
 <span class="n">_cosmosClient</span> <span class="p">=</span> <span class="n">tableClient</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>這裡要做的就是設定連線字串跟設定 table name，而塞資料的方式就只要呼叫 <code class="highlighter-rouge">await _cosmosClient.AddEntityAsync&lt;AzureTestData&gt;(data);</code> 即可，而拿資料則所是 <code class="highlighter-rouge">_cosmosClient.Query&lt;AzureTestData&gt;(x =&gt; x.PartitionKey == "AzureTestData").ToList();</code>。</p>
+<p>這裡要做的就是設定連線字串跟設定 table name，而塞資料的方式就只要呼叫 <code class="language-plaintext highlighter-rouge">await _cosmosClient.AddEntityAsync&lt;AzureTestData&gt;(data);</code> 即可，而拿資料則所是 <code class="language-plaintext highlighter-rouge">_cosmosClient.Query&lt;AzureTestData&gt;(x =&gt; x.PartitionKey == "AzureTestData").ToList();</code>。</p>
 
 <p>完整的程式碼如下：</p>
 
@@ -143,7 +145,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>在 ASP.NET 中，因為都是用 DI，所以可以這樣設定：<code class="highlighter-rouge">builder.Services.AddSingleton(typeof(AzureDataRepository), new AzureDataRepository(connectionstring));</code></p>
+<p>在 ASP.NET 中，因為都是用 DI，所以可以這樣設定：<code class="language-plaintext highlighter-rouge">builder.Services.AddSingleton(typeof(AzureDataRepository), new AzureDataRepository(connectionstring));</code></p>
 
 <p><strong>參考資料</strong></p>
 

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -71,16 +73,16 @@
 <p>首先是 libman.json 的設定</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"defaultProvider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdnjs"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"libraries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"defaultProvider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdnjs"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"libraries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"library"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vue@3.2.33"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/lib/vue/"</span><span class="w">
+      </span><span class="nl">"library"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vue@3.2.33"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/lib/vue/"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"library"</span><span class="p">:</span><span class="w"> </span><span class="s2">"axios@1.0.0-alpha.1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/lib/axios"</span><span class="w">
+      </span><span class="nl">"library"</span><span class="p">:</span><span class="w"> </span><span class="s2">"axios@1.0.0-alpha.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/lib/axios"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -89,84 +91,84 @@
 <p>再來是 package.json</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asp.net"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"@babel/types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.17.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"@types/vue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"axios"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0-alpha.1"</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asp.net"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@babel/types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.17.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@types/vue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"axios"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0-alpha.1"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>最後是 Axios 在 Get 及 Post 的用法：</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s2">"app2"</span><span class="p">,</span>
-    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">v</span> <span class="o">=</span> <span class="nf">defineComponent</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">app2</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nf">data</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="na">x</span><span class="p">:</span> <span class="s2">"aaa3"</span><span class="p">,</span>
-            <span class="na">y</span><span class="p">:</span> <span class="s2">"aaa4"</span><span class="p">,</span>
-            <span class="na">exchange</span><span class="p">:</span> <span class="s2">"test message"</span><span class="p">,</span>
+            <span class="na">x</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">y</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa4</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">exchange</span><span class="p">:</span> <span class="dl">"</span><span class="s2">test message</span><span class="dl">"</span><span class="p">,</span>
             <span class="na">n1</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
             <span class="na">n2</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
         <span class="p">};</span>
     <span class="p">},</span>
     <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">AJAX</span><span class="p">:</span> <span class="kd">function</span> <span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
-            <span class="kd">let</span> <span class="na">url</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="s2">"/Home/GetJSON"</span><span class="p">;</span>
+        <span class="na">AJAX</span><span class="p">:</span> <span class="nf">function </span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="na">url</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/Home/GetJSON</span><span class="dl">"</span><span class="p">;</span>
             <span class="nx">ax</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="kd">get</span><span class="o">&lt;</span><span class="nx">JSONData</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
                 <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="na">Accept</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+                    <span class="na">Accept</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
                 <span class="p">},</span>
-            <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}).</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kd">let</span> <span class="na">result</span><span class="p">:</span> <span class="nx">JSONData</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"name: "</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">name: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
             <span class="p">});</span>
 
         <span class="p">},</span>
-        <span class="na">AJAXPOST</span><span class="p">:</span> <span class="kd">function</span> <span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
-            <span class="kd">let</span> <span class="na">url</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="s2">"/Home/PostJSONData"</span><span class="p">;</span>
-            <span class="kd">let</span> <span class="na">postData</span><span class="p">:</span> <span class="nx">JSONData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JSONData</span><span class="p">();</span>
-            <span class="nx">postData</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">"Peter"</span><span class="p">;</span>
+        <span class="na">AJAXPOST</span><span class="p">:</span> <span class="nf">function </span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="na">url</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/Home/PostJSONData</span><span class="dl">"</span><span class="p">;</span>
+            <span class="kd">let</span> <span class="na">postData</span><span class="p">:</span> <span class="nx">JSONData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONData</span><span class="p">();</span>
+            <span class="nx">postData</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Peter</span><span class="dl">"</span><span class="p">;</span>
             <span class="nx">postData</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
             <span class="nx">ax</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">JSONData</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">postData</span><span class="p">,</span> <span class="p">{</span>
                 <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="na">Accept</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+                    <span class="na">Accept</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span>
                 <span class="p">},</span>
-            <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}).</span><span class="nf">then</span><span class="p">(</span><span class="nf">function </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kd">let</span> <span class="na">result</span><span class="p">:</span> <span class="nx">JSONData</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"age: "</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">age: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
             <span class="p">});</span>
         <span class="p">},</span>
     <span class="p">},</span>
-    <span class="na">mounted</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"App name:"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">$options</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-        <span class="kd">let</span> <span class="nx">divScripts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"dynamicScript"</span><span class="p">);</span>
-        <span class="kd">let</span> <span class="nx">newScript</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
-        <span class="nx">newScript</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'https://cse.google.com/cse.js?cx=007968012720720263530:10z7awj2l37'</span><span class="p">;</span>
-        <span class="nx">divScripts</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newScript</span><span class="p">);</span>
+    <span class="na">mounted</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">App name:</span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">$options</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">divScripts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">dynamicScript</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">newScript</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">);</span>
+        <span class="nx">newScript</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://cse.google.com/cse.js?cx=007968012720720263530:10z7awj2l37</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">divScripts</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">newScript</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div></div>
 
 <p>前端的寫法：</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"importmap"</span><span class="o">&gt;</span>
-    <span class="p">{</span> <span class="s2">"imports"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"vue"</span><span class="p">:</span> <span class="s2">"/lib/vue/vue.esm-browser.js"</span><span class="p">,</span>
-      <span class="s2">"axios"</span><span class="p">:</span> <span class="s2">"/lib/axios/esm/axios.js"</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">importmap</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="p">{</span> <span class="dl">"</span><span class="s2">imports</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/lib/vue/vue.esm-browser.js</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">axios</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/lib/axios/esm/axios.js</span><span class="dl">"</span>
     <span class="p">}</span> <span class="p">}</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"module"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"~/js/app.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">module</span><span class="dl">"</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">~/js/app.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span>
-<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"module"</span><span class="o">&gt;</span>
-    <span class="k">import</span> <span class="p">{</span> <span class="nx">GetVueObject</span><span class="p">}</span> <span class="k">from</span> <span class="s2">"./js/app.js"</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">vueApp</span> <span class="o">=</span> <span class="nx">GetVueObject</span><span class="p">(</span><span class="s2">"#app"</span><span class="p">);</span>
-    <span class="nx">vueApp</span><span class="p">.</span><span class="nx">AJAX</span><span class="p">();</span>
-    <span class="nx">vueApp</span><span class="p">.</span><span class="nx">AJAXPOST</span><span class="p">();</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">module</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">GetVueObject</span><span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./js/app.js</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">vueApp</span> <span class="o">=</span> <span class="nc">GetVueObject</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">vueApp</span><span class="p">.</span><span class="nc">AJAX</span><span class="p">();</span>
+    <span class="nx">vueApp</span><span class="p">.</span><span class="nc">AJAXPOST</span><span class="p">();</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span></code></pre></div></div>
 

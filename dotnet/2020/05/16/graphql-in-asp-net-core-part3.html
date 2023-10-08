@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -66,7 +68,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>在 GraphQL 中，可以在查詢資料時，只選擇特定的欄位。但在前一篇文章中，可以看到像這樣的程式碼：<code class="highlighter-rouge">resolve: context =&gt; companyRepository.GetAll()</code>，也就是說雖然傳回前端的資料只有部份欄位，但在後端中其實是撈出所有的欄位。這其實是可以解決的，像是下列程式碼：</p>
+    <p>在 GraphQL 中，可以在查詢資料時，只選擇特定的欄位。但在前一篇文章中，可以看到像這樣的程式碼：<code class="language-plaintext highlighter-rouge">resolve: context =&gt; companyRepository.GetAll()</code>，也就是說雖然傳回前端的資料只有部份欄位，但在後端中其實是撈出所有的欄位。這其實是可以解決的，像是下列程式碼：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">AllDatas</span> <span class="p">:</span> <span class="n">ObjectGraphType</span>
 <span class="p">{</span>
@@ -89,7 +91,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>上面的程式碼，可以看到<code class="highlighter-rouge">var names = context.SubFields.Keys.ToList();</code>這一行，就是取出前端傳過來的欄位有哪些，然後就可以將這些參數傳到 Repository 裡，至於底層要怎麼實作，就要看資料庫那端是用 Entity Framework 或是 Dapper，這部份之後會另外寫文章介紹，Dapper 的部份會比較簡單些，因為它吃的是純 SQL 指令。</p>
+<p>上面的程式碼，可以看到<code class="language-plaintext highlighter-rouge">var names = context.SubFields.Keys.ToList();</code>這一行，就是取出前端傳過來的欄位有哪些，然後就可以將這些參數傳到 Repository 裡，至於底層要怎麼實作，就要看資料庫那端是用 Entity Framework 或是 Dapper，這部份之後會另外寫文章介紹，Dapper 的部份會比較簡單些，因為它吃的是純 SQL 指令。</p>
 
 
   </div>

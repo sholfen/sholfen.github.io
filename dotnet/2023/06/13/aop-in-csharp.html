@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -70,14 +72,14 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print_func_name</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">warp</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Now use function '{}'"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
-        <span class="n">func</span><span class="p">()</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Now use function </span><span class="sh">'</span><span class="s">{}</span><span class="sh">'"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">))</span>
+        <span class="nf">func</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">warp</span>
 
 
 <span class="nd">@print_func_name</span>
 <span class="k">def</span> <span class="nf">dog_bark</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"Bark !!!"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Bark !!!</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>這樣在執行 dog_bark 時就會印象函式名稱，而在 C# 並沒有類似的原生功能，早期有 PostSharp，但它的原理是干涉編譯器的行為，而且它是商用。不過好在 .Net Core 之後的版本，有熱心人士做相關套件，像是 isRock.Core.AOP。</p>

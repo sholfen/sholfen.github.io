@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,23 +70,23 @@
   <div class="post-content" itemprop="articleBody">
     <h2 id="變數宣告">變數宣告</h2>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#這是註解</span>
-<span class="nv">$int1</span> <span class="o">=</span> 1;
-<span class="nv">$int2</span> <span class="o">=</span> 2; 
-<span class="nv">$float1</span> <span class="o">=</span> 0.1;
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#這是註解</span><span class="w">
+</span><span class="nv">$int1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="nv">$int2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> 
+</span><span class="nv">$float1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>兩個變數做相加後，可以輸出至螢幕，方式有下列兩種：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$int1</span> <span class="o">=</span> 1;
-<span class="nv">$int2</span> <span class="o">=</span> 2;
-<span class="nb">Write-Host</span> <span class="nv">$int1</span> + <span class="nv">$int2</span>;
-<span class="nv">$int1</span> + <span class="nv">$int2</span>;
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$int1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="nv">$int2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">
+</span><span class="n">Write-Host</span><span class="w"> </span><span class="nv">$int1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">$int2</span><span class="p">;</span><span class="w">
+</span><span class="nv">$int1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">$int2</span><span class="p">;</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="條件式">條件式</h2>
 
-<p>條件式比較麻煩，要硬記一些縮寫，像是 <code class="highlighter-rouge">-eq</code>、<code class="highlighter-rouge">-ne</code>、<code class="highlighter-rouge">-gt</code> 等，不能以常用 <code class="highlighter-rouge">&gt;</code> 及 <code class="highlighter-rouge">&lt;</code> 是因為在 shell script 中它們另有作用，底下列出條件式的縮寫：</p>
+<p>條件式比較麻煩，要硬記一些縮寫，像是 <code class="language-plaintext highlighter-rouge">-eq</code>、<code class="language-plaintext highlighter-rouge">-ne</code>、<code class="language-plaintext highlighter-rouge">-gt</code> 等，不能以常用 <code class="language-plaintext highlighter-rouge">&gt;</code> 及 <code class="language-plaintext highlighter-rouge">&lt;</code> 是因為在 shell script 中它們另有作用，底下列出條件式的縮寫：</p>
 
 <table>
   <thead>
@@ -122,52 +124,52 @@
 </table>
 
 <p>寫法如下，格式跟 C# 類似：</p>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span>1 -eq 2<span class="o">)</span> <span class="o">{</span>
-    <span class="s2">"aaa3"</span>;
-<span class="o">}</span>
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"aaa3"</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="迴圈">迴圈</h2>
 
-<p>有 <code class="highlighter-rouge">for</code> 及 <code class="highlighter-rouge">foreach</code> 兩種：</p>
+<p>有 <code class="language-plaintext highlighter-rouge">for</code> 及 <code class="language-plaintext highlighter-rouge">foreach</code> 兩種：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$p5</span> <span class="o">=</span> <span class="s2">"1,2,3,4,5"</span>.Split<span class="o">(</span><span class="s1">','</span><span class="o">)</span>;
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$p5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1,2,3,4,5"</span><span class="o">.</span><span class="nf">Split</span><span class="p">(</span><span class="s1">','</span><span class="p">);</span><span class="w">
 
-<span class="k">foreach</span> <span class="o">(</span><span class="nv">$item</span> <span class="k">in</span> <span class="nv">$p5</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nv">$item</span> + <span class="s2">"~"</span>;
-<span class="o">}</span>
+</span><span class="kr">foreach</span><span class="w"> </span><span class="p">(</span><span class="nv">$item</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$p5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">$item</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"~"</span><span class="p">;</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<span class="k">for</span> <span class="o">(</span><span class="nv">$i</span> <span class="o">=</span> 0; <span class="nv">$i</span> -lt <span class="nv">$p5</span>.Count; <span class="nv">$i</span>++<span class="o">)</span> <span class="o">{</span>
-    <span class="nv">$p5</span><span class="o">[</span><span class="nv">$i</span><span class="o">]</span>;
-<span class="o">}</span>
-</code></pre></div></div>
+</span><span class="kr">for</span><span class="w"> </span><span class="p">(</span><span class="nv">$i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nv">$i</span><span class="w"> </span><span class="o">-lt</span><span class="w"> </span><span class="nv">$p5</span><span class="o">.</span><span class="nf">Count</span><span class="p">;</span><span class="w"> </span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">$p5</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="函式">函式</h2>
 
 <p>函式的寫法類似 JavaScript，帶有參數的寫法如下：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>testFunc <span class="o">{</span>
-    <span class="k">param</span> <span class="o">(</span>
-        <span class="nv">$param</span>
-    <span class="o">)</span>
-    <span class="nv">$param</span>;
-<span class="o">}</span>;
-testFunc<span class="o">(</span><span class="s1">'aaa3'</span><span class="o">)</span>;
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">function</span><span class="w"> </span><span class="nf">testFunc</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="kr">param</span><span class="w"> </span><span class="p">(</span><span class="w">
+        </span><span class="nv">$param</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+    </span><span class="nv">$param</span><span class="p">;</span><span class="w">
+</span><span class="p">};</span><span class="w">
+</span><span class="n">testFunc</span><span class="p">(</span><span class="s1">'aaa3'</span><span class="p">);</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="其它常用指令">其它常用指令</h2>
 
 <p>下面列一些常用的指令</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#新增檔案</span>
-<span class="c1">#New-Item 'test.txt ' -ItemType File;</span>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#新增檔案</span><span class="w">
+</span><span class="c">#New-Item 'test.txt ' -ItemType File;</span><span class="w">
 
-<span class="c1">#新增資料夾</span>
-mkdir <span class="nb">test</span>;
+</span><span class="c">#新增資料夾</span><span class="w">
+</span><span class="n">mkdir</span><span class="w"> </span><span class="nx">test</span><span class="p">;</span><span class="w">
 
-<span class="c1">#將字串寫入檔案</span>
-<span class="nb">echo</span> <span class="s1">'aaa3'</span> <span class="o">&gt;</span> test.txt
-</code></pre></div></div>
+</span><span class="c">#將字串寫入檔案</span><span class="w">
+</span><span class="n">echo</span><span class="w"> </span><span class="s1">'aaa3'</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">test.txt</span><span class="w">
+</span></code></pre></div></div>
 
 <p><strong>參考資料</strong></p>
 

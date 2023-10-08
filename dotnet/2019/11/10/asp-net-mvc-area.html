@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -70,7 +72,7 @@
 
 <p>首先簡單示範 Area 的預設行為，先新增下列 controller 程式碼：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[Area("Products")]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Area</span><span class="p">(</span><span class="s">"Products"</span><span class="p">)]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">TestController</span> <span class="p">:</span> <span class="n">Controller</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Index</span><span class="p">()</span>
@@ -85,9 +87,9 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>這裡 Area 設定為 <code class="highlighter-rouge">Products</code>，所以打開網址  <code class="highlighter-rouge">https://localhost/Products/Test</code> 後就可以拿到 response。</p>
+<p>這裡 Area 設定為 <code class="language-plaintext highlighter-rouge">Products</code>，所以打開網址  <code class="language-plaintext highlighter-rouge">https://localhost/Products/Test</code> 後就可以拿到 response。</p>
 
-<p>如果是範例中的 action index2，就要取得 view 檔案，而它的預設路徑老實說相當奇怪，會在根目錄 <code class="highlighter-rouge">Areas/Products/Views/Test/Index2.cshtml</code>。但這個行為是可以設定的，方法如下，在 Startup.cs 加入下列程式碼：</p>
+<p>如果是範例中的 action index2，就要取得 view 檔案，而它的預設路徑老實說相當奇怪，會在根目錄 <code class="language-plaintext highlighter-rouge">Areas/Products/Views/Test/Index2.cshtml</code>。但這個行為是可以設定的，方法如下，在 Startup.cs 加入下列程式碼：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
 <span class="p">{</span>

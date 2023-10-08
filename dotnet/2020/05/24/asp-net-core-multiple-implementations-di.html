@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -82,7 +84,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>重點在於<code class="highlighter-rouge">services.AddTransient(x =&gt; new HomeController(x.GetRequiredService&lt;ILogger&lt;HomeController&gt;&gt;(), (IService)x.GetService&lt;ServiceA&gt;()));</code>這一行，將 controller 跟要對應的類別做 mapping，最後別忘了<code class="highlighter-rouge">services.AddMvc().AddControllersAsServices();</code>這一行，不然不會有任何作用。</p>
+<p>重點在於<code class="language-plaintext highlighter-rouge">services.AddTransient(x =&gt; new HomeController(x.GetRequiredService&lt;ILogger&lt;HomeController&gt;&gt;(), (IService)x.GetService&lt;ServiceA&gt;()));</code>這一行，將 controller 跟要對應的類別做 mapping，最後別忘了<code class="language-plaintext highlighter-rouge">services.AddMvc().AddControllersAsServices();</code>這一行，不然不會有任何作用。</p>
 
 <p>這樣在 HomeController 中就會取得 ServiceA，其它的 Controller 一律取得 ServiceB。</p>
 

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -66,11 +68,11 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Azure 上有個<code class="highlighter-rouge">應用程式組態</code>的功能，可以建立多組”設定檔”，這對於網站要切換到本機開發或 UAT 或者是正式環境都很方便，下面就示範如何使用。</p>
+    <p>Azure 上有個<code class="language-plaintext highlighter-rouge">應用程式組態</code>的功能，可以建立多組”設定檔”，這對於網站要切換到本機開發或 UAT 或者是正式環境都很方便，下面就示範如何使用。</p>
 
-<p>最一開始當然是在<code class="highlighter-rouge">應用程式組態</code>中新增一組”設定”，它是 Key Value 的對應，為了方便展示，在設定裡新增 key: API_DOMAIN、value: www.google.com。</p>
+<p>最一開始當然是在<code class="language-plaintext highlighter-rouge">應用程式組態</code>中新增一組”設定”，它是 Key Value 的對應，為了方便展示，在設定裡新增 key: API_DOMAIN、value: www.google.com。</p>
 
-<p>接在從 nuget 中加入<code class="highlighter-rouge">Microsoft.Extensions.Configuration.AzureAppConfiguration</code>套件。</p>
+<p>接在從 nuget 中加入<code class="language-plaintext highlighter-rouge">Microsoft.Extensions.Configuration.AzureAppConfiguration</code>套件。</p>
 
 <p>接著新增類別，用來連接 Azure 及取得設定：</p>
 
@@ -105,20 +107,20 @@
 <p>因為需要連接 Azure 的連線字串，所以在 appsettings.json 中新增連線字串：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"Logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Microsoft.AspNetCore"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="w">
+  </span><span class="nl">"Logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Microsoft.AspNetCore"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"AllowedHosts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"AzureConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"connectionStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your connection string&gt;"</span><span class="w">
+  </span><span class="nl">"AllowedHosts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"AzureConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"connectionStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your connection string&gt;"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>然後記得設定 DI：<code class="highlighter-rouge">builder.Services.AddTransient&lt;IConfigManager, ConfigManager&gt;(x =&gt; new ConfigManager(builder.Configuration));</code></p>
+<p>然後記得設定 DI：<code class="language-plaintext highlighter-rouge">builder.Services.AddTransient&lt;IConfigManager, ConfigManager&gt;(x =&gt; new ConfigManager(builder.Configuration));</code></p>
 
 <p>最後在 controller 上測試：</p>
 

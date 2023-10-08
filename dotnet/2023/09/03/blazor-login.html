@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,7 +70,7 @@
   <div class="post-content" itemprop="articleBody">
     <p>在 Blazor 上做登入功能，我原以為會比傳統的 ASP.NET 專案簡單，但事實上沒有，先說結論，還是要寫 controller。</p>
 
-<p>首先，我把邏輯抽到 service，所以需要透過 DI 取得 <code class="highlighter-rouge">IHttpContextAccessor</code> 物件：</p>
+<p>首先，我把邏輯抽到 service，所以需要透過 DI 取得 <code class="language-plaintext highlighter-rouge">IHttpContextAccessor</code> 物件：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="n">IHttpContextAccessor</span> <span class="n">_httpContextAccessor</span><span class="p">;</span>
 
@@ -130,8 +132,8 @@
 
 <p>最後是 controller，這部份也是沒什麼特別的，就是拿到參數後由 service 執行登入：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[Route("/[controller]</span><span class="s">")]
-</span><span class="na">[ApiController]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Route</span><span class="p">(</span><span class="s">"/[controller]"</span><span class="p">)]</span>
+<span class="p">[</span><span class="n">ApiController</span><span class="p">]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">AuthController</span> <span class="p">:</span> <span class="n">ControllerBase</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="n">IUserAppService</span> <span class="n">_userAppService</span><span class="p">;</span>

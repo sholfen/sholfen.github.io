@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -73,48 +75,48 @@
     <span class="nl">F1</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span>
     <span class="nx">F2</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span>
 
-    <span class="nx">TestMethod</span><span class="p">(</span><span class="nx">a1</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">a2</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span>
+    <span class="nc">TestMethod</span><span class="p">(</span><span class="nx">a1</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">a2</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span>
 <span class="p">};</span>
 
-<span class="kd">class</span> <span class="nx">TestClass</span> <span class="kr">implements</span> <span class="nx">ITest</span> <span class="p">{</span>
+<span class="kd">class</span> <span class="nc">TestClass</span> <span class="kr">implements</span> <span class="nx">ITest</span> <span class="p">{</span>
     <span class="kr">public</span> <span class="nx">F1</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
     <span class="kr">public</span> <span class="nx">F2</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
 
-    <span class="kr">public</span> <span class="nx">TestMethod</span><span class="p">(</span><span class="nx">a1</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">a2</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a1</span> <span class="o">+</span> <span class="nx">a2</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+    <span class="kr">public</span> <span class="nc">TestMethod</span><span class="p">(</span><span class="nx">a1</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">a2</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">a1</span> <span class="o">+</span> <span class="nx">a2</span><span class="p">.</span><span class="nf">toString</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kr">abstract</span> <span class="kd">class</span> <span class="nx">AClass</span> <span class="p">{</span>
-    <span class="kr">public</span> <span class="kr">abstract</span> <span class="nx">Method1</span><span class="p">():</span> <span class="k">void</span><span class="p">;</span>
-    <span class="kr">public</span> <span class="nx">Method2</span><span class="p">():</span> <span class="nx">string</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s2">"Hello"</span><span class="p">;</span>
+<span class="nx">abstract</span> <span class="kd">class</span> <span class="nc">AClass</span> <span class="p">{</span>
+    <span class="kr">public</span> <span class="nx">abstract</span> <span class="nc">Method1</span><span class="p">():</span> <span class="k">void</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nc">Method2</span><span class="p">():</span> <span class="nx">string</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">class</span> <span class="nx">BClass</span> <span class="kd">extends</span> <span class="nx">AClass</span> <span class="p">{</span>
-    <span class="kr">public</span> <span class="nx">Method1</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">super</span><span class="p">.</span><span class="nx">Method2</span><span class="p">());</span>
+<span class="kd">class</span> <span class="nc">BClass</span> <span class="kd">extends</span> <span class="nc">AClass</span> <span class="p">{</span>
+    <span class="kr">public</span> <span class="nc">Method1</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="k">super</span><span class="p">.</span><span class="nc">Method2</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>接下來是比較常用到的 JSON 與字串間的互相轉換。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">strArray</span><span class="p">:</span> <span class="nx">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"aaa3"</span><span class="p">,</span> <span class="s2">"aaa2"</span><span class="p">,</span> <span class="s2">"aaa1"</span><span class="p">];</span>
-<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">strArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">strArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">strArray</span><span class="p">:</span> <span class="nx">string</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">aaa2</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">aaa1</span><span class="dl">"</span><span class="p">];</span>
+<span class="k">for </span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">strArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">strArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
 <span class="p">}</span>
 
 <span class="kd">let</span> <span class="nx">jsonObj</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"aaa3"</span><span class="p">,</span>
-    <span class="s2">"age"</span><span class="p">:</span> <span class="mi">19</span>
+    <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">:</span> <span class="mi">19</span>
 <span class="p">};</span>
 
-<span class="kd">let</span> <span class="nx">jsonStr</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">jsonObj</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">otherJsonObj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">otherJsonObj</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">jsonStr</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">jsonObj</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">otherJsonObj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">otherJsonObj</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p><strong>參考資料</strong></p>

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,7 +70,7 @@
   <div class="post-content" itemprop="articleBody">
     <p>PowerShell 具有強大的功能，有時一些小雜事用 C# 處理會有一種殺雞用牛刀的感覺，這時 PowerShell 就是個簡單快速的選擇。然而有時還是會遇到用單純的 script 來寫過於複雜的情況，如果用 PowerShell 呼叫 .NET dll 來處理特定問題，絕對是個令人神清氣爽的解決方安。</p>
 
-<p>由於現在的 .NET 6 跟過往的 .NET Framework 已經完全不同，所以新版的 PowerShell 底層也由新的 .NET 翻新，呼叫上也改為 <code class="highlighter-rouge">pwsh</code>，需注意的是如果是用<code class="highlighter-rouge">powershell</code> 來呼叫，就會用到舊版的。接下來示範如何從 PowerShell 呼叫 .NET 的 dll，首先用 C# 寫個簡單的類別：</p>
+<p>由於現在的 .NET 6 跟過往的 .NET Framework 已經完全不同，所以新版的 PowerShell 底層也由新的 .NET 翻新，呼叫上也改為 <code class="language-plaintext highlighter-rouge">pwsh</code>，需注意的是如果是用<code class="language-plaintext highlighter-rouge">powershell</code> 來呼叫，就會用到舊版的。接下來示範如何從 PowerShell 呼叫 .NET 的 dll，首先用 C# 寫個簡單的類別：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">namespace</span> <span class="nn">ClassLibraryForPowershell</span>
 <span class="p">{</span>
@@ -92,7 +94,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>之後把編譯好的 dll 跟 script 檔放在同一個目錄下，特別注意的是，以往要呼叫 dll 時，也需同時指定有使用到的 .NET 內建的函式庫，但在 .NET 6 中有支援所謂的 <code class="highlighter-rouge">隱含全域 Using</code>，也就是不用再特別去指定了，簡化了寫法，底下示範了如何呼叫 static method 以及如何建立物件並呼叫其 method：</p>
+<p>之後把編譯好的 dll 跟 script 檔放在同一個目錄下，特別注意的是，以往要呼叫 dll 時，也需同時指定有使用到的 .NET 內建的函式庫，但在 .NET 6 中有支援所謂的 <code class="language-plaintext highlighter-rouge">隱含全域 Using</code>，也就是不用再特別去指定了，簡化了寫法，底下示範了如何呼叫 static method 以及如何建立物件並呼叫其 method：</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$CurrentLocation</span> <span class="o">=</span> Get-Location<span class="p">;</span>
 <span class="nv">$PSLib</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$CurrentLocation</span><span class="se">\C</span><span class="s2">lassLibraryForPowershell.dll"</span><span class="p">;</span>

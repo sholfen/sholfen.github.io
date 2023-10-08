@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -66,7 +68,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>最近接觸了 MediatR 這個神奇的工具，只要定義好 request 和 response，以及對應這兩種物件的 handler，在 API 端的程式碼會非常簡潔，詳細可以查<code class="highlighter-rouge">CQRS</code>。</p>
+    <p>最近接觸了 MediatR 這個神奇的工具，只要定義好 request 和 response，以及對應這兩種物件的 handler，在 API 端的程式碼會非常簡潔，詳細可以查<code class="language-plaintext highlighter-rouge">CQRS</code>。</p>
 
 <p>一開始先看最後的成果：</p>
 
@@ -91,7 +93,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>在上面的程式碼中，就只會依賴<code class="highlighter-rouge">IMediator</code>這個 interface，在傳統的設計中，通常會依賴多種 service。</p>
+<p>在上面的程式碼中，就只會依賴<code class="language-plaintext highlighter-rouge">IMediator</code>這個 interface，在傳統的設計中，通常會依賴多種 service。</p>
 
 <p>接下來看 request 跟 response：</p>
 

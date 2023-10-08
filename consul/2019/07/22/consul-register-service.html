@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -134,25 +136,25 @@
 <p>前面的程式碼會讀取設定檔，而 appsettings.json 檔案的內容如下：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"AllowedHosts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Service"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API.ConsulTestService"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9000"</span><span class="w">
+  </span><span class="nl">"AllowedHosts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Service"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API.ConsulTestService"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9000"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"Consul"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"IP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8500"</span><span class="w">
+  </span><span class="nl">"Consul"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"IP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8500"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"Logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"IncludeScopes"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Debug"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="w">
+  </span><span class="nl">"Logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"IncludeScopes"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Debug"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"Console"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="w">
+    </span><span class="nl">"Console"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -165,42 +167,42 @@
 
 <p>要取得 API 位址時，可透過下列網址取得 json value：</p>
 
-<p><code class="highlighter-rouge">http://[FQDN]]:8500/v1/catalog/service/[API Name]</code></p>
+<p><code class="language-plaintext highlighter-rouge">http://[FQDN]]:8500/v1/catalog/service/[API Name]</code></p>
 
 <p>json value 如下：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3f95b2f2-85f9-8059-f77d-e0c308125790"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1918da7ef151"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.2"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Datacenter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"TaggedAddresses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"lan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"wan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.2"</span><span class="w">
+    </span><span class="nl">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3f95b2f2-85f9-8059-f77d-e0c308125790"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1918da7ef151"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Datacenter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"TaggedAddresses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"lan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.2"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"wan"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.2"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"NodeMeta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"consul-network-segment"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="nl">"NodeMeta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"consul-network-segment"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"ServiceKind"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62af3850-5d29-4110-90fe-3d29fcaf5b78"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API.ConsulTestService"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceTags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"ServiceKind"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62af3850-5d29-4110-90fe-3d29fcaf5b78"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API.ConsulTestService"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceTags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"urlprefix-/API.ConsulTestService"</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"ServiceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.50.41"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceWeights"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Passing"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Warning"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nl">"ServiceAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.50.41"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceWeights"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Passing"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Warning"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"ServiceMeta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"ServicePort"</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceEnableTagOverride"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceProxyDestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ServiceProxy"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"ServiceConnect"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="s2">"CreateIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">182330</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ModifyIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">182330</span><span class="w">
+    </span><span class="nl">"ServiceMeta"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"ServicePort"</span><span class="p">:</span><span class="w"> </span><span class="mi">9000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceEnableTagOverride"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceProxyDestination"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ServiceProxy"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"ServiceConnect"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"CreateIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">182330</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ModifyIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">182330</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div></div>

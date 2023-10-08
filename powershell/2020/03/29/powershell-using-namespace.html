@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,17 +70,17 @@
   <div class="post-content" itemprop="articleBody">
     <p>在 PowerShell 最大的好處就是可以使用 .NET 內建的 class，這樣可以讓 script 的使用上更為強大。範例如下：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using </span>namespace System.Collections.Generic;
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">using</span><span class="w"> </span><span class="kr">namespace</span><span class="w"> </span><span class="n">System.Collections.Generic</span><span class="p">;</span><span class="w">
 
-<span class="nv">$list</span> <span class="o">=</span> <span class="nb">New-Object </span>List[string];
-<span class="nv">$list</span>.Add<span class="o">(</span><span class="s2">"aaa3"</span><span class="o">)</span>;
-<span class="nv">$list</span>.Add<span class="o">(</span><span class="s2">"aaa4"</span><span class="o">)</span>;
-<span class="nv">$list</span>;
-<span class="nv">$guid</span> <span class="o">=</span> <span class="o">[</span>System.Guid]::NewGuid<span class="o">()</span>;
-<span class="nv">$guid</span>.ToString<span class="o">()</span>;
-</code></pre></div></div>
+</span><span class="nv">$list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">List</span><span class="p">[</span><span class="n">string</span><span class="p">];</span><span class="w">
+</span><span class="nv">$list</span><span class="o">.</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"aaa3"</span><span class="p">);</span><span class="w">
+</span><span class="nv">$list</span><span class="o">.</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"aaa4"</span><span class="p">);</span><span class="w">
+</span><span class="nv">$list</span><span class="p">;</span><span class="w">
+</span><span class="nv">$guid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">System.Guid</span><span class="p">]::</span><span class="n">NewGuid</span><span class="p">();</span><span class="w">
+</span><span class="nv">$guid</span><span class="o">.</span><span class="nf">ToString</span><span class="p">();</span><span class="w">
+</span></code></pre></div></div>
 
-<p>唯一要注意的是，產生 instance 要用<code class="highlighter-rouge">New-Object</code>語法，雖然不好記，但寫一次後，就直接複製就好XD。如果是呼叫 static method 就要用<code class="highlighter-rouge">[Namespace]::Foo()</code>這樣的語法。</p>
+<p>唯一要注意的是，產生 instance 要用<code class="language-plaintext highlighter-rouge">New-Object</code>語法，雖然不好記，但寫一次後，就直接複製就好XD。如果是呼叫 static method 就要用<code class="language-plaintext highlighter-rouge">[Namespace]::Foo()</code>這樣的語法。</p>
 
 <p><strong>參考資料</strong></p>
 

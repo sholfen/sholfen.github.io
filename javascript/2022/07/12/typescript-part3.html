@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -71,17 +73,17 @@
 <p>首先，要修改 tsconfig.json，新增 lib 欄位：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"noImplicitAny"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"noEmitOnError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"removeComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es5"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/JS"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"lib"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DOM"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ES2015"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"noImplicitAny"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noEmitOnError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"removeComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/JS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lib"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DOM"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ES2015"</span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"node_modules"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"wwwroot"</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -91,18 +93,18 @@
 <p>接下來測試支援泛形的 Map：</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">mapTest</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="o">&lt;</span><span class="nx">string</span><span class="p">,</span> <span class="nx">number</span><span class="o">&gt;</span><span class="p">([</span>
-    <span class="p">[</span><span class="s2">"aaa3"</span><span class="p">,</span> <span class="mi">123</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"aaa4"</span><span class="p">,</span> <span class="mi">456</span><span class="p">]</span>
+    <span class="p">[</span><span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">,</span> <span class="mi">123</span><span class="p">],</span>
+    <span class="p">[</span><span class="dl">"</span><span class="s2">aaa4</span><span class="dl">"</span><span class="p">,</span> <span class="mi">456</span><span class="p">]</span>
 <span class="p">]);</span>
-<span class="kd">let</span> <span class="nx">v</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">mapTest</span><span class="p">[</span><span class="s2">"aaa3"</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">v</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">mapTest</span><span class="p">[</span><span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">];</span>
 </code></pre></div></div>
 
 <p>把它當作 C# 的 Dictionary 就可以了。接下來是 Set，跟數學定義中的集合一模一樣，程式碼如下：</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">testSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Set</span><span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
-<span class="nx">testSet</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
-<span class="nx">testSet</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="nx">testSet</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+<span class="nx">testSet</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
 <span class="p">})</span>
 </code></pre></div></div>
 

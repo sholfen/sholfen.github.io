@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,7 +70,7 @@
   <div class="post-content" itemprop="articleBody">
     <p>前篇文章介紹了如何把資料傳至 Azure Table，本篇文章會講解如何上傳檔案。</p>
 
-<p>下列程式要注意的是 BlobContainerClient 的用法，其實不難，呼叫 <code class="highlighter-rouge">UploadBlobAsync</code> 這個 method 就可以了，而取得所有檔案透過 PartitionKey 即可，如果是特定檔案的話，要有 RowKey。</p>
+<p>下列程式要注意的是 BlobContainerClient 的用法，其實不難，呼叫 <code class="language-plaintext highlighter-rouge">UploadBlobAsync</code> 這個 method 就可以了，而取得所有檔案透過 PartitionKey 即可，如果是特定檔案的話，要有 RowKey。</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">void</span> <span class="nf">Init</span><span class="p">()</span>
 <span class="p">{</span>

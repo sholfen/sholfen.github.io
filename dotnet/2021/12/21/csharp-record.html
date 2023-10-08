@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,10 +70,10 @@
   <div class="post-content" itemprop="articleBody">
     <p>在 C# 9 中加入了一個新語法 record，用來滿足單純傳遞資料但不希望在程式執行的中途被任意更改之需求，直接來看範例：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">record</span> <span class="n">Person</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">record</span> <span class="nc">Person</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
-    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">Age</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">init</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -89,7 +91,7 @@
 
 <p>另外，在 C# 10 之後，寫法可以再更簡潔一些：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">record</span> <span class="nf">Address</span><span class="p">(</span><span class="kt">string</span> <span class="n">Street</span><span class="p">,</span> <span class="kt">string</span> <span class="n">City</span><span class="p">,</span> <span class="kt">string</span> <span class="n">State</span><span class="p">,</span> <span class="kt">string</span> <span class="n">Country</span><span class="p">,</span> <span class="kt">string</span> <span class="n">ZipCode</span><span class="p">);</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">record</span> <span class="nc">Address</span><span class="p">(</span><span class="kt">string</span> <span class="n">Street</span><span class="p">,</span> <span class="kt">string</span> <span class="n">City</span><span class="p">,</span> <span class="kt">string</span> <span class="n">State</span><span class="p">,</span> <span class="kt">string</span> <span class="n">Country</span><span class="p">,</span> <span class="kt">string</span> <span class="n">ZipCode</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>塞資料時照著建構子依序輸入就可以了。</p>

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -87,11 +89,11 @@
 
 </code></pre></div></div>
 
-<p>這樣在 View 上可簡化成：<code class="highlighter-rouge">&lt;email mail-to="aaa3"&gt;aaa3&lt;/email&gt;</code></p>
+<p>這樣在 View 上可簡化成：<code class="language-plaintext highlighter-rouge">&lt;email mail-to="aaa3"&gt;aaa3&lt;/email&gt;</code></p>
 
 <p>而以下範例則是單純生出一個連到 Google 的 html a tag：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[HtmlTargetElement("test")]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">HtmlTargetElement</span><span class="p">(</span><span class="s">"test"</span><span class="p">)]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">TestTagHelper</span> <span class="p">:</span> <span class="n">TagHelper</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Process</span><span class="p">(</span><span class="n">TagHelperContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">TagHelperOutput</span> <span class="n">output</span><span class="p">)</span>
@@ -114,7 +116,7 @@
 
 <p>之後加入 APIController：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[Route("API")]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">Route</span><span class="p">(</span><span class="s">"API"</span><span class="p">)]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">APIController</span> <span class="p">:</span> <span class="n">Controller</span>
 <span class="p">{</span>
     <span class="c1">/// &lt;summary&gt;</span>
@@ -163,11 +165,11 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>要注意的是，在每個 action 上都要明確加上 route 路徑，另外如果在 url 上要加上變數，如上面程式碼所示，可這樣寫：<code class="highlighter-rouge">[Route("GetDatasByDate/{date}")]</code></p>
+<p>要注意的是，在每個 action 上都要明確加上 route 路徑，另外如果在 url 上要加上變數，如上面程式碼所示，可這樣寫：<code class="language-plaintext highlighter-rouge">[Route("GetDatasByDate/{date}")]</code></p>
 
 <p>最後測試網址如下：</p>
 
-<p><code class="highlighter-rouge">https://[FQDN]/swagger/</code></p>
+<p><code class="language-plaintext highlighter-rouge">https://[FQDN]/swagger/</code></p>
 
 <p>就可以看到測試網頁了</p>
 

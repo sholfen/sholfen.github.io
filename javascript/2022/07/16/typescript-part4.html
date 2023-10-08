@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -70,42 +72,42 @@
 
 <p>首先介紹 static，程式碼如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">TestStaticClass</span> <span class="p">{</span>
-    <span class="kr">public</span> <span class="kr">static</span> <span class="nx">Add</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">TestStaticClass</span> <span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">static</span> <span class="nc">Add</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="kr">public</span> <span class="kr">static</span> <span class="nx">Sub</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
+    <span class="kr">public</span> <span class="kd">static</span> <span class="nc">Sub</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">x</span> <span class="o">-</span> <span class="nx">y</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span> <span class="nx">result1</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">TestStaticClass</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">result2</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">TestStaticClass</span><span class="p">.</span><span class="nx">Sub</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">result1</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">TestStaticClass</span><span class="p">.</span><span class="nc">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">result2</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">TestStaticClass</span><span class="p">.</span><span class="nc">Sub</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>接下來是支援泛形的 class：</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">TestArrayClass</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">TestArrayClass</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span>
 <span class="p">{</span>
     <span class="kr">private</span> <span class="na">array</span><span class="p">:</span> <span class="nx">T</span><span class="p">[];</span>
 
-    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">constructor</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">array</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="p">}</span>
 
-    <span class="kr">public</span> <span class="nx">Add</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="kr">public</span> <span class="nc">Add</span><span class="p">(</span><span class="na">item</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="kr">public</span> <span class="nx">Pop</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+    <span class="kr">public</span> <span class="nc">Pop</span><span class="p">():</span> <span class="nx">T</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span> <span class="na">arrayTest</span><span class="p">:</span> <span class="nx">TestArrayClass</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TestArrayClass</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="nx">arrayTest</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="s2">"aaa3"</span><span class="p">);</span>
-<span class="kd">let</span> <span class="na">item</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">arrayTest</span><span class="p">.</span><span class="nx">Pop</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">arrayTest</span><span class="p">:</span> <span class="nx">TestArrayClass</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TestArrayClass</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="nx">arrayTest</span><span class="p">.</span><span class="nc">Add</span><span class="p">(</span><span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">item</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">arrayTest</span><span class="p">.</span><span class="nc">Pop</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p><strong>參考資料</strong></p>

@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -79,19 +81,19 @@
 <p>新增 package.json 後，修改如下：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asp.net"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"@types/vue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"@babel/types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.17.0"</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asp.net"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"@types/vue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"@babel/types"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.17.0"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>如果遇到修改 package.json 檔後，在寫 TypeScript 時  intellisense 還是失效，可以在專案底下執行下列指令：</p>
 
-<p><code class="highlighter-rouge">npm i --save-dev @types/vue</code></p>
+<p><code class="language-plaintext highlighter-rouge">npm i --save-dev @types/vue</code></p>
 
 <p>之後是加入 Vue 的 js 檔案，選擇”新增用戶端程式庫”選項，如下圖安裝所需的檔案：</p>
 
@@ -100,19 +102,19 @@
 <p>接下來新增 tsconfig.json 檔，設定如下：</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"noImplicitAny"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"noEmitOnError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"removeComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES6"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES2015"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Node"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"allowJs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/js"</span><span class="w">
+  </span><span class="nl">"compileOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"noImplicitAny"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"noEmitOnError"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"removeComments"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES6"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES2015"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Node"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"allowJs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"outDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wwwroot/js"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"node_modules"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"wwwroot"</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -121,33 +123,33 @@
 
 <p>接下新增 app.ts 檔，程式碼如下：</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">createApp</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'vue'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">createApp</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s2">"app2"</span><span class="p">,</span>
-    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+<span class="kd">let</span> <span class="nx">v</span> <span class="o">=</span> <span class="nf">defineComponent</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">app2</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nf">data</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="na">x</span><span class="p">:</span> <span class="s2">"aaa3"</span><span class="p">,</span>
-            <span class="na">y</span><span class="p">:</span> <span class="s2">"aaa4"</span>
+            <span class="na">x</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">y</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa4</span><span class="dl">"</span>
         <span class="p">};</span>
     <span class="p">},</span>
     <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">a</span><span class="p">:</span> <span class="kd">function</span> <span class="p">():</span> <span class="nx">number</span> <span class="p">{</span>
+        <span class="na">a</span><span class="p">:</span> <span class="nf">function </span><span class="p">():</span> <span class="nx">number</span> <span class="p">{</span>
             <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
         <span class="p">},</span>
-        <span class="na">b</span><span class="p">:</span> <span class="kd">function</span> <span class="p">():</span> <span class="nx">string</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="s2">"Hello World!!"</span><span class="p">;</span>
+        <span class="na">b</span><span class="p">:</span> <span class="nf">function </span><span class="p">():</span> <span class="nx">string</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="dl">"</span><span class="s2">Hello World!!</span><span class="dl">"</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">},</span>
     <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">add</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="na">add</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
             <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">GetVueObject</span><span class="p">(</span><span class="na">divName</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">any</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">createApp</span><span class="p">(</span><span class="nx">v</span><span class="p">).</span><span class="nx">mount</span><span class="p">(</span><span class="nx">divName</span><span class="p">);</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">GetVueObject</span><span class="p">(</span><span class="nx">divName</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">createApp</span><span class="p">(</span><span class="nx">v</span><span class="p">).</span><span class="nf">mount</span><span class="p">(</span><span class="nx">divName</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -156,8 +158,8 @@
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@section Scripts{
 
     <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"importmap"</span><span class="nt">&gt;</span>
-        <span class="p">{</span> <span class="s2">"imports"</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">"vue"</span><span class="p">:</span> <span class="s2">"/lib/vue/vue.esm-browser.js"</span>
+        <span class="p">{</span> <span class="dl">"</span><span class="s2">imports</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">/lib/vue/vue.esm-browser.js</span><span class="dl">"</span>
         <span class="p">}</span> <span class="p">}</span>
     <span class="nt">&lt;/script&gt;</span>
 
@@ -165,9 +167,9 @@
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"~/js/library.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span><span class="nt">&gt;</span>
-    <span class="k">import</span> <span class="p">{</span> <span class="nx">GetVueObject</span><span class="p">}</span> <span class="k">from</span> <span class="s2">"./js/app.js"</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">vueApp</span> <span class="o">=</span> <span class="nx">GetVueObject</span><span class="p">(</span><span class="s2">"#app"</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vueApp</span><span class="p">);</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">GetVueObject</span><span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./js/app.js</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">vueApp</span> <span class="o">=</span> <span class="nc">GetVueObject</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">vueApp</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 }
 

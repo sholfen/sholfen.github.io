@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -72,40 +74,40 @@
 
 <p>以下用 TypeScript 示範：</p>
 
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">createApp</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'vue'</span><span class="p">;</span>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">createApp</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">defineComponent</span><span class="p">({</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s2">"app"</span><span class="p">,</span>
-    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+<span class="kd">let</span> <span class="nx">v</span> <span class="o">=</span> <span class="nf">defineComponent</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">app</span><span class="dl">"</span><span class="p">,</span>
+    <span class="nf">data</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="na">x</span><span class="p">:</span> <span class="s2">"aaa3"</span><span class="p">,</span>
-            <span class="na">y</span><span class="p">:</span> <span class="s2">"aaa4"</span>
+            <span class="na">x</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa3</span><span class="dl">"</span><span class="p">,</span>
+            <span class="na">y</span><span class="p">:</span> <span class="dl">"</span><span class="s2">aaa4</span><span class="dl">"</span>
         <span class="p">};</span>
     <span class="p">},</span>
-    <span class="na">mounted</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nx">divScripts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"dynamicScript"</span><span class="p">);</span>
-        <span class="kd">let</span> <span class="nx">newScript</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span>
+    <span class="na">mounted</span><span class="p">:</span> <span class="nf">function </span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">divScripts</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">dynamicScript</span><span class="dl">"</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">newScript</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">);</span>
         <span class="c1">//網址可透過 Web API 取得</span>
-        <span class="nx">newScript</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'https://cse.google.com/cse.js?cx=007968012720720263530:10z7awj2l37'</span><span class="p">;</span>
-        <span class="nx">divScripts</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newScript</span><span class="p">);</span>
+        <span class="nx">newScript</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://cse.google.com/cse.js?cx=007968012720720263530:10z7awj2l37</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">divScripts</span><span class="p">.</span><span class="nf">appendChild</span><span class="p">(</span><span class="nx">newScript</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">GetVueObject</span><span class="p">(</span><span class="na">divName</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">any</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">createApp</span><span class="p">(</span><span class="nx">v</span><span class="p">).</span><span class="nx">mount</span><span class="p">(</span><span class="nx">divName</span><span class="p">);</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">GetVueObject</span><span class="p">(</span><span class="nx">divName</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="kr">any</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">createApp</span><span class="p">(</span><span class="nx">v</span><span class="p">).</span><span class="nf">mount</span><span class="p">(</span><span class="nx">divName</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>再來是前端的呼叫</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"module"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"~/js/app.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"module"</span><span class="o">&gt;</span>
-    <span class="k">import</span> <span class="p">{</span> <span class="nx">GetVueObject</span><span class="p">}</span> <span class="k">from</span> <span class="s2">"./js/app.js"</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">vueApp</span> <span class="o">=</span> <span class="nx">GetVueObject</span><span class="p">(</span><span class="s2">"#app"</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">module</span><span class="dl">"</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">~/js/app.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">module</span><span class="dl">"</span><span class="o">&gt;</span>
+    <span class="k">import</span> <span class="p">{</span> <span class="nx">GetVueObject</span><span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./js/app.js</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">vueApp</span> <span class="o">=</span> <span class="nc">GetVueObject</span><span class="p">(</span><span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">);</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span><span class="p">}</span>
 
-<span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"dynamicScript"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">dynamicScript</span><span class="dl">"</span><span class="o">&gt;</span>
 
 <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span></code></pre></div></div>

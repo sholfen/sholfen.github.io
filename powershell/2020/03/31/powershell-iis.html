@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -66,13 +68,13 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>其實 PowerShell 除了像 Linux 的 ShellScript 一樣可以做些雜事外，還整合了 .NET 元件，可以直接進行呼叫，或是呼叫自己寫的 C# 程式碼。另外我覺得還有一個不錯的功能就是可以管理 IIS 網站，這邊只講怎麼啟動、停止網站，雖說也可以用來新增網站跟 Application Pool，但這樣的情境似乎比較少遇到，所以只列上面提到的指令。另外在本機執行寫好的 ps 檔案，要先執行 <code class="highlighter-rouge">Set-ExecutionPolicy RemoteSigned</code>。範例如下：</p>
+    <p>其實 PowerShell 除了像 Linux 的 ShellScript 一樣可以做些雜事外，還整合了 .NET 元件，可以直接進行呼叫，或是呼叫自己寫的 C# 程式碼。另外我覺得還有一個不錯的功能就是可以管理 IIS 網站，這邊只講怎麼啟動、停止網站，雖說也可以用來新增網站跟 Application Pool，但這樣的情境似乎比較少遇到，所以只列上面提到的指令。另外在本機執行寫好的 ps 檔案，要先執行 <code class="language-plaintext highlighter-rouge">Set-ExecutionPolicy RemoteSigned</code>。範例如下：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Stop-WebSite</span> -Name <span class="s2">"Default Web Site"</span>;
-<span class="nb">Start-WebSite</span> -Name <span class="s2">"Default Web Site"</span>;
-<span class="nb">Stop-WebAppPool</span> -Name <span class="s2">"TestPool"</span>
-<span class="nb">Start-WebAppPool</span> -Name <span class="s2">"TestPool"</span>
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Stop-WebSite</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"Default Web Site"</span><span class="p">;</span><span class="w">
+</span><span class="n">Start-WebSite</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"Default Web Site"</span><span class="p">;</span><span class="w">
+</span><span class="n">Stop-WebAppPool</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"TestPool"</span><span class="w">
+</span><span class="n">Start-WebAppPool</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"TestPool"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>指令簡單易懂。</p>
 

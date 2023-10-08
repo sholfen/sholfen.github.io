@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -100,7 +102,7 @@
 
 <p>可以直接用類似一個物件的方式，裡面放各屬性的資料，接下來講解實作細節：</p>
 
-<p>首先實作<code class="highlighter-rouge">CompanyInputType</code>，它繼承<code class="highlighter-rouge">InputObjectGraphType</code>，這是給外部當參數用的：</p>
+<p>首先實作<code class="language-plaintext highlighter-rouge">CompanyInputType</code>，它繼承<code class="language-plaintext highlighter-rouge">InputObjectGraphType</code>，這是給外部當參數用的：</p>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">CompanyInputType</span><span class="p">:</span> <span class="n">InputObjectGraphType</span><span class="p">&lt;</span><span class="n">Company</span><span class="p">&gt;</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nf">CompanyInputType</span><span class="p">()</span>

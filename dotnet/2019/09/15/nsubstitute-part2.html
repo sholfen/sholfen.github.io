@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -103,7 +105,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>從程式碼中可以看到 FooClass 需要兩個參數，NSubstitute 可以直接呼叫，而重新設定 FooMethod 的回傳值時，參數可用 <code class="highlighter-rouge">default</code> 來代替，需注意的是，FooMethod 是被宣告為 virtual 的。</p>
+<p>從程式碼中可以看到 FooClass 需要兩個參數，NSubstitute 可以直接呼叫，而重新設定 FooMethod 的回傳值時，參數可用 <code class="language-plaintext highlighter-rouge">default</code> 來代替，需注意的是，FooMethod 是被宣告為 virtual 的。</p>
 
 <h3 id="檢查-method-是否被呼叫">檢查 method 是否被呼叫</h3>
 
@@ -115,7 +117,7 @@
 <span class="n">service</span><span class="p">.</span><span class="nf">DidNotReceive</span><span class="p">().</span><span class="nf">DoSomeThing</span><span class="p">();</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ClearReceivedCalls</code> 是將之前有呼叫過的記錄都清掉，重新來過。<code class="highlighter-rouge">service.Received().DoSomeThing();</code> 這一行就是檢查 method 是否有被呼叫，當然，前面提的是不希望被呼叫，那就是使用 <code class="highlighter-rouge">DidNotReceive()</code>。</p>
+<p><code class="language-plaintext highlighter-rouge">ClearReceivedCalls</code> 是將之前有呼叫過的記錄都清掉，重新來過。<code class="language-plaintext highlighter-rouge">service.Received().DoSomeThing();</code> 這一行就是檢查 method 是否有被呼叫，當然，前面提的是不希望被呼叫，那就是使用 <code class="language-plaintext highlighter-rouge">DidNotReceive()</code>。</p>
 
 <h3 id="callback">Callback</h3>
 
@@ -128,7 +130,7 @@
 <span class="n">service</span><span class="p">.</span><span class="nf">DoSomeThing</span><span class="p">();</span>
 </code></pre></div></div>
 
-<p>用法有兩種，呼叫 <code class="highlighter-rouge">AddDoes</code> 或是用 <code class="highlighter-rouge">When...Do</code>，我個人偏好 <code class="highlighter-rouge">AndDoes</code>，因為用起來較簡單。</p>
+<p>用法有兩種，呼叫 <code class="language-plaintext highlighter-rouge">AddDoes</code> 或是用 <code class="language-plaintext highlighter-rouge">When...Do</code>，我個人偏好 <code class="language-plaintext highlighter-rouge">AndDoes</code>，因為用起來較簡單。</p>
 
 <p><strong>參考資料</strong></p>
 

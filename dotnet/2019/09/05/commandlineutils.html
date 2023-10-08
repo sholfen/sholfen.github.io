@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -75,7 +77,7 @@
 
 <p>首先定義一個類別，決定它的參數有哪些：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[HelpOption("--help")]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nf">HelpOption</span><span class="p">(</span><span class="s">"--help"</span><span class="p">)]</span>
 <span class="k">public</span> <span class="k">class</span> <span class="nc">CommandLineParametersClass</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nf">CommandLineParametersClass</span><span class="p">()</span>
@@ -103,7 +105,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>最上層的 <code class="highlighter-rouge">[HelpOption("--help")]</code> 就是設定程式的 help 指令，而在每個 property 上設定的 option，就是將它設為程式的參數，像是 Version property，它的指令就會自動被設為 <code class="highlighter-rouge">-v</code> 或 <code class="highlighter-rouge">--version</code>。其中 <code class="highlighter-rouge">[Required]</code> 就是程式的必要參數，沒加的話程式會直接拋出例外。</p>
+<p>最上層的 <code class="language-plaintext highlighter-rouge">[HelpOption("--help")]</code> 就是設定程式的 help 指令，而在每個 property 上設定的 option，就是將它設為程式的參數，像是 Version property，它的指令就會自動被設為 <code class="language-plaintext highlighter-rouge">-v</code> 或 <code class="language-plaintext highlighter-rouge">--version</code>。其中 <code class="language-plaintext highlighter-rouge">[Required]</code> 就是程式的必要參數，沒加的話程式會直接拋出例外。</p>
 
 <p>而 Option 中裡面的 Description 是給 help 指令顯示用的，用來說明參數的功用，如下圖：</p>
 
@@ -152,7 +154,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>由於 CommandLineUtils 會自動將值塞入 property 中，所以直接檢查 property 就行了，而在 main function 中也直接簡化為 <code class="highlighter-rouge">public static int Main(string[] args) =&gt; CommandLineApplication.Execute&lt;CommandLineParametersClass&gt;(args);</code> 即可。</p>
+<p>由於 CommandLineUtils 會自動將值塞入 property 中，所以直接檢查 property 就行了，而在 main function 中也直接簡化為 <code class="language-plaintext highlighter-rouge">public static int Main(string[] args) =&gt; CommandLineApplication.Execute&lt;CommandLineParametersClass&gt;(args);</code> 即可。</p>
 
 <p><strong>參考資料</strong></p>
 

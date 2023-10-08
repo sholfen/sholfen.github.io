@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -68,13 +70,13 @@
   <div class="post-content" itemprop="articleBody">
     <p>這篇算是個小筆記。在之前的公司上班，每次上新版網站都很煩，因為 IIS 底下掛了好幾個網站，然後都要一個一個把網站跟 application pool 停掉，再把新網站更新上去，最後再把每個網站跟 application pool 都開啟。事情很簡單，但很花時間，於是我就試著利用之前學到的指令寫了一支簡單的 script，有興趣的人可以參考看看(範例中網站名稱跟 application pool 同名)：</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Stop-WebSite</span> -Name <span class="s2">"TestWebSite"</span>;
-<span class="nb">Stop-WebAppPool</span> -Name <span class="s2">"TestWebSite"</span>
-<span class="nb">rm </span>C:\inetpub\wwwroot\TestWebSite\<span class="k">*</span>
-<span class="nb">Expand-Archive</span> -LiteralPath <span class="s1">'C:\WebFileFolder\Publish.zip'</span> -DestinationPath C:\inetpub\wwwroot\TestWebSite
-<span class="nb">Start-WebAppPool</span> -Name <span class="s2">"TestWebSite"</span>
-<span class="nb">Start-WebSite</span> -Name <span class="s2">"TestWebSite"</span>;
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Stop-WebSite</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"TestWebSite"</span><span class="p">;</span><span class="w">
+</span><span class="n">Stop-WebAppPool</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"TestWebSite"</span><span class="w">
+</span><span class="n">rm</span><span class="w"> </span><span class="nx">C:\inetpub\wwwroot\TestWebSite\</span><span class="o">*</span><span class="w">
+</span><span class="n">Expand-Archive</span><span class="w"> </span><span class="nt">-LiteralPath</span><span class="w"> </span><span class="s1">'C:\WebFileFolder\Publish.zip'</span><span class="w"> </span><span class="nt">-DestinationPath</span><span class="w"> </span><span class="nx">C:\inetpub\wwwroot\TestWebSite</span><span class="w">
+</span><span class="n">Start-WebAppPool</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"TestWebSite"</span><span class="w">
+</span><span class="n">Start-WebSite</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"TestWebSite"</span><span class="p">;</span><span class="w">
+</span></code></pre></div></div>
 
 <p>中間有一個解壓縮的指令，是因為網站的檔案較多，壓成一個檔案，丟到遠端的主機會比較有效率。</p>
 

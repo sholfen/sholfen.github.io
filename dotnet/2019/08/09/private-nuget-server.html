@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -70,7 +72,7 @@
 
 <h3 id="準備架設">準備架設</h3>
 
-<p>要架 private NuGet server，首先新增一個空白的 ASP.NET 網站專案，然後在 NuGet 上搜尋 <code class="highlighter-rouge">NuGet.Server</code>。</p>
+<p>要架 private NuGet server，首先新增一個空白的 ASP.NET 網站專案，然後在 NuGet 上搜尋 <code class="language-plaintext highlighter-rouge">NuGet.Server</code>。</p>
 
 <p><img src="/pics/2019-08-09/1.PNG" border="0" /></p>
 
@@ -84,7 +86,7 @@
 <span class="nt">&lt;/appSettings&gt;</span>
 </code></pre></div></div>
 
-<p>API key 是為了上傳套件用到的(請不要直接拿範例的 key 來用)，而 <code class="highlighter-rouge">packagePath</code> 是設定套件存放的網站，建議不要放在網站目錄底下，以免造成管理上的不便。</p>
+<p>API key 是為了上傳套件用到的(請不要直接拿範例的 key 來用)，而 <code class="language-plaintext highlighter-rouge">packagePath</code> 是設定套件存放的網站，建議不要放在網站目錄底下，以免造成管理上的不便。</p>
 
 <p>之後在 Visual Studio 上新增架好的 NuGet Server：</p>
 

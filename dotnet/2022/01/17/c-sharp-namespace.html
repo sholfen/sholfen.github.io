@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -81,14 +83,14 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>除此之外，在專案中常常要在各 cs 檔中輸入重覆的 <code class="highlighter-rouge">using xxxx;</code> 這類的程式碼，現在只要這樣輸入，對整個專案的 cs 檔都有效：</p>
+<p>除此之外，在專案中常常要在各 cs 檔中輸入重覆的 <code class="language-plaintext highlighter-rouge">using xxxx;</code> 這類的程式碼，現在只要這樣輸入，對整個專案的 cs 檔都有效：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">global</span> <span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
 <span class="k">global</span> <span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
 <span class="k">global</span> <span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>但在 csproj 檔中的預設值關係，即使把 <code class="highlighter-rouge">using</code> 全部拿掉，還是能正常運作，但如果把 <code class="highlighter-rouge">ImplicitUsings</code> 的值改成 <code class="highlighter-rouge">disable</code>，就需要用上 <code class="highlighter-rouge">using</code> 關鍵字：</p>
+<p>但在 csproj 檔中的預設值關係，即使把 <code class="language-plaintext highlighter-rouge">using</code> 全部拿掉，還是能正常運作，但如果把 <code class="language-plaintext highlighter-rouge">ImplicitUsings</code> 的值改成 <code class="language-plaintext highlighter-rouge">disable</code>，就需要用上 <code class="language-plaintext highlighter-rouge">using</code> 關鍵字：</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;PropertyGroup&gt;</span>
   <span class="nt">&lt;OutputType&gt;</span>Exe<span class="nt">&lt;/OutputType&gt;</span>

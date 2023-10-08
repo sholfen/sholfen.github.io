@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -73,7 +75,7 @@
 <p><a href="https://github.com/sholfen/EntityFrameworkWebAPTemplate" target="_blank">範例下載</a></p>
 
 <p>從資料庫建 DB Model 的指令(以北風資料庫為範例)：
-<code class="highlighter-rouge">dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models/DBModels</code></p>
+<code class="language-plaintext highlighter-rouge">dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models/DBModels</code></p>
 
 <p>一開始先在 Startup.cs 設定 DbContext：</p>
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
@@ -98,14 +100,14 @@
 
 <p>在 Controller 上的使用：</p>
 
-<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">[HttpGet]</span>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">HttpGet</span><span class="p">]</span>
 <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">TestCustomers</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">_customersService</span><span class="p">.</span><span class="nf">GetAll</span><span class="p">();</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">JsonResult</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="na">[HttpGet]</span>
+<span class="p">[</span><span class="n">HttpGet</span><span class="p">]</span>
 <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">TestCustomer</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">Customers</span> <span class="n">customer</span> <span class="p">=</span> <span class="n">_customersService</span><span class="p">.</span><span class="nf">GetCustomerByID</span><span class="p">(</span><span class="s">"ANATR"</span><span class="p">);</span>

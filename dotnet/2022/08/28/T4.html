@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -80,7 +82,7 @@
 <span class="n">END</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>不看最上面的宣告，底下可以看出這是一個 insert 的 SQL 語法，只是中間用 <code class="highlighter-rouge">&lt;#= variable #&gt;</code> 的方式插入變數，用來動態產生 SQL 語法。需注意的是，在新增 T4 檔案時，”自訂工具屬性” 要從 <code class="highlighter-rouge">TextTemplatingFileGenerator</code> 改為 <code class="highlighter-rouge">TextTemplatingFilePreprocessor</code>。</p>
+<p>不看最上面的宣告，底下可以看出這是一個 insert 的 SQL 語法，只是中間用 <code class="language-plaintext highlighter-rouge">&lt;#= variable #&gt;</code> 的方式插入變數，用來動態產生 SQL 語法。需注意的是，在新增 T4 檔案時，”自訂工具屬性” 要從 <code class="language-plaintext highlighter-rouge">TextTemplatingFileGenerator</code> 改為 <code class="language-plaintext highlighter-rouge">TextTemplatingFilePreprocessor</code>。</p>
 
 <p>接下來為 T4 新增變數，所以需要宣告相對應的類別，程式碼如下：</p>
 

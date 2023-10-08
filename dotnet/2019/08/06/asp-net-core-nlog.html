@@ -48,6 +48,8 @@
         
           
         
+          
+        
       </div>
     </nav>
 
@@ -116,10 +118,10 @@
 <p>target 設定的是檔案的寫法位置，以及 log 的格式(分別是 fileName 及 layout)，其中 ${level} 這個就是代表置入 level 這個變數，這個變數是內建。</p>
 
 <h3 id="variable">variable</h3>
-<p>宣告變數用的，在前面的 target 部份，有提到可以置入變數，除了內建的，也可以自行宣告，像是 <code class="highlighter-rouge">&lt;variable name="appname" value="TestNLog" /&gt;</code> 這行，就是用來設定專案名稱，好讓 log 裡可以清楚顯示是來自於哪個專案。</p>
+<p>宣告變數用的，在前面的 target 部份，有提到可以置入變數，除了內建的，也可以自行宣告，像是 <code class="language-plaintext highlighter-rouge">&lt;variable name="appname" value="TestNLog" /&gt;</code> 這行，就是用來設定專案名稱，好讓 log 裡可以清楚顯示是來自於哪個專案。</p>
 
 <h3 id="rule">rule</h3>
-<p>rule 就是用來設定所謂的 logger，像是 <code class="highlighter-rouge">&lt;logger name="MyLog" maxlevel="Info" writeTo="ownFile-web" /&gt;</code> 這一行，就是設定要使用前面宣告的哪個 target。而 name 這個部份稍微複雜一點。先看這一行程式碼：</p>
+<p>rule 就是用來設定所謂的 logger，像是 <code class="language-plaintext highlighter-rouge">&lt;logger name="MyLog" maxlevel="Info" writeTo="ownFile-web" /&gt;</code> 這一行，就是設定要使用前面宣告的哪個 target。而 name 這個部份稍微複雜一點。先看這一行程式碼：</p>
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">NLogBuilder</span><span class="p">.</span><span class="nf">ConfigureNLog</span><span class="p">(</span><span class="s">"nlog.config"</span><span class="p">).</span><span class="nf">GetLogger</span><span class="p">(</span><span class="s">"MyLog"</span><span class="p">);</span>
 </code></pre></div></div>
@@ -135,7 +137,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>在這個 controller 中，我設定的 namespace 是 <code class="highlighter-rouge">NLogTestWebApp.Controllers</code>。也就是說，在整個專案下，基本上 namespace 都會是 <code class="highlighter-rouge">NLogTestWebApp</code>，所以我的 rule name 就可以設定為 <code class="highlighter-rouge">NLogTestWebApp.*</code>，這樣子基本上專案底下的元件都可以吃到這個 rule。</p>
+<p>在這個 controller 中，我設定的 namespace 是 <code class="language-plaintext highlighter-rouge">NLogTestWebApp.Controllers</code>。也就是說，在整個專案下，基本上 namespace 都會是 <code class="language-plaintext highlighter-rouge">NLogTestWebApp</code>，所以我的 rule name 就可以設定為 <code class="language-plaintext highlighter-rouge">NLogTestWebApp.*</code>，這樣子基本上專案底下的元件都可以吃到這個 rule。</p>
 
 <p>最後，再回頭講解 Program.cs 中需要做什麼設定：</p>
 
@@ -150,7 +152,7 @@
         <span class="p">.</span><span class="nf">UseNLog</span><span class="p">();</span>
 </code></pre></div></div>
 
-<p>基本上只是在結尾加上 <code class="highlighter-rouge">UseNLog()</code></p>
+<p>基本上只是在結尾加上 <code class="language-plaintext highlighter-rouge">UseNLog()</code></p>
 
 <p><strong>參考資料</strong></p>
 
