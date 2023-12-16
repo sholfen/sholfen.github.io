@@ -5,8 +5,8 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 16 Dec 2023 12:42:18 +0800</pubDate>
-    <lastBuildDate>Sat, 16 Dec 2023 12:42:18 +0800</lastBuildDate>
+    <pubDate>Sat, 16 Dec 2023 14:21:20 +0800</pubDate>
+    <lastBuildDate>Sat, 16 Dec 2023 14:21:20 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -127,6 +127,32 @@
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最後是更新用的SP：&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;USE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BulkCopyDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;GO&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ANSI_NULLS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;GO&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QUOTED_IDENTIFIER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;GO&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ALTER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PROCEDURE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UpdateWinlossDatasToUsers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;-- SET NOCOUNT ON added to prevent extra result sets from&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;-- interfering with SELECT statements.&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NOCOUNT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;UPDATE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BulkCopyDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;Credit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Credit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Winloss&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BulkCopyDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BulkCopyDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StockTemp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stock&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BulkCopyDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Id&lt;/span&gt;
+
+	&lt;span class=&quot;k&quot;&gt;TRUNCATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BulkCopyDemo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StockTemp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;流程就是：&lt;/p&gt;

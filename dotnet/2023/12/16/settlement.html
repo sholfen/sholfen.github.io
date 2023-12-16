@@ -186,6 +186,32 @@
     <span class="p">}</span>
 </code></pre></div></div>
 
+<p>最後是更新用的SP：</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">USE</span> <span class="p">[</span><span class="n">BulkCopyDemo</span><span class="p">]</span>
+<span class="k">GO</span>
+<span class="k">SET</span> <span class="n">ANSI_NULLS</span> <span class="k">ON</span>
+<span class="k">GO</span>
+<span class="k">SET</span> <span class="n">QUOTED_IDENTIFIER</span> <span class="k">ON</span>
+<span class="k">GO</span>
+<span class="k">ALTER</span> <span class="k">PROCEDURE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UpdateWinlossDatasToUsers</span><span class="p">]</span>
+
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+	<span class="c1">-- SET NOCOUNT ON added to prevent extra result sets from</span>
+	<span class="c1">-- interfering with SELECT statements.</span>
+	<span class="k">SET</span> <span class="n">NOCOUNT</span> <span class="k">ON</span><span class="p">;</span>
+	<span class="k">UPDATE</span> <span class="p">[</span><span class="n">BulkCopyDemo</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Member</span><span class="p">]</span>
+    <span class="k">SET</span> 
+        <span class="n">Credit</span> <span class="o">=</span> <span class="n">Credit</span> <span class="o">+</span> <span class="n">Stock</span><span class="p">.</span><span class="n">Winloss</span>
+    <span class="k">FROM</span> <span class="p">[</span><span class="n">BulkCopyDemo</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Member</span><span class="p">]</span>
+    <span class="k">INNER</span> <span class="k">JOIN</span> <span class="p">[</span><span class="n">BulkCopyDemo</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">StockTemp</span><span class="p">]</span> <span class="n">Stock</span>
+    <span class="k">ON</span> <span class="n">Stock</span><span class="p">.</span><span class="n">Id</span> <span class="o">=</span> <span class="p">[</span><span class="n">BulkCopyDemo</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Member</span><span class="p">].</span><span class="n">Id</span>
+
+	<span class="k">TRUNCATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">BulkCopyDemo</span><span class="p">].[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">StockTemp</span><span class="p">]</span>
+<span class="k">END</span>
+</code></pre></div></div>
+
 <p>流程就是：</p>
 
 <ul>
