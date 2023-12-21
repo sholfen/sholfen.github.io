@@ -107,8 +107,6 @@
 
 <p>類別在宣告後就會自動執行 <code class="language-plaintext highlighter-rouge">_timer_Elapsed</code> 10次後停止，而如果要執行非同步程式，修改如下：</p>
 
-<p>上面的類別只有流程，實際的執行方式如下：</p>
-
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">TimerClass</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="n">System</span><span class="p">.</span><span class="n">Timers</span><span class="p">.</span><span class="n">Timer</span> <span class="n">_timer</span><span class="p">;</span>

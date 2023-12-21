@@ -5,8 +5,8 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Dec 2023 14:07:28 +0800</pubDate>
-    <lastBuildDate>Thu, 21 Dec 2023 14:07:28 +0800</lastBuildDate>
+    <pubDate>Thu, 21 Dec 2023 14:11:45 +0800</pubDate>
+    <lastBuildDate>Thu, 21 Dec 2023 14:11:45 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -49,8 +49,6 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;類別在宣告後就會自動執行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_timer_Elapsed&lt;/code&gt; 10次後停止，而如果要執行非同步程式，修改如下：&lt;/p&gt;
-
-&lt;p&gt;上面的類別只有流程，實際的執行方式如下：&lt;/p&gt;
 
 &lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TimerClass&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
