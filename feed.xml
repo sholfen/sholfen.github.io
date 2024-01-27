@@ -5,12 +5,12 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Jan 2024 08:31:47 +0800</pubDate>
-    <lastBuildDate>Sat, 27 Jan 2024 08:31:47 +0800</lastBuildDate>
+    <pubDate>Sat, 27 Jan 2024 16:48:38 +0800</pubDate>
+    <lastBuildDate>Sat, 27 Jan 2024 16:48:38 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
-        <title>透過設定檔關閉Web API</title>
+        <title>Atomic Lock的另一個選擇</title>
         <description>&lt;p&gt;&lt;img src=&quot;/pics/2024-01-27/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在之前”並行運算”的文章中，有提到可以用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Interlocked&lt;/code&gt;來對整數計算提供變數上的鎖定，是除了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lock&lt;/code&gt;以外的選擇，但因為只有整數，在現實的情況下是不符合使用情況，尤其對於金錢上的計算，一定會有浮點數，所幸還有&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DotNext&lt;/code&gt;這個第三方函式庫，以下是程式範例：&lt;/p&gt;
