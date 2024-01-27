@@ -5,9 +5,49 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 10 Jan 2024 19:17:57 +0800</pubDate>
-    <lastBuildDate>Wed, 10 Jan 2024 19:17:57 +0800</lastBuildDate>
+    <pubDate>Sat, 27 Jan 2024 08:31:47 +0800</pubDate>
+    <lastBuildDate>Sat, 27 Jan 2024 08:31:47 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>透過設定檔關閉Web API</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2024-01-27/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在之前”並行運算”的文章中，有提到可以用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Interlocked&lt;/code&gt;來對整數計算提供變數上的鎖定，是除了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lock&lt;/code&gt;以外的選擇，但因為只有整數，在現實的情況下是不符合使用情況，尤其對於金錢上的計算，一定會有浮點數，所幸還有&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DotNext&lt;/code&gt;這個第三方函式庫，以下是程式範例：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;DotNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;DotNext.Threading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;td&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UpdateAndGet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;td&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;td&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AccumulateAndGet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;td&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上述的程式碼，對於&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;double&lt;/code&gt;型別有提供擴充方法，可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UpdateAndGet&lt;/code&gt;或&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AccumulateAndGet&lt;/code&gt;，用哪個都可以，依實際的情況去採用即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dotnet.github.io/dotNext/features/core/atomic.html&quot; target=&quot;_blank&quot;&gt;Atomic Operations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 27 Jan 2024 00:00:00 +0800</pubDate>
+        <link>/dotnet/2024/01/27/number-lock.html</link>
+        <guid isPermaLink="true">/dotnet/2024/01/27/number-lock.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>透過設定檔關閉Web API</title>
@@ -939,36 +979,6 @@
         <pubDate>Tue, 17 Oct 2023 00:00:00 +0800</pubDate>
         <link>/dotnet/2023/10/17/stock-crawler.html</link>
         <guid isPermaLink="true">/dotnet/2023/10/17/stock-crawler.html</guid>
-        
-        
-        <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>在 DB Transaction 使用到 Async 的注意事項</title>
-        <description>&lt;p&gt;現在使用 Async 這種非同步寫法算是家常便飯了，但某些時候會遇到問題，像是 transaction，主要的問題是 Async 會切換執行緒，但在 transaction 中遇到執行緒的切換時會出錯(正確來說是偵測到執行緒不同條)，解法也很簡單，就是加個參數就好，範例如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TransactionScope&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tran&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;TransactionScope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TransactionScopeAsyncFlowOption&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AsyncWorker1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AsyncWorker2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AsyncWorker3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這樣問題就解決了。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dotblogs.com.tw/wasichris/2017/10/12/002341&quot; target=&quot;_blank&quot;&gt;排除 TransactionScope 中使用 await 所產生的跨執行續交易錯誤&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Thu, 12 Oct 2023 00:00:00 +0800</pubDate>
-        <link>/dotnet/2023/10/12/transactionscope.html</link>
-        <guid isPermaLink="true">/dotnet/2023/10/12/transactionscope.html</guid>
         
         
         <category>dotnet</category>
