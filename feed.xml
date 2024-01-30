@@ -5,13 +5,13 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 30 Jan 2024 11:31:51 +0800</pubDate>
-    <lastBuildDate>Tue, 30 Jan 2024 11:31:51 +0800</lastBuildDate>
+    <pubDate>Tue, 30 Jan 2024 11:35:07 +0800</pubDate>
+    <lastBuildDate>Tue, 30 Jan 2024 11:35:07 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
         <title>使用 FluentValidation 來檢查物件裡的資料</title>
-        <description>&lt;p&gt;&lt;img src=&quot;pics/2024-01-30/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2024-01-30/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;有時在 ASP.NET 裡要驗證資料，通常都是寫很多的判斷式，但這樣有可讀性降低及不好維護的缺點，最近發現 FluentValidation 是一個還不錯的解決方案。&lt;/p&gt;
 
