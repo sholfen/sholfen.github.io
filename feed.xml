@@ -5,13 +5,13 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 07 Feb 2024 14:10:19 +0800</pubDate>
-    <lastBuildDate>Wed, 07 Feb 2024 14:10:19 +0800</lastBuildDate>
+    <pubDate>Wed, 07 Feb 2024 14:13:14 +0800</pubDate>
+    <lastBuildDate>Wed, 07 Feb 2024 14:13:14 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
         <title>回傳唯讀狀態的資料結構</title>
-        <description>&lt;p&gt;&lt;img src=&quot;pics/2024-02-07/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2024-02-07/1.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在設計 API 的回傳值時，有時會回傳 List 或 Dictionary，但假如這是共用的資料，這時就會希望接收方不要修改內部的值。但在技術上很難避免，甚至會造成邏輯上的錯誤，最後為了找出這錯誤，只能一步步檢視有使用到該回傳值的程式碼。&lt;/p&gt;
 
