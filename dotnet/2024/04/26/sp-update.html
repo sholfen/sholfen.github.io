@@ -83,7 +83,7 @@
 <span class="k">BEGIN</span>
 	<span class="k">SET</span> <span class="n">NOCOUNT</span> <span class="k">ON</span><span class="p">;</span>
 	<span class="k">BEGIN</span> <span class="n">TRANSACTION</span>
-	<span class="k">update</span> <span class="n">Product</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">UPDLOCK</span><span class="p">)</span> <span class="k">set</span> <span class="n">Price</span> <span class="o">=</span> <span class="o">@</span><span class="n">price</span>
+	<span class="k">update</span> <span class="n">Product</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">ROWLOCK</span><span class="p">)</span> <span class="k">set</span> <span class="n">Price</span> <span class="o">=</span> <span class="o">@</span><span class="n">price</span>
 	<span class="k">where</span> <span class="n">ProductId</span> <span class="o">=</span> <span class="o">@</span><span class="n">id</span> <span class="n">waitfor</span> <span class="n">delay</span> <span class="s1">'00:00:15'</span><span class="p">;</span>
 	<span class="k">select</span> <span class="n">Price</span> <span class="k">from</span> <span class="n">Product</span> <span class="k">WITH</span> <span class="p">(</span><span class="n">UPDLOCK</span><span class="p">)</span> <span class="k">where</span> <span class="n">ProductId</span> <span class="o">=</span> <span class="o">@</span><span class="n">id</span><span class="p">;</span>
 	<span class="k">COMMIT</span> <span class="n">TRANSACTION</span>
@@ -91,6 +91,12 @@
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">delay '00:00:15'</code> 這一行單純只是等待15秒，以便測試其它的查詢是否會因此卡住。</p>
+
+<p><strong>參考資料</strong></p>
+
+<ul>
+  <li><a href="https://relycoding.blogspot.com/2016/06/sql-server-nolock-rowlock.html" target="_blank">SQL Server 之 NOLOCK, UPDLOCK 與 ROWLOCK</a></li>
+</ul>
 
 
   </div>
