@@ -5,13 +5,13 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 May 2024 14:06:12 +0800</pubDate>
-    <lastBuildDate>Tue, 21 May 2024 14:06:12 +0800</lastBuildDate>
+    <pubDate>Tue, 21 May 2024 14:09:15 +0800</pubDate>
+    <lastBuildDate>Tue, 21 May 2024 14:09:15 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
         <title>LiteDB簡單範例</title>
-        <description>&lt;p&gt;&lt;img src=&quot;pics/2024-05-21/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2024-05-21/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;以前要做簡單的資料儲存，都會優先使用SQLite，後來發現還有更方便的函式庫：LiteDB。下面程式碼是簡單的CRUD：&lt;/p&gt;
 
