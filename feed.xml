@@ -5,8 +5,8 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 Sep 2024 09:12:42 +0800</pubDate>
-    <lastBuildDate>Fri, 13 Sep 2024 09:12:42 +0800</lastBuildDate>
+    <pubDate>Fri, 13 Sep 2024 09:18:19 +0800</pubDate>
+    <lastBuildDate>Fri, 13 Sep 2024 09:18:19 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -177,7 +177,7 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;另外程式碼已放到 &lt;a href=&quot;&quot;&gt;GitHub&lt;/a&gt; 上了。&lt;/p&gt;
+&lt;p&gt;另外程式碼已放到 &lt;a href=&quot;https://github.com/sholfen/LLMWinFormsAP&quot;&gt;GitHub&lt;/a&gt; 上了。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
 
