@@ -5,12 +5,12 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jan 2025 20:12:32 +0800</pubDate>
-    <lastBuildDate>Sun, 19 Jan 2025 20:12:32 +0800</lastBuildDate>
+    <pubDate>Sun, 19 Jan 2025 20:25:38 +0800</pubDate>
+    <lastBuildDate>Sun, 19 Jan 2025 20:25:38 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
-        <title>在Timer中設定TimeSpan物件</title>
+        <title>透過C#程式送訊息到DC頻道</title>
         <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-01-19/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;最近工作發現同事很愛把Log往DC去送，於是我也小研究了一下，發現還真的不難。&lt;/p&gt;
