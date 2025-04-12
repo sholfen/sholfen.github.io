@@ -5,8 +5,8 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 12 Apr 2025 08:48:31 +0800</pubDate>
-    <lastBuildDate>Sat, 12 Apr 2025 08:48:31 +0800</lastBuildDate>
+    <pubDate>Sat, 12 Apr 2025 08:52:30 +0800</pubDate>
+    <lastBuildDate>Sat, 12 Apr 2025 08:52:30 +0800</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
     
       <item>
@@ -16,6 +16,8 @@
 &lt;p&gt;這陣子迷上了攝影，所以拍了不少照片，但照片又不想放Flickr，索性就自己寫了個網站來放，順便練習怎麼用Azure的儲存體服務。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/sholfen/PLPhtotsWebAP&quot; target=&quot;_blank&quot;&gt;網站的GitHub連結&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://peterphotographs.net/&quot; target=&quot;_blank&quot;&gt;我的攝影作品網站&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;其中縮圖的部份有用到ImageMagick，以下是簡單的範例：&lt;/p&gt;
 
