@@ -92,43 +92,45 @@
 
 <p>再來就是透過HttpClient來呼叫API：</p>
 
-<p>~~~csharp
-var requestMessage = new HttpRequestMessage(HttpMethod.Post, “your endpoint”);
-requestMessage.Headers.Authorization = new AuthenticationHeaderValue(“Bearer”, “your API key”);
-requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(“application/json”));
-var requestModel = new
-{
-    model = “Text-Image-Peter”,
-    prompt = “your prompt”,
-    n = 1,
-    style = “vivid”,
-    quality = “standard”,
-    size = “1024x1024”
-};
-requestMessage.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(requestModel), Encoding.UTF8, “application/json”);
-var response = await _httpClient.SendAsync(requestMessage);
-var stream = await response.Content.ReadAsStreamAsync();
-StreamReader streamReader = new StreamReader(stream);
-string jsonStr = streamReader.ReadToEnd();
-~~</p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">requestMessage</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpRequestMessage</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="n">Post</span><span class="p">,</span> <span class="s">"your endpoint"</span><span class="p">);</span>
+<span class="n">requestMessage</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Bearer"</span><span class="p">,</span> <span class="s">"your API key"</span><span class="p">);</span>
+<span class="n">requestMessage</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/json"</span><span class="p">));</span>
+<span class="kt">var</span> <span class="n">requestModel</span> <span class="p">=</span> <span class="k">new</span>
+<span class="p">{</span>
+    <span class="n">model</span> <span class="p">=</span> <span class="s">"Text-Image-Peter"</span><span class="p">,</span>
+    <span class="n">prompt</span> <span class="p">=</span> <span class="s">"your prompt"</span><span class="p">,</span>
+    <span class="n">n</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span>
+    <span class="n">style</span> <span class="p">=</span> <span class="s">"vivid"</span><span class="p">,</span>
+    <span class="n">quality</span> <span class="p">=</span> <span class="s">"standard"</span><span class="p">,</span>
+    <span class="n">size</span> <span class="p">=</span> <span class="s">"1024x1024"</span>
+<span class="p">};</span>
+<span class="n">requestMessage</span><span class="p">.</span><span class="n">Content</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">Json</span><span class="p">.</span><span class="n">JsonSerializer</span><span class="p">.</span><span class="nf">Serialize</span><span class="p">(</span><span class="n">requestModel</span><span class="p">),</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_httpClient</span><span class="p">.</span><span class="nf">SendAsync</span><span class="p">(</span><span class="n">requestMessage</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">stream</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStreamAsync</span><span class="p">();</span>
+<span class="n">StreamReader</span> <span class="n">streamReader</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StreamReader</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">jsonStr</span> <span class="p">=</span> <span class="n">streamReader</span><span class="p">.</span><span class="nf">ReadToEnd</span><span class="p">();</span>
+</code></pre></div></div>
 
 <p>拿到response後就可以下載圖片了：</p>
 
-<p>~~~csharp
-ImageResult imageResult = System.Text.Json.JsonSerializer.Deserialize<ImageResult>(jsonStr);
-if (imageResult != null &amp;&amp; (imageResult.data != null &amp;&amp; imageResult.data.Count() != 0))
-{
-    Console.WriteLine($"Revised Prompt: {imageResult.data[0].revised_prompt}");
-    Console.WriteLine($"Image URL: {imageResult.data[0].url}");</ImageResult></p>
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ImageResult</span> <span class="n">imageResult</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">Json</span><span class="p">.</span><span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">ImageResult</span><span class="p">&gt;(</span><span class="n">jsonStr</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">imageResult</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="n">imageResult</span><span class="p">.</span><span class="n">data</span> <span class="p">!=</span> <span class="k">null</span> <span class="p">&amp;&amp;</span> <span class="n">imageResult</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="nf">Count</span><span class="p">()</span> <span class="p">!=</span> <span class="m">0</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Revised Prompt: </span><span class="p">{</span><span class="n">imageResult</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">revised_prompt</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Image URL: </span><span class="p">{</span><span class="n">imageResult</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">url</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string fileName = $"{DateTime.Now:yyyyMMddHHmmss}.png";
-HttpClient httpClient = new HttpClient();
-using var downloadStream = await httpClient.GetStreamAsync(imageResult.data[0].url);
-using var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-await downloadStream.CopyToAsync(fileStream);
-await fileStream.FlushAsync();
-fileStream.Close(); } else {
-Console.WriteLine("Failed to deserialize the response."); } ~~
+    <span class="kt">string</span> <span class="n">fileName</span> <span class="p">=</span> <span class="s">$"</span><span class="p">{</span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">:</span><span class="n">yyyyMMddHHmmss</span><span class="p">}</span><span class="s">.png"</span><span class="p">;</span>
+    <span class="n">HttpClient</span> <span class="n">httpClient</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="k">using</span> <span class="nn">var</span> <span class="n">downloadStream</span> <span class="p">=</span> <span class="k">await</span> <span class="n">httpClient</span><span class="p">.</span><span class="nf">GetStreamAsync</span><span class="p">(</span><span class="n">imageResult</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">url</span><span class="p">);</span>
+    <span class="k">using</span> <span class="nn">var</span> <span class="n">fileStream</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">FileStream</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">FileMode</span><span class="p">.</span><span class="n">Create</span><span class="p">,</span> <span class="n">FileAccess</span><span class="p">.</span><span class="n">Write</span><span class="p">);</span>
+    <span class="k">await</span> <span class="n">downloadStream</span><span class="p">.</span><span class="nf">CopyToAsync</span><span class="p">(</span><span class="n">fileStream</span><span class="p">);</span>
+    <span class="k">await</span> <span class="n">fileStream</span><span class="p">.</span><span class="nf">FlushAsync</span><span class="p">();</span>
+    <span class="n">fileStream</span><span class="p">.</span><span class="nf">Close</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Failed to deserialize the response."</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p><strong>參考資料</strong></p>
