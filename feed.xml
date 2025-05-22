@@ -5,9 +5,65 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 17 May 2025 14:16:54 +0800</pubDate>
-    <lastBuildDate>Sat, 17 May 2025 14:16:54 +0800</lastBuildDate>
+    <pubDate>Thu, 22 May 2025 16:07:22 +0800</pubDate>
+    <lastBuildDate>Thu, 22 May 2025 16:07:22 +0800</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>試玩n8n</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;現在AI的流行，也使得n8n這類的工作大為流行，雖然這工具強調跟AI相關，但一開始查資料時總覺得比較像微軟的BizTalk。不過我還是透過Docker安裝了起來，試試它的功能，以為是我試做的flow。&lt;/p&gt;
+
+&lt;p&gt;下圖是我簡單拉好的流程，一開始是從公開API取得JSON資料，然後解析並設定變數，再透過JS code變動裡面的某個欄位，最後再把資料送到我設定好的DC頻道。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/2.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一開始是設定API位址，這邊很單純，因為是透過GET取得的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/3.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再來就是解析資料，這邊多設定了一個newField欄位，後面會用到。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/4.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再來就是透過JS Code把前面取得的資料做變動，這邊只是單純測試node的作用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/5.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最後就是設定DC，一開始先設定Webhook的位址。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/6.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;把URL填進去。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/7.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後設定要送過去的訊息，這邊把前面新設的newField以及變動過的id合併後送過去。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/8.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;設定好之後測試，最後檢查DC是否有收到。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-05-22/9.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這邊只是單純測試，之後的文章會試著接上ChatGPT的API，看效果如何。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://n8n.io/workflows/&quot; target=&quot;_blank&quot;&gt;n8n Templates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 22 May 2025 00:00:00 +0800</pubDate>
+        <link>/ai/2025/05/22/first-n8n.html</link>
+        <guid isPermaLink="true">/ai/2025/05/22/first-n8n.html</guid>
+        
+        
+        <category>AI</category>
+        
+      </item>
     
       <item>
         <title>使用 IChatClient 介面整合各 Chat AI API</title>
@@ -513,37 +569,6 @@
         <pubDate>Sun, 19 Jan 2025 00:00:00 +0800</pubDate>
         <link>/dotnet/2025/01/19/send-message-to-dc.html</link>
         <guid isPermaLink="true">/dotnet/2025/01/19/send-message-to-dc.html</guid>
-        
-        
-        <category>dotnet</category>
-        
-      </item>
-    
-      <item>
-        <title>在Timer中設定TimeSpan物件</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-01-11/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;簡單做個筆記，最近在ASP.NET上要設定Job，但想在固定時間執行，一直找不到範例，後來發現是我對TimeSpan類別了解不夠，仔細研究後才知道怎麼設定。&lt;/p&gt;
-
-&lt;p&gt;以下列的程式來說，我想設定在每天早上六點執行Job，那首先就得算出程式啟動後，距離隔天的六點還差多少時間，最後再設定週期為每天：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IHostedService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;StartAsync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CancellationToken&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cancellationToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UtcNow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddHours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Month&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Day&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;TimeSpan&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeSpan&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;_timer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DoJob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeSpan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TimeSpan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;FromDays&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CompletedTask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;很簡單的寫法，但在網路上找不到直接的解答，所以做個筆記。&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 11 Jan 2025 00:00:00 +0800</pubDate>
-        <link>/dotnet/2025/01/11/time-span.html</link>
-        <guid isPermaLink="true">/dotnet/2025/01/11/time-span.html</guid>
         
         
         <category>dotnet</category>
