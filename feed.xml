@@ -5,9 +5,41 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 May 2025 18:23:51 +0800</pubDate>
-    <lastBuildDate>Fri, 30 May 2025 18:23:51 +0800</lastBuildDate>
+    <pubDate>Mon, 02 Jun 2025 12:15:07 +0800</pubDate>
+    <lastBuildDate>Mon, 02 Jun 2025 12:15:07 +0800</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>透過n8n將MySQL資料取出並整理後送至DC</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;n8n的好用就是將資料的整理自動化，所以這篇文章做的事很簡單，就是透過簡單的DB Query，然後將多筆資料整合成一筆，最後送出至DC，下面是流程，其中最重要的node就是Summarize。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/2.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;MySQL這邊不用多講，就是把你要的SQL語法塞進去就對了，這邊因為只是示範，所以只取10筆。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/3.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再來就是Summarize這個node，其實也不難，就是將取得的資料做合併，這邊我選擇用換行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/4.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最後是DC的設定，它的UI很直覺，將左邊的欄位直接拖進Message欄位，它就自動幫你填好了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/5.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最後按下執行，就可以到DC確認有無訊息。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 02 Jun 2025 00:00:00 +0800</pubDate>
+        <link>/ai/2025/06/02/n8n-mysql.html</link>
+        <guid isPermaLink="true">/ai/2025/06/02/n8n-mysql.html</guid>
+        
+        
+        <category>AI</category>
+        
+      </item>
     
       <item>
         <title>將AI提示詞做問題分類</title>
@@ -532,36 +564,6 @@ result：{&quot;prompt&quot;:&quot;妳是誰&quot;,&quot;category&quot;:&quot;Te
         
         
         <category>AI</category>
-        
-      </item>
-    
-      <item>
-        <title>使用Interlocked替代lock語法</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-03-16/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在Web程式中，如果同時有多個request要去修改一個共用變數，通常會有資料混亂的問題，而在List或Dictionary中，.NET提供了ConcurrentDictionary這類可以確保Thread-Safety的類別，但如果今天是Int變數呢？我想宣告一個變數用來記錄影片觀看次數該怎麼做呢？&lt;/p&gt;
-
-&lt;p&gt;好在.NET有提供一個方式，寫法如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Interlocked&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;ref&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這樣的做法就可以省去lock語法，且確保資料不會混亂。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;參考資料&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.csharptutorial.net/csharp-concurrency/c-interlocked/&quot; target=&quot;_blank&quot;&gt;C# Interlocked&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sun, 16 Mar 2025 00:00:00 +0800</pubDate>
-        <link>/dotnet/2025/03/16/inter-locked.html</link>
-        <guid isPermaLink="true">/dotnet/2025/03/16/inter-locked.html</guid>
-        
-        
-        <category>dotnet</category>
         
       </item>
     
