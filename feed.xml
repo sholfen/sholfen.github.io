@@ -5,9 +5,57 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 19 Jun 2025 13:33:15 +0800</pubDate>
-    <lastBuildDate>Thu, 19 Jun 2025 13:33:15 +0800</lastBuildDate>
+    <pubDate>Wed, 02 Jul 2025 15:57:04 +0800</pubDate>
+    <lastBuildDate>Wed, 02 Jul 2025 15:57:04 +0800</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+    
+      <item>
+        <title>在n8n中執行Ollama</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最近想試試在n8n跑AI模型，但一直沒想到好的題目，剛好最近朋友給我一個點子，就是從RSS抓新聞下來，然後把新聞標題透過LLM把它縮短，於是就決定動手試試。&lt;/p&gt;
+
+&lt;p&gt;下圖是整個拉好的流程。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/2.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第一步是設定好RSS，把資料拉進來。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/3.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再來就是寫JS code把標題先做處理，把換行符號跟多餘的空白刪掉。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/4.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下來是最重要的node：Basic LLM Chain，下面接的是Ollama。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/5.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後設定LLM模型。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/6.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下來就是設定好提示詞，這裡最方便的是可以直接把變數放進去。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/7.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著是把結果輸出成excel檔。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/8.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最後的輸出結果，雖然結果不符預期，但標題是真的有被縮短。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/pics/2025-07-02/9.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 02 Jul 2025 00:00:00 +0800</pubDate>
+        <link>/ai/2025/07/02/n8n-ollama.html</link>
+        <guid isPermaLink="true">/ai/2025/07/02/n8n-ollama.html</guid>
+        
+        
+        <category>AI</category>
+        
+      </item>
     
       <item>
         <title>如何在本機端實作AI對話</title>
@@ -576,43 +624,6 @@ result：{&quot;prompt&quot;:&quot;妳是誰&quot;,&quot;category&quot;:&quot;Te
         
         
         <category>AI</category>
-        
-      </item>
-    
-      <item>
-        <title>替自己寫個相簿網站</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-04-12/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這陣子迷上了攝影，所以拍了不少照片，但照片又不想放Flickr，索性就自己寫了個網站來放，順便練習怎麼用Azure的儲存體服務。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/sholfen/PLPhtotsWebAP&quot; target=&quot;_blank&quot;&gt;網站的GitHub連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://peterphotographs.net/&quot; target=&quot;_blank&quot;&gt;我的攝影作品網站&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;其中縮圖的部份有用到ImageMagick，以下是簡單的範例：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;readSettings&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MagickReadSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Format&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MagickFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Jpeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Interlace&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Interlace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Jpeg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thumb&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MagickImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;readSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MagickGeometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thumb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Width&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thumb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Height&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;IgnoreAspectRatio&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;thumb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sourceStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;thumb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Resize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thumbStream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MemoryStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;thumb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thumbStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//image.Save(thumbStream, ImageFormat.Jpeg);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//or save to Azure blob&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;thumbStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Position&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-</description>
-        <pubDate>Sat, 12 Apr 2025 00:00:00 +0800</pubDate>
-        <link>/dotnet/2025/04/12/peter-photo.html</link>
-        <guid isPermaLink="true">/dotnet/2025/04/12/peter-photo.html</guid>
-        
-        
-        <category>dotnet</category>
         
       </item>
     
