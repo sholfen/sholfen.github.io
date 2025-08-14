@@ -5,13 +5,13 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 Aug 2025 12:45:01 +0800</pubDate>
-    <lastBuildDate>Thu, 14 Aug 2025 12:45:01 +0800</lastBuildDate>
+    <pubDate>Thu, 14 Aug 2025 12:53:54 +0800</pubDate>
+    <lastBuildDate>Thu, 14 Aug 2025 12:53:54 +0800</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
     
       <item>
         <title>AI LLM與搜尋引擎的結合 - 提示詞改寫</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/ics/2025-08-14/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-08-14/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;說到AI大語言模型，很多人都會想到用RAG來改善幻覺問題或是做客製化。但除了RAG裡的向量資料庫，其實搜尋引擎也是很好用，但在自製搜尋引擎之前，筆者想先利用LLM將提示詞轉化為搜尋引擎用的關鍵字，也就是Query，畢竟大家在使用Google搜尋時，都是打關鍵字。&lt;/p&gt;
 
