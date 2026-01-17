@@ -105,7 +105,7 @@
 
 <div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">from</span> <span class="n">p</span> <span class="k">in</span> <span class="n">people</span>
                <span class="k">group</span> <span class="n">p</span> <span class="k">by</span> <span class="k">new</span> <span class="p">{</span> <span class="n">p</span><span class="p">.</span><span class="n">Gender</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">Name</span> <span class="p">}</span> <span class="k">into</span> <span class="n">gender</span>
-               <span class="k">select</span> <span class="n">gender</span><span class="p">;</span>
+               <span class="n">select</span> <span class="n">gender</span><span class="p">;</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">item</span> <span class="k">in</span> <span class="n">result</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">var</span> <span class="n">key</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">Key</span><span class="p">;</span>

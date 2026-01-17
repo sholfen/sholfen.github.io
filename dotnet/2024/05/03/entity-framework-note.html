@@ -141,7 +141,7 @@
 <span class="p">{</span>
     <span class="n">Employee</span><span class="p">?</span> <span class="n">emp</span> <span class="p">=</span> <span class="p">(</span><span class="k">from</span> <span class="n">e</span> <span class="k">in</span> <span class="n">Context</span><span class="p">.</span><span class="n">Employees</span>
                      <span class="k">where</span> <span class="n">e</span><span class="p">.</span><span class="n">EmployeeID</span> <span class="p">==</span> <span class="n">id</span>
-                     <span class="k">select</span> <span class="n">e</span><span class="p">).</span><span class="nf">FirstOrDefault</span><span class="p">();</span>
+                     <span class="n">select</span> <span class="n">e</span><span class="p">).</span><span class="nf">FirstOrDefault</span><span class="p">();</span>
 
     <span class="k">return</span> <span class="n">emp</span><span class="p">;</span>
 <span class="p">}</span>
