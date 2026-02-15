@@ -5,13 +5,13 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 15 Feb 2026 22:48:52 +0800</pubDate>
-    <lastBuildDate>Sun, 15 Feb 2026 22:48:52 +0800</lastBuildDate>
+    <pubDate>Sun, 15 Feb 2026 22:56:37 +0800</pubDate>
+    <lastBuildDate>Sun, 15 Feb 2026 22:56:37 +0800</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
     
       <item>
         <title>C#的Extension Members新功能</title>
-        <description>&lt;p&gt;&lt;img src=&quot;pics/2026-02-15/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2026-02-15/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;以往的Extension Method算是好用的功能，但唯獨沒有外掛data member的能力，感覺有點受限，如今新版C#把這最後一堆補上了。&lt;/p&gt;
 
