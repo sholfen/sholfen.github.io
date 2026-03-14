@@ -5,9 +5,57 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Feb 2026 18:24:45 +0800</pubDate>
-    <lastBuildDate>Fri, 20 Feb 2026 18:24:45 +0800</lastBuildDate>
+    <pubDate>Sat, 14 Mar 2026 08:47:48 +0800</pubDate>
+    <lastBuildDate>Sat, 14 Mar 2026 08:47:48 +0800</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
+    
+      <item>
+        <title>目前AI的相關資料以及工具整理(2026年)</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2026-03-14/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2026年了，AI的發展真的超乎想像，從原本的聊天機器人，變成一個多功能的助手，除了本身文字品質的提升，還能生圖、生影片，甚至還能幫忙寫程式，也誕生了Vibe Coding這個新名詞。尤其最令我意外的，則是AI影片，原本我覺得至少要到今年才會有一個比較能看的成果，但今年的AI生成影片已經到了一個不可思議的地步。&lt;/p&gt;
+
+&lt;p&gt;之前的文章，會分章節來探討，這次因為是寫第二版，就乾脆直接流水帳下去。&lt;/p&gt;
+
+&lt;p&gt;首先我想講AI影片這塊，目前真的很不可思議，來看看下面的影片：&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/PVh3LH55T7E?si=HK3NpMxUpPpM-mpc&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;非常神奇，而且作者把一些腦洞的想法放進去，這個我覺得很適合用AI來做。&lt;/p&gt;
+
+&lt;p&gt;再來就是擬真的真人短片，基本上都可以做電影了：&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ujpwCwMw_KY?si=yWvd4A10IWdroHNg&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;現在好用的AI工具，除了ChatGPT，像Google的Gemini也很不錯，在推理能力有長足的進步，尤其寫程式方面更是令人覺得，現在根本沒新人發揮的空間，最恐佈的是，Google整合生態系的能力，有興趣一直要去試試，你會驚呼AI的進步。&lt;/p&gt;
+
+&lt;p&gt;接下來我想以工程師的角度，來推幾個目前還不錯的AI整合工作，不過大部份都是C#為主：&lt;/p&gt;
+
+&lt;h3 id=&quot;ollama&quot;&gt;Ollama&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ollama.com/&quot; target=&quot;_blank&quot;&gt;Ollama&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;它可以下載開源模型，然後在本機端執行，可以透它的UI來進行對話，也可以利用它的Web API去整合，非常方便&lt;/p&gt;
+
+&lt;h3 id=&quot;foundry-local&quot;&gt;Foundry Local&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.foundrylocal.ai/&quot; target=&quot;_blank&quot;&gt;Foundry Local&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;微軟推出的工具，跟Ollama很類似，但它使用起來很微妙，有些雷要避開，之後我會再寫一篇來說明。&lt;/p&gt;
+
+&lt;h3 id=&quot;結尾&quot;&gt;結尾&lt;/h3&gt;
+
+&lt;p&gt;最後想講一下AI Agent，今年AI的方向應該會往AI代理前進，我想這是確定的，因為等基礎建設都差不多了之後，就會開始有大量的應用出現，AI Agent算是一個整合，所以一定會有大量的相關應用出現，當然工程師們也不用焦慮，目前很多開發套件都很新，改動很快也很大，基礎知識也了解，之後再學也不遲，共勉之。&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate>
+        <link>/ai/2026/03/14/ai-tools-2026.html</link>
+        <guid isPermaLink="true">/ai/2026/03/14/ai-tools-2026.html</guid>
+        
+        
+        <category>AI</category>
+        
+      </item>
     
       <item>
         <title>AOP的另一選擇：Metalama</title>
@@ -655,38 +703,6 @@
         <pubDate>Thu, 19 Jun 2025 00:00:00 +0800</pubDate>
         <link>/ai/2025/06/19/ai-history.html</link>
         <guid isPermaLink="true">/ai/2025/06/19/ai-history.html</guid>
-        
-        
-        <category>AI</category>
-        
-      </item>
-    
-      <item>
-        <title>透過n8n將MySQL資料取出並整理後送至DC</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;n8n的好用就是將資料的整理自動化，所以這篇文章做的事很簡單，就是透過簡單的DB Query，然後將多筆資料整合成一筆，最後送出至DC，下面是流程，其中最重要的node就是Summarize。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/2.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;MySQL這邊不用多講，就是把你要的SQL語法塞進去就對了，這邊因為只是示範，所以只取10筆。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/3.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;再來就是Summarize這個node，其實也不難，就是將取得的資料做合併，這邊我選擇用換行。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/4.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最後是DC的設定，它的UI很直覺，將左邊的欄位直接拖進Message欄位，它就自動幫你填好了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/pics/2025-06-02/5.jpg&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最後按下執行，就可以到DC確認有無訊息。&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 02 Jun 2025 00:00:00 +0800</pubDate>
-        <link>/ai/2025/06/02/n8n-mysql.html</link>
-        <guid isPermaLink="true">/ai/2025/06/02/n8n-mysql.html</guid>
         
         
         <category>AI</category>
