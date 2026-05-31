@@ -408,6 +408,13 @@ pre > code {
 .highlighter-rouge .highlight {
   background: #040a15;
 }
+.highlight pre,
+.highlight code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0;
+}
 .highlight .c {
   color: #6a9dbb;
   font-style: italic;
