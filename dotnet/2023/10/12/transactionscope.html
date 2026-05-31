@@ -9,6 +9,9 @@
   <title>在 DB Transaction 使用到 Async 的注意事項</title>
   <meta name="description" content="現在使用 Async 這種非同步寫法算是家常便飯了，但某些時候會遇到問題，像是 transaction，主要的問題是 Async 會切換執行緒，但在 transaction 中遇到執行緒的切換時會出錯(正確來說是偵測到執行緒不同條)，解法也很簡單，就是加個參數就好，範例如下：">
 
+  <!-- Inter font for modern UI -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="/dotnet/2023/10/12/transactionscope.html">
   <link rel="alternate" type="application/rss+xml" title="卑微研究生的部落格" href="/feed.xml">
