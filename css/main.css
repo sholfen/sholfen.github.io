@@ -12,7 +12,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 400 16px/1.6 "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font: 400 18px/1.6 "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #dbe9ff;
   background: linear-gradient(180deg, #02060c, #071226);
   background-color: #071226;
@@ -52,7 +52,7 @@ figure > img {
 }
 
 figcaption {
-  font-size: 14px;
+  font-size: 15.75px;
 }
 
 /**
@@ -343,7 +343,7 @@ pre > code {
 }
 
 .post-meta {
-  font-size: 14px;
+  font-size: 15.75px;
   color: #3b4754;
 }
 
@@ -404,6 +404,11 @@ pre > code {
 .highlight {
   background: #050e1d;
   color: #e6f7ff;
+  font-family: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Roboto Mono", "Segoe UI Mono", monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  tab-size: 4;
+  -moz-tab-size: 4;
 }
 .highlighter-rouge .highlight {
   background: #040a15;
