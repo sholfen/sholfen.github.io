@@ -5,9 +5,58 @@
     <description>It&apos;s my blog</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 24 Jul 2026 17:55:27 +0800</pubDate>
-    <lastBuildDate>Fri, 24 Jul 2026 17:55:27 +0800</lastBuildDate>
+    <pubDate>Sat, 26 Sep 2026 18:10:12 +0800</pubDate>
+    <lastBuildDate>Sat, 26 Sep 2026 18:10:12 +0800</lastBuildDate>
     <generator>Jekyll v4.3.4</generator>
+    
+      <item>
+        <title>用Garnet取代Redis</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/pics/2026-09-26/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Redis常用來當作快取伺服器，而開發當中，最常見的做法是架一台測試用Redis，或是在本機用Docker起一台Redis Server，但相當麻煩，而且微軟推出相容於Redis介面的Garnet，正是開發測試的好用瑞士刀。&lt;/p&gt;
+
+&lt;p&gt;使用Garnet，記得安裝套件”Microsoft.Garnet”。&lt;/p&gt;
+
+&lt;p&gt;它的啟動方式如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6330&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//預設資料存在記憶體裡，測試方便&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GarnetServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;--port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;--bind&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;由於它跟Redis是相容的，所以接下來安裝套件”StackExchange.Redis”。&lt;/p&gt;
+
+&lt;p&gt;然後直接用它的client來操作就可以了：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redis&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConnectionMultiplexer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ConnectAsync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&quot;127.0.0.1:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetDatabase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;簡單的測試：&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;=== String 操作 ===&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;StringSetAsync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Garnet&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;StringSetAsync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;StringGetAsync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;StringGetAsync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&quot;name    = &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$&quot;version = &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;寫法都是一樣，只是底層抽換掉了。&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 26 Sep 2026 00:00:00 +0800</pubDate>
+        <link>/dotnet/2026/09/26/garnet.html</link>
+        <guid isPermaLink="true">/dotnet/2026/09/26/garnet.html</guid>
+        
+        
+        <category>dotnet</category>
+        
+      </item>
     
       <item>
         <title>利用LLM來替問題做分類</title>
@@ -793,54 +842,6 @@
         
         
         <category>other</category>
-        
-      </item>
-    
-      <item>
-        <title>目前AI的相關資料以及工具整理(2026年)</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/pics/2026-03-14/1.png&quot; border=&quot;0&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;2026年了，AI的發展真的超乎想像，從原本的聊天機器人，變成一個多功能的助手，除了本身文字品質的提升，還能生圖、生影片，甚至還能幫忙寫程式，也誕生了Vibe Coding這個新名詞。尤其最令我意外的，則是AI影片，原本我覺得至少要到今年才會有一個比較能看的成果，但今年的AI生成影片已經到了一個不可思議的地步。&lt;/p&gt;
-
-&lt;p&gt;之前的文章，會分章節來探討，這次因為是寫第二版，就乾脆直接流水帳下去。&lt;/p&gt;
-
-&lt;p&gt;首先我想講AI影片這塊，目前真的很不可思議，來看看下面的影片：&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/PVh3LH55T7E?si=HK3NpMxUpPpM-mpc&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;非常神奇，而且作者把一些腦洞的想法放進去，這個我覺得很適合用AI來做。&lt;/p&gt;
-
-&lt;p&gt;再來就是擬真的真人短片，基本上都可以做電影了：&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ujpwCwMw_KY?si=yWvd4A10IWdroHNg&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;現在好用的AI工具，除了ChatGPT，像Google的Gemini也很不錯，在推理能力有長足的進步，尤其寫程式方面更是令人覺得，現在根本沒新人發揮的空間，最恐佈的是，Google整合生態系的能力，有興趣一直要去試試，你會驚呼AI的進步。&lt;/p&gt;
-
-&lt;p&gt;接下來我想以工程師的角度，來推幾個目前還不錯的AI整合工作，不過大部份都是C#為主：&lt;/p&gt;
-
-&lt;h3 id=&quot;ollama&quot;&gt;Ollama&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ollama.com/&quot; target=&quot;_blank&quot;&gt;Ollama&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;它可以下載開源模型，然後在本機端執行，可以透它的UI來進行對話，也可以利用它的Web API去整合，非常方便&lt;/p&gt;
-
-&lt;h3 id=&quot;foundry-local&quot;&gt;Foundry Local&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.foundrylocal.ai/&quot; target=&quot;_blank&quot;&gt;Foundry Local&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;微軟推出的工具，跟Ollama很類似，但它使用起來很微妙，有些雷要避開，之後我會再寫一篇來說明。&lt;/p&gt;
-
-&lt;h3 id=&quot;結尾&quot;&gt;結尾&lt;/h3&gt;
-
-&lt;p&gt;最後想講一下AI Agent，今年AI的方向應該會往AI代理前進，我想這是確定的，因為等基礎建設都差不多了之後，就會開始有大量的應用出現，AI Agent算是一個整合，所以一定會有大量的相關應用出現，當然工程師們也不用焦慮，目前很多開發套件都很新，改動很快也很大，基礎知識也了解，之後再學也不遲，共勉之。&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 14 Mar 2026 00:00:00 +0800</pubDate>
-        <link>/ai/2026/03/14/ai-tools-2026.html</link>
-        <guid isPermaLink="true">/ai/2026/03/14/ai-tools-2026.html</guid>
-        
-        
-        <category>AI</category>
         
       </item>
     
